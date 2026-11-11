@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7F3EA">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Адыгэбзэ">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<title>Адыгэбзэ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Manrope:wght@500;600;700;800&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#0A1430;--bg2:#0F1D42;--card:#13244F;--card2:#1A2E60;--line:#26407A;
+ --white:#F6F3EB;--soft:#B9C3DA;--gold:#E2BE6A;--gold2:#F3D99A;--goldd:#B8913E;
+ --a:#2C4C9A;--b:#3B2F6B;--c:#1D5560;--ok:#7FD1A8;--no:#F29C8B;--pal:#F3D99A;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg)}
+body{color:var(--white);font-family:'Manrope',system-ui,sans-serif;font-size:18px;line-height:1.5;min-height:100vh;
+ background:radial-gradient(900px 500px at 90% -10%,#1C3270 0%,transparent 60%),radial-gradient(700px 400px at -10% 110%,#1A2B5E 0%,transparent 60%),var(--bg);background-attachment:fixed}
+button{font-family:inherit;cursor:pointer}
+.app{max-width:720px;margin:0 auto;padding:0 16px 110px}
+/* top */
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px 0 10px;position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 70%,transparent)}
+.logo{font-family:'Aref Ruqaa',serif;font-size:40px;color:var(--gold);line-height:1;text-shadow:0 0 18px rgba(226,190,106,.35)}
+.brand{text-align:right;font-size:12px;letter-spacing:.14em;color:var(--soft);font-weight:700}
+.brand b{display:block;color:var(--gold2);font-size:15px;letter-spacing:.06em}
+h1{font-family:'Cormorant Garamond',serif;font-size:36px;line-height:1.1;color:var(--white);margin:6px 0 4px}
+h2{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold2);margin:22px 0 10px;line-height:1.15}
+h3{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:22px 0 10px;font-weight:800}
+.sub{color:var(--soft);font-size:16px}
+.card{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:16px 18px;margin-bottom:12px}
+.gold-line{height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:18px 0;opacity:.6}
+.pal{color:var(--pal);font-weight:800}
+.kb{font-weight:800;color:var(--white)}
+/* nav */
+nav{position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(10,20,48,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
+nav .in{max-width:720px;margin:0 auto;display:flex;justify-content:space-around}
+nav button{background:none;border:0;color:var(--soft);font-size:12px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;border-radius:12px;min-width:62px}
+nav button .ic{font-size:22px;line-height:1}
+nav button.on{color:var(--gold2)}
+nav button.on .ic{filter:drop-shadow(0 0 6px rgba(226,190,106,.6))}
+.view{display:none;animation:fade .25s}.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+/* home */
+.hero{background:linear-gradient(135deg,#1D3576,#122656 60%,#2A2150);border:1px solid var(--goldd);border-radius:24px;padding:20px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-30px;top:-30px;width:160px;height:160px;border-radius:50%;background:radial-gradient(var(--gold) 0%,transparent 70%);opacity:.18}
+.hero .lbl{font-size:13px;letter-spacing:.14em;color:var(--gold);font-weight:800;text-transform:uppercase}
+.hero .w{font-size:34px;font-weight:800;margin:6px 0 2px}
+.hero .t{color:var(--gold2);font-size:19px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}
+.stat b{display:block;font-size:26px;color:var(--gold2)}
+.stat span{font-size:13px;color:var(--soft)}
+.bar{height:10px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--goldd),var(--gold2));border-radius:99px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:left;color:var(--white)}
+.tile b{display:block;font-size:17px;margin-top:6px}.tile span{font-size:13px;color:var(--soft)}
+/* chips & inputs */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;background:var(--card);border:1px solid var(--line);color:var(--white);border-radius:99px;padding:9px 15px;font-size:15px;font-weight:700}
+.chip.on{background:var(--gold);color:#0A1430;border-color:var(--gold)}
+.search{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--white);border-radius:14px;padding:13px 16px;font:600 17px 'Manrope',system-ui,sans-serif;margin:6px 0 8px}
+.search::placeholder{color:#7F8BAA}
+.btn{background:var(--card2);border:1px solid var(--line);color:var(--white);border-radius:14px;padding:12px 16px;font-size:16px;font-weight:800}
+.btn.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#0A1430;border:0}
+.btn.sm{padding:8px 12px;font-size:14px;border-radius:11px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 14px}
+.modes button{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--goldd);color:var(--white);border-radius:16px;padding:14px 6px;font-weight:800;font-size:15px}
+
+/* word list */
+.wl{display:flex;flex-direction:column;gap:8px}
+.wi{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.wi .k{font-size:21px;font-weight:800;flex:1;min-width:0}
+.wi .r{display:block;font-size:16px;font-weight:600;color:var(--gold2)}
+.st{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);background:none;color:var(--soft);font-size:15px;flex:0 0 auto}
+.st.s1{border-color:var(--gold);color:var(--gold)}
+.st.s2{border-color:var(--ok);background:var(--ok);color:#0A1430}
+.more{display:block;margin:12px auto 0}
+/* flashcard */
+.fc{perspective:1200px;margin:8px 0 14px}
+.fc-in{position:relative;height:300px;transition:transform .5s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-in{transform:rotateY(180deg)}
+.side{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:26px;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--goldd)}
+.front{background:linear-gradient(150deg,#22408A,#152A5E)}
+.back{background:linear-gradient(150deg,#2D2766,#1A2D62);transform:rotateY(180deg)}
+.side .l{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:12px}
+.side .big{font-size:32px;font-weight:800;line-height:1.25}
+.side .hint{position:absolute;bottom:14px;font-size:13px;color:var(--soft)}
+.know{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.know .btn{padding:16px;font-size:17px}
+.know .no{background:#3A2440;border-color:#6B3E5A}
+.know .yes{background:#1E4B45;border-color:#2F7A68}
+.prog{display:flex;justify-content:space-between;color:var(--soft);font-size:14px;margin-bottom:6px}
+/* quiz */
+.qz-q{font-size:30px;font-weight:800;text-align:center;margin:18px 0 6px}
+.qz-s{text-align:center;color:var(--soft);margin-bottom:16px}
+.opts{display:grid;gap:10px}
+.opt{background:var(--card);border:1px solid var(--line);color:var(--white);border-radius:16px;padding:15px;font-size:18px;font-weight:700;text-align:left}
+.opt.ok{background:#1E4B45;border-color:var(--ok)}
+.opt.bad{background:#4A2433;border-color:var(--no)}
+/* lessons */
+.tl{position:relative;padding-left:22px}
+.tl:before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--gold),var(--line))}
+.ls{position:relative;display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:10px;color:var(--white)}
+.ls:before{content:"";position:absolute;left:-21px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.ls.done:before{background:var(--gold)}
+.ls .d{font-size:13px;color:var(--gold);font-weight:800;letter-spacing:.06em}
+.ls b{display:block;font-size:19px;margin:2px 0}
+.ls .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:12px;background:var(--bg2);border:1px solid var(--line);color:var(--soft);border-radius:99px;padding:3px 9px;font-weight:700}
+.back-btn{background:none;border:0;color:var(--gold);font-size:16px;font-weight:800;padding:8px 0}
+.phr{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phr:last-child{border:0}
+.phr .k{font-size:20px;font-weight:800}.phr .r{color:var(--gold2);font-size:16px}
+.note{background:rgba(226,190,106,.1);border-left:4px solid var(--gold);border-radius:12px;padding:12px 14px;margin:10px 0;font-size:16px}
+.tip{background:rgba(226,190,106,.08);border-left:3px solid var(--gold);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:16px}
+/* hw */
+.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.chk:last-child{border:0}
+.box{width:26px;height:26px;border-radius:8px;border:2px solid var(--gold);flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:16px;color:#0A1430;margin-top:1px}
+.chk.on .box{background:var(--gold)}
+.chk.on span{color:var(--soft);text-decoration:line-through}
+/* dialogs */
+.dl-list .ls:before{display:none}
+.bubbles{display:flex;flex-direction:column;gap:10px;margin:10px 0}
+.bb{max-width:86%;padding:12px 15px;border-radius:20px;position:relative}
+.bb .who{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--gold2);text-transform:uppercase;margin-bottom:3px}
+.bb .k{font-size:19px;font-weight:700;line-height:1.4}
+.bb .r{font-size:15px;color:var(--soft);margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.12)}
+.bb.L{align-self:flex-start;border-bottom-left-radius:6px}
+.bb.R{align-self:flex-end;border-bottom-right-radius:6px}
+.bb.a{background:var(--a)}.bb.b{background:var(--b)}.bb.c{background:var(--c)}
+.bb.hid .k{filter:blur(8px);user-select:none}
+.bb.hid:after{content:"твоя реплика — скажи вслух и нажми";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--gold2)}
+.bb.hid.show .k{filter:none}.bb.hid.show:after{display:none}
+.narr{align-self:center;font-size:14px;color:var(--gold);font-weight:700;background:var(--bg2);border:1px solid var(--line);border-radius:99px;padding:5px 14px;text-align:center}
+.noru .bb .r{display:none}
+.noru .phr .r,.noru .para .r{filter:blur(7px)}
+.para{margin:8px 0 14px}.para .k{font-size:20px;font-weight:700;line-height:1.5}.para .r{color:var(--gold2);font-size:16px;margin-top:2px}
+/* reading */
+.poem{white-space:pre-line;font-size:22px;font-weight:700;line-height:1.6;text-align:center;padding:10px 0}
+.counter{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--goldd)}
+.dots i.f{background:var(--gold)}
+.gloss{font-size:14px;color:var(--soft);margin-top:10px;line-height:1.6}
+/* grammar */
+.tb{width:100%;border-collapse:separate;border-spacing:0;font-size:16px;margin:6px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.tb td,.tb th{padding:9px 10px;border-bottom:1px solid var(--line)}
+.tb th{background:var(--bg2);color:var(--gold);font-size:13px;text-align:left}
+.tb tr:last-child td{border:0}
+.tb b{color:var(--gold2)}
+.qg,.pairs,.nums{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.qg div,.pairs div,.nums div{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px;font-size:15px}
+.qg b,.pairs b{display:block;font-size:19px;color:var(--gold2)}
+.nums{grid-template-columns:repeat(5,1fr)}
+.nums div{text-align:center;color:var(--soft)}.nums b{display:block;font-size:17px;color:var(--white)}
+.flow{display:grid;gap:10px}
+.fbox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px;font-size:15px}
+.fbox .lbl{display:block;color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.fbox .ex{font-size:19px;font-weight:700;margin:8px 0;color:var(--white)}
+.r{color:var(--ok)} .m{color:#FFB38A}
+.fbox .ex .r{color:var(--ok)}
+.ul{padding-left:20px;font-size:16px}.ul li{margin:4px 0}
+.gacc{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;background:none;border:0;color:var(--white);font-size:19px;font-weight:800;padding:2px 0}
+.gacc:after{content:"＋";color:var(--gold)}.open .gacc:after{content:"−"}
+.gbody{display:none;margin-top:8px}.open .gbody{display:block}
+/* exercises */
+.ex{padding:10px 0;border-bottom:1px dashed var(--line)}
+.ex .q{font-size:18px;font-weight:700}
+.ex .a{display:none;color:var(--ok);font-weight:700;margin-top:4px}
+.ex.on .a{display:block}
+/* notebook */
+textarea,input.in{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:14px;color:var(--white);font:600 17px 'Manrope',system-ui,sans-serif;padding:12px;margin:6px 0}
+textarea{min-height:170px;line-height:1.5}
+label{font-weight:800;color:var(--gold);font-size:14px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:10px}
+.entry .t{font-size:19px;font-weight:800}.entry .d{font-size:13px;color:var(--gold)}
+.entry .body{white-space:pre-wrap;margin-top:6px;font-size:17px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:var(--gold);color:#0A1430;font-weight:800;padding:12px 18px;border-radius:14px;opacity:0;transition:.3s;z-index:40;pointer-events:none;max-width:90%;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.modal{position:fixed;inset:0;background:rgba(5,10,25,.8);z-index:30;display:none;align-items:flex-end;justify-content:center}
+.modal.on{display:flex}
+.sheet{background:var(--bg2);border:1px solid var(--goldd);border-radius:24px 24px 0 0;width:100%;max-width:720px;padding:20px 18px calc(24px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}
+.empty{text-align:center;color:var(--soft);padding:24px}
+footer{text-align:center;color:var(--soft);font-size:13px;margin-top:30px}
+footer .logo{font-size:30px;display:block}
+
+/* ===== СВЕТЛАЯ ТЕМА ===== */
+body.light{--bg:#F7F3EA;--bg2:#F0EADC;--card:#FFFFFF;--card2:#FFFFFF;--line:#E4D9C2;
+ --white:#14234B;--soft:#5D6785;--gold:#A87A22;--gold2:#8E6516;--goldd:#D9B66A;--pal:#B5480E;--ok:#1F8A5B;--no:#C2412D;
+ background:radial-gradient(900px 500px at 90% -10%,#FBEFD3 0%,transparent 60%),radial-gradient(700px 400px at -10% 110%,#E8EEFA 0%,transparent 60%),#F7F3EA}
+body.light .card,body.light .tile,body.light .wi,body.light .ls,body.light .stat,body.light .opt{box-shadow:0 2px 10px rgba(20,35,75,.06)}
+body.light .card{background:#fff}
+body.light .logo{color:#B08327;text-shadow:none}
+body.light .hero{background:linear-gradient(135deg,#14234B,#1E3470);border:0;color:#F6F3EB}
+body.light .hero .w{color:#fff}body.light .hero .t{color:#F3D99A}body.light .hero .lbl{color:#E2BE6A}
+body.light .hero .tag{background:rgba(255,255,255,.12);color:#DCE3F5;border-color:transparent}
+body.light .hero .pal,body.light .daily .pal{color:#F3D99A}
+body.light nav{background:rgba(255,255,255,.96);border-top:1px solid #E4D9C2}
+body.light nav button.on{color:#14234B}
+body.light nav button.on .ic{filter:none}
+body.light nav button.on:after{content:"";width:22px;height:3px;border-radius:3px;background:#C9973A;margin-top:2px}
+body.light .chip.on,body.light .btn.gold{background:linear-gradient(135deg,#E9C77B,#D4A84A);color:#14234B}
+body.light .modes button{background:#fff;border-color:#E4D9C2;color:#14234B}
+body.light .front{background:linear-gradient(150deg,#14234B,#22397A);color:#F6F3EB;border:0}
+body.light .back{background:linear-gradient(150deg,#FFF8E6,#F6E7C2);border-color:#D9B66A}
+body.light .front .pal{color:#F3D99A}
+body.light .front .hint{color:#B9C3DA}body.light .front .l{color:#E2BE6A}
+body.light .know .no{background:#FBE9E4;border-color:#EBC3B8;color:#8A2E1F}
+body.light .know .yes{background:#E3F4EB;border-color:#A9D9BF;color:#145C3C}
+body.light .opt.ok{background:#E3F4EB;border-color:#1F8A5B}
+body.light .opt.bad{background:#FBE9E4;border-color:#C2412D}
+body.light .bb{color:#14234B}
+body.light .bb.a{background:#E4EBFB}body.light .bb.b{background:#F1E9F8}body.light .bb.c{background:#E0F2EF}
+body.light .bb .who{color:#8E6516}
+body.light .bb .r{color:#5D6785;border-top-color:rgba(20,35,75,.12)}
+body.light .note,body.light .tip{background:#FBF3E0}
+body.light .modal{background:rgba(20,35,75,.45)}
+body.light .sheet{background:#FBF8F1}
+body.light .search,body.light textarea,body.light input.in{background:#fff}
+body.light .search::placeholder{color:#9AA1B8}
+body.light .top{background:linear-gradient(#F7F3EA 70%,transparent)}
+body.light .fbox .ex .r,body.light .r.ok{color:#1F8A5B}
+body.light .m{color:#C25A12}
+body.light .toast{background:#14234B;color:#F3D99A}
+body.light .st.s2{color:#fff}
+body.light .chk.on .box{color:#fff}
+
+body.light .daily{background:linear-gradient(135deg,#FFF8E8,#F7E8C4);color:#14234B;border:1.5px solid #D9B66A;box-shadow:0 6px 20px rgba(168,122,34,.15)}
+body.light .daily h3{color:#8E6516}
+body.light .daily div[style*="B9C3DA"],body.light .daily .meta{color:#5D6785!important}
+body.light .daily .dw div{background:#fff;box-shadow:0 1px 4px rgba(20,35,75,.06)}
+body.light .daily .dw span{color:#8E6516}
+body.light .daily .pal{color:#B5480E}
+body.light .daily .lnk{color:#8E6516}
+body.light .steps button{background:#fff;color:#14234B;border-color:#D9B66A}
+body.light .steps button.done{background:#14234B;color:#F3D99A;border-color:#14234B}
+body.light .hero:after{display:none}
+body.light .hero{background:#fff;border:1.5px solid #E4D9C2;color:#14234B}
+body.light .hero .w{color:#14234B}body.light .hero .t{color:#8E6516}body.light .hero .lbl{color:#A87A22}
+body.light .hero .tag{background:#F0EADC;color:#5D6785}
+body.light .hero .pal{color:#B5480E}
+body.light .front{background:#fff;color:#14234B;border:1.5px solid #D9B66A}
+body.light .front .pal{color:#B5480E}body.light .front .hint{color:#5D6785}body.light .front .l{color:#A87A22}
+.daily .steps{grid-template-columns:1fr 1fr}
+.daily .steps button{display:flex;align-items:center;gap:8px;justify-content:flex-start;font-size:15px;padding:10px}
+.daily .steps button span{margin:0!important}
+.modes button{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px}
+.modes button span{margin:0!important}
+html,body{overflow-x:hidden}
+.gbody,.card{overflow-wrap:anywhere}
+.tb{table-layout:fixed;font-size:15px}
+.tb td,.tb th{padding:8px 6px;word-break:break-word;vertical-align:top}
+.tb.cases th:nth-child(1),.tb.cases td:nth-child(1){width:31%}
+.tb.cases th:nth-child(2),.tb.cases td:nth-child(2){width:19%}
+.wk{background:linear-gradient(135deg,#FFFFFF,#EEF2FC);border:1.5px solid #C9D3EE;border-radius:20px;padding:16px;margin:12px 0}
+.wk.due{border-color:#D4A84A;background:linear-gradient(135deg,#FFF8E8,#F7E8C4)}
+.wk h3{margin:0 0 4px}
+
+/* ===== кнопка «Добавить» ===== */
+.fab{position:fixed;right:max(16px,calc(50% - 344px));bottom:calc(84px + env(safe-area-inset-bottom));z-index:25;width:60px;height:60px;border-radius:20px;border:0;background:linear-gradient(135deg,#E9C77B,#C9973A);color:#14234B;box-shadow:0 8px 22px rgba(168,122,34,.4);display:flex;align-items:center;justify-content:center}
+.fab .ico{width:30px;height:30px;stroke-width:2.2}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.seg button{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:10px 4px;font-weight:800;font-size:13px;color:var(--white);display:flex;flex-direction:column;align-items:center;gap:4px}
+.seg button.on{border-color:var(--gold);background:#FBF0D6;color:#14234B}
+.seg button .ico{width:22px;height:22px;color:var(--gold)}
+.found{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin:8px 0}
+.found h4{font-size:14px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.found .li{font-size:16px;padding:3px 0;border-bottom:1px dashed var(--line)}
+.found .li:last-child{border:0}
+.found .li b{font-weight:800}.found .li span{color:var(--gold2)}
+.mine-tag{background:#FBF0D6!important;color:#8E6516!important;border-color:#E9C77B!important}
+
+/* ===== приложение ===== */
+.top{padding-top:calc(16px + env(safe-area-inset-top))}
+#splash{position:fixed;inset:0;z-index:100;background:radial-gradient(600px 400px at 50% 30%,#FFFDF7,#F3E7CB);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity .6s ease,visibility .6s}
+#splash.hide{opacity:0;visibility:hidden}
+#splash .frame{position:absolute;inset:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));border:2px solid #D4A84A;border-radius:34px;pointer-events:none}
+#splash .frame:after{content:"";position:absolute;inset:8px;border:1px solid rgba(201,151,58,.45);border-radius:27px}
+#splash .orn{width:190px;height:30px;margin-bottom:22px;animation:rise .9s ease both}
+#splash .cal{font-family:'Aref Ruqaa',serif;font-size:54px;color:#B08327;line-height:1;animation:rise .9s .1s ease both}
+#splash .name{font-family:'Cormorant Garamond',Lora,serif;font-weight:700;font-size:66px;color:#14234B;line-height:1.05;margin-top:18px;animation:rise .9s .2s ease both}
+#splash .name b{color:#C9973A}
+#splash .sub2{font-family:'Manrope',system-ui,sans-serif;font-weight:800;letter-spacing:.32em;font-size:13px;color:#8E6516;margin-top:12px;animation:rise .9s .3s ease both}
+#splash .line{width:0;height:2px;background:linear-gradient(90deg,transparent,#C9973A,transparent);margin-top:26px;animation:grow 1.1s .35s ease forwards}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes grow{to{width:180px}}
+.migr{background:#fff;border:1.5px dashed #D4A84A;border-radius:18px;padding:14px 16px;margin:12px 0}
+.theme{background:none;border:1px solid var(--line);color:var(--white);border-radius:99px;padding:6px 10px;font-size:15px;font-weight:700;margin-left:8px}
+
+/* иконки */
+.ico{width:1.15em;height:1.15em;vertical-align:-.2em;flex:0 0 auto}
+i[data-i]{font-style:normal;display:inline-flex;align-items:center;justify-content:center}
+h3 i[data-i],.btn i[data-i],.chip i[data-i],.tag i[data-i],.lnk i[data-i]{margin-right:.35em}
+nav button .ic .ico{width:25px;height:25px}
+nav button .ic{height:26px}
+.tile span.badge,.modes button span,.steps button span{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,rgba(226,190,106,.28),rgba(226,190,106,.12));color:var(--gold);margin:0 auto 6px}
+.tile span.badge{margin:0 0 4px}
+.tile span.badge .ico,.modes button span .ico{width:24px;height:24px}
+.steps button span{width:36px;height:36px;border-radius:11px}
+.steps button span .ico{width:20px;height:20px}
+body.light .tile span.badge,body.light .modes button span,body.light .steps button span{background:linear-gradient(135deg,#FBEFD0,#F4E2B5);color:#8E6516}
+body.light .steps button.done span{background:rgba(243,217,154,.18);color:#F3D99A}
+.theme .ico{width:18px;height:18px;vertical-align:-3px}
+.theme{margin-left:8px}
+.bigic{display:inline-flex;width:76px;height:76px;border-radius:24px;align-items:center;justify-content:center;background:linear-gradient(135deg,#FBEFD0,#F1DCA8);color:#8E6516}
+.bigic .ico{width:40px;height:40px}
+.modes{grid-template-columns:repeat(3,1fr)}
+.modes button{font-size:14px;padding:12px 4px}
+.steps{grid-template-columns:repeat(2,1fr)}
+.steps button{font-size:15px;padding:10px 6px;display:flex;align-items:center;gap:8px;justify-content:flex-start}
+.steps button span{margin:0!important}
+/* аудио */
+.aud{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.aud audio{width:100%;height:40px}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+/* собери фразу */
+.slots{min-height:64px;background:var(--bg2);border:1.5px dashed var(--goldd);border-radius:16px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.pool{display:flex;flex-wrap:wrap;gap:8px}
+.wchip{background:var(--card);border:1.5px solid var(--line);color:var(--white);border-radius:12px;padding:10px 13px;font-size:18px;font-weight:800;box-shadow:0 2px 6px rgba(20,35,75,.06)}
+.slots .wchip{border-color:var(--gold)}
+.res{font-weight:800;margin:8px 0;font-size:17px}
+.res.ok{color:var(--ok)}.res.no{color:var(--no)}
+/* пишу сама */
+.typein{font-size:22px!important;text-align:center;font-weight:800!important}
+.ans{text-align:center;font-size:20px;font-weight:800;margin:10px 0}
+.kbd{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:4px 0 10px}
+.kbd button{background:var(--card);border:1px solid var(--line);color:var(--white);border-radius:10px;padding:8px 12px;font-weight:800;font-size:17px}
+/* daily */
+.daily{background:linear-gradient(135deg,#14234B,#1E3470);color:#F6F3EB;border-radius:24px;padding:18px;margin:14px 0}
+.daily h3{color:#E2BE6A;margin:0 0 4px}
+.daily .dw{display:grid;grid-template-columns:1fr;gap:6px;margin:12px 0}
+.daily .dw div{background:rgba(255,255,255,.08);border-radius:12px;padding:9px 12px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.daily .dw b{font-size:20px}.daily .dw span{color:#F3D99A;font-size:15px;text-align:right}
+.daily .dw .hide span{filter:blur(6px)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.steps button{background:rgba(255,255,255,.1);border:1px solid rgba(226,190,106,.5);color:#fff;border-radius:14px;padding:11px 4px;font-weight:800;font-size:14px}
+.steps button.done{background:#E2BE6A;color:#14234B}
+
+.daily .meta{font-size:13px;color:#B9C3DA;margin-top:10px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.daily .lnk{background:none;border:0;color:#F3D99A;font-weight:800;font-size:13px;text-decoration:underline}
+.week{display:flex;gap:6px;justify-content:space-between;margin-top:8px}
+.week div{flex:1;text-align:center;font-size:11px;color:var(--soft)}
+.week i{display:block;height:30px;border-radius:9px;background:var(--bg2);border:1px solid var(--line);margin-bottom:3px;line-height:28px;font-style:normal;font-size:14px}
+.week i.f{background:var(--gold);border-color:var(--gold);color:#fff}
+@media(max-width:420px){h1{font-size:31px}.side .big{font-size:27px}.nums{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body class="light">
+<div id="splash"><div class="frame"></div>
+<svg class="orn" viewBox="0 0 190 30" fill="none"><path d="M95 2l4.5 10.5L110 15l-10.5 2.5L95 28l-4.5-10.5L80 15l10.5-2.5z" fill="#C9973A"/><path d="M70 15H18M120 15h52" stroke="#C9973A" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="15" r="3" fill="#C9973A"/><circle cx="180" cy="15" r="3" fill="#C9973A"/></svg>
+<div class="cal">عائشة</div>
+<div class="name">Адыгэбзэ</div>
+<div class="sub2">ТЕТРАДЬ АИШИ</div>
+<div class="line"></div></div>
+
+<div class="app">
+ <div class="top"><div class="logo">عائشة</div><div class="row" style="flex-wrap:nowrap"><div class="brand"><b>Адыгэбзэ</b>МОЯ ТЕТРАДЬ</div><button class="theme" id="thm" onclick="toggleTheme()"><i data-i=moon></i></button></div></div>
+
+ <!-- ГЛАВНАЯ -->
+ <section class="view on" id="v-home"></section>
+ <!-- ЛЕКСИКА -->
+ <section class="view" id="v-words"></section>
+ <!-- УРОКИ -->
+ <section class="view" id="v-lessons"></section>
+ <!-- ДИАЛОГИ / ЧТЕНИЕ -->
+ <section class="view" id="v-talk"></section>
+ <!-- ДЗ -->
+ <section class="view" id="v-hw"></section>
+ <!-- ГРАММАТИКА -->
+ <section class="view" id="v-gram"></section>
+
+ <footer><span class="logo">عائشة</span>Тетрадь кабардинского · Telegram @Aisha_0309</footer>
+</div>
+
+<nav><div class="in">
+ <button data-v="home" class="on"><span class="ic"><i data-i=home></i></span>Главная</button>
+ <button data-v="words"><span class="ic"><i data-i=cards></i></span>Слова</button>
+ <button data-v="lessons"><span class="ic"><i data-i=books></i></span>Уроки</button>
+ <button data-v="talk"><span class="ic"><i data-i=chat></i></span>Диалоги</button>
+ <button data-v="hw"><span class="ic"><i data-i=pen></i></span>ДЗ</button>
+</div></nav>
+
+<button class="fab" onclick="addAny()" aria-label="Добавить"><i data-i=plus></i></button>
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== ФИРМЕННЫЕ ИКОНКИ (линейные, 24×24) =====
+const ICONS={
+home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',
+cards:'<rect x="3.5" y="6" width="11" height="14" rx="2"/><path d="M8 4.5l9.6-1.3a2 2 0 0 1 2.2 1.7l1.5 11a2 2 0 0 1-1.7 2.2l-3.1.4"/><path d="M7 11h4M7 14h3"/>',
+books:'<path d="M4 4.5h4v15H4z"/><path d="M8 6.5h4v13H8z"/><path d="m13.5 6.2 3.7-1 3.9 14.5-3.7 1z"/>',
+book:'<path d="M12 6.5C10 5 7 4.5 3.5 5v13.5C7 18 10 18.5 12 20c2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5V20"/>',
+chat:'<path d="M4 5.5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2z"/><path d="M17 9.5h3a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v2.5L16 18.5h-3"/>',
+pen:'<path d="M4 20l1-4.5L16 4.5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M14 7l3 3"/><path d="M13 20h7"/>',
+pencil:'<path d="M4 20l1-4.5L16 4.5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M14 7l3 3"/>',
+repeat:'<path d="M4 12a7.5 7.5 0 0 1 13-5.1L19.5 9"/><path d="M19.5 4v5h-5"/><path d="M20 12a7.5 7.5 0 0 1-13 5.1L4.5 15"/><path d="M4.5 20v-5h5"/>',
+target:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/>',
+scroll:'<path d="M7 4h11a2 2 0 0 1 2 2v1h-4"/><path d="M16 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1h10"/><path d="M7 4a2 2 0 0 0-2 2v11"/><path d="M8.5 9h4.5M8.5 12h4.5"/>',
+star:'<path d="m12 3.5 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/>',
+pin:'<path d="M9 3.5h6l-1 5 3.5 3.5h-11L10 8.5z"/><path d="M12 12v8.5"/>',
+puzzle:'<path d="M4 8h4a2 2 0 1 1 4 0h4v4a2 2 0 1 1 0 4v4h-4a2 2 0 1 0-4 0H4v-4a2 2 0 1 0 0-4z"/>',
+moon:'<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/>',
+sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',
+eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+flame:'<path d="M12 21c-4 0-6.5-2.6-6.5-6 0-3.7 3-5.6 4-9.5 2.3 1.4 3.4 3.4 3.5 5.2 1-.7 1.7-1.9 1.8-3.2 2.2 1.8 3.7 4.5 3.7 7.5 0 3.4-2.5 6-6.5 6z"/><path d="M12 21c-1.7 0-2.8-1.1-2.8-2.7 0-1.8 1.5-2.6 2.3-4.3 1.6 1.2 3.3 2.4 3.3 4.3 0 1.6-1.1 2.7-2.8 2.7z"/>',
+sparkle:'<path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z"/><path d="M19 15.5c.2 1.4.9 2.1 2.3 2.3-1.4.2-2.1.9-2.3 2.3-.2-1.4-.9-2.1-2.3-2.3 1.4-.2 2.1-.9 2.3-2.3z"/>',
+list:'<rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M8 8.5h8M8 12h8M8 15.5h5"/>',
+masks:'<path d="M3 5c3 1 6 1 9 0v5.5a4.5 4.5 0 0 1-9 0z"/><path d="M12 8.5c3 1 6 1 9 0V14a4.5 4.5 0 0 1-9 0"/><path d="M5.5 8.5h1M8.5 8.5h1M14.5 12h1M17.5 12h1M15 15.5c.9.7 2.1.7 3 0"/>',
+save:'<path d="M5 3.5h11l3.5 3.5v12a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V5A1.5 1.5 0 0 1 5 3.5z"/><path d="M7.5 3.5v5h8v-5M7.5 20.5v-6h9v6"/>',
+copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/>',
+box:'<path d="m3.5 7.5 8.5-4 8.5 4v9l-8.5 4-8.5-4z"/><path d="m3.5 7.5 8.5 4 8.5-4M12 11.5v9"/>',
+restore:'<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4.5h4.5"/><path d="M12 8v4l2.5 2.5"/>',
+gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/><circle cx="12" cy="12" r="6.5"/>',
+voice:'<path d="M9 4.5a4 4 0 0 1 4 4c0 2-1 2.6-1 4.5V15a2 2 0 0 1-2 2H8.5"/><path d="M5.5 8.5a3.5 3.5 0 0 1 7 0"/><path d="M16.5 7.5c1 1.2 1 3.8 0 5M19 5.5c2 2.5 2 6.5 0 9"/><path d="M8.5 17v3.5"/>',
+calendar:'<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/>',
+search:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+trophy:'<path d="M7.5 4h9v5a4.5 4.5 0 0 1-9 0z"/><path d="M7.5 6H4.5v1.5A3 3 0 0 0 7.6 10.5M16.5 6h3v1.5a3 3 0 0 1-3.1 3"/><path d="M12 13.5V17M8.5 20.5h7M9.5 17h5v3.5h-5z"/>',
+clip:'<path d="m20 11.5-8 8a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.3 8.3a1.7 1.7 0 0 1-2.4-2.4L15 7"/>',
+bulb:'<path d="M9 17.5h6M10 20.5h4"/><path d="M12 3.5a6 6 0 0 0-3.5 10.9c.4.3.5.8.5 1.3v1.8h6v-1.8c0-.5.2-1 .5-1.3A6 6 0 0 0 12 3.5z"/>',
+flower:'<circle cx="12" cy="9" r="2.2"/><path d="M12 6.8c-1-2.6 1-4.3 2.4-3.3 1.6 1.1.6 3.6-2.4 3.3zM14.1 8.3c2.2-1.6 4.5-.3 4 1.4-.6 1.8-3.2 1.6-4-1.4zM13.3 11c1.6 2.3.2 4.4-1.4 4-1.7-.5-1.7-3 1.4-4zM10.7 11c-1.6 2.3-.2 4.4 1.4 4M9.9 8.3c-2.2-1.6-4.5-.3-4 1.4.6 1.8 3.2 1.6 4-1.4zM12 6.8c1-2.6-1-4.3-2.4-3.3-1.6 1.1-.6 3.6 2.4 3.3z"/><path d="M12 15v6M12 18.5c1.5-1.5 3.5-1.8 5-1.5-.6 1.8-2.6 2.6-5 1.5z"/>',
+swirl:'<path d="M12 12a1.8 1.8 0 1 1 1.8 1.8A3.6 3.6 0 1 1 17.4 10a5.4 5.4 0 1 1-5.4-5.4 7.2 7.2 0 1 1-7.2 7.2"/>',
+quote:'<path d="M5 18c2.5-1 4-3.4 4-6.5V7H4.5v5.5H9M15 18c2.5-1 4-3.4 4-6.5V7h-4.5v5.5H19"/>',
+scene:'<path d="M4 9.5h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="m4 9.5-.6-3.4a1 1 0 0 1 .8-1.1l13.8-2.4a1 1 0 0 1 1.1.8l.4 2.3z"/><path d="m8.5 4.5 2 3.6M13.5 3.6l2 3.6"/>',
+trash:'<path d="M4 6.5h16M9.5 6.5V4h5v2.5M6 6.5l1 13.5a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13.5M10 10.5v6.5M14 10.5v6.5"/>',
+family:'<circle cx="7.5" cy="6.5" r="2.3"/><circle cx="16.5" cy="6.5" r="2.3"/><circle cx="12" cy="13" r="1.8"/><path d="M3.5 19.5v-5a4 4 0 0 1 8 0M12.5 14.5a4 4 0 0 1 8 0v5M9.5 20.5v-2a2.5 2.5 0 0 1 5 0v2"/>',
+bread:'<path d="M5 10.5C3.3 10 3 8.3 3.6 7.3 4.8 5.2 8.5 4 12 4s7.2 1.2 8.4 3.3c.6 1 .3 2.7-1.4 3.2V19a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19z"/><path d="M9 11.5l1.5-1.5M12 13l1.5-1.5M9.5 15.5 11 14"/>',
+leaf:'<path d="M5 19c-1-6 2.5-13 15-14.5C19.5 14 14 19.5 6.5 18"/><path d="M5 19c3-4.5 6-7 10-9"/>',
+bird:'<path d="M8 8.5a4 4 0 0 1 8 0v1.5c2.5.4 4 2.3 4 4.5a6 6 0 0 1-6 6H9.5A5.5 5.5 0 0 1 4 15v-2.5"/><path d="M16 8.5l3-1.5-2.8-.4M11.5 8.2h0"/><path d="M8 4.5l1-1.5 1 1.5 1-1.5 1 1.5"/><path d="M10 20.5V22M14 20.5V22"/>',
+hand:'<path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11M11 10.5V4a1.5 1.5 0 0 1 3 0v6.5M14 10.5V5.5a1.5 1.5 0 0 1 3 0V13"/><path d="M17 9.5a1.5 1.5 0 0 1 3 0v4.5a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-2.7l-3-4.6a1.6 1.6 0 0 1 2.6-1.9L8 13.5"/>',
+dress:'<path d="M9 3l1.2 4h3.6L15 3"/><path d="M10.2 7 8.5 11l-3 9.5h13l-3-9.5-1.7-4"/><path d="M8.5 11h7"/>',
+clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/>',
+run:'<circle cx="14.5" cy="4.5" r="1.8"/><path d="m6 9.5 3.5-2 4 .5 1.5 4 3.5 1.5"/><path d="m12 8-2.5 5.5 4 3V21M9.5 13.5 7 17H3.5"/>',
+palette:'<path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.2 0 1.8-.7 1.8-1.6 0-1.3-1.2-1.7-1.2-2.9 0-1 .8-1.7 1.8-1.7H17a3.5 3.5 0 0 0 3.5-3.5C20.5 6.7 16.7 3.5 12 3.5z"/><circle cx="7.5" cy="11" r="1.1"/><circle cx="10" cy="7.3" r="1.1"/><circle cx="14.5" cy="7.3" r="1.1"/>',
+heart:'<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 3c0 5.4-7.5 10-7.5 10z"/>',
+crescent:'<path d="M15.5 20A8.5 8.5 0 1 1 15.5 4a7 7 0 0 0 0 16z"/><path d="m18.5 8.5.7 1.6 1.8.2-1.3 1.2.4 1.8-1.6-.9-1.6.9.4-1.8-1.3-1.2 1.8-.2z"/>',
+user:'<circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
+sound:'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/>',
+keyboard:'<rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6 10h0M9 10h0M12 10h0M15 10h0M18 10h0M6 13.5h0M9 13.5h0M12 13.5h0M15 13.5h0M18 13.5h0M8 16h8" stroke-width="2.2"/>',
+blocks:'<rect x="3.5" y="13" width="7.5" height="7.5" rx="1.5"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.5"/><rect x="8.2" y="3.5" width="7.5" height="7.5" rx="1.5"/>',
+mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5v3.5M8.5 21h7"/>',
+play:'<circle cx="12" cy="12" r="8.5"/><path d="M10 8.5v7l6-3.5z" fill="currentColor"/>',
+upload:'<path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M4 15v3.5A2 2 0 0 0 6 20.5h12a2 2 0 0 0 2-2V15"/>',
+bell:'<path d="M6 10a6 6 0 0 1 12 0c0 5 2 6.5 2 6.5H4S6 15 6 10z"/><path d="M10 19.5a2 2 0 0 0 4 0"/>',
+intro:'<rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M7.5 10h9M7.5 14h5"/><path d="M15.5 13.5l1.5 1.5 3-3"/>',
+hide:'<rect x="3" y="6" width="18" height="12" rx="6"/><circle cx="15" cy="12" r="3.5" fill="currentColor"/>',
+week:'<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/>',
+plusdoc:'<path d="M14 3.5H6.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V9z"/><path d="M14 3.5V9h5.5M12 12v6M9 15h6"/>',
+check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',
+x:'<path d="M6 6l12 12M18 6 6 18"/>',
+swap:'<path d="M4 8.5h14l-3.5-3.5M20 15.5H6l3.5 3.5"/>',
+home2:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/>',
+ornament:'<path d="M12 2.5 14 7l4.5 2-4.5 2-2 4.5-2-4.5L5.5 9 10 7z"/>'
+};
+function ic(n,c){return `<svg class="ico ${c||""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]||ICONS.ornament}</svg>`}
+// заполнение плейсхолдеров <i data-i="..."></i>
+function hydrate(root){(root||document).querySelectorAll("i[data-i]:not([data-d])").forEach(e=>{e.innerHTML=ic(e.dataset.i);e.dataset.d=1})}
+
+// ===== ДАННЫЕ ИЗ ЧАТА «Д/з» и «Материалы урока» =====
+// формат слова: [кабардинский, русский, тема]
+const TOPICS = {
+  people:"<i data-i=family></i>Семья и люди", home:"<i data-i=home></i>Дом и быт", food:"<i data-i=bread></i>Еда", nature:"<i data-i=leaf></i>Природа",
+  animals:"<i data-i=bird></i>Животные", body:"<i data-i=hand></i>Тело", clothes:"<i data-i=dress></i>Одежда", time:"<i data-i=clock></i>Время и числа",
+  verbs:"<i data-i=run></i>Глаголы", adj:"<i data-i=palette></i>Какой? (признаки)", phrases:"<i data-i=chat></i>Фразы и вопросы",
+  faith:"<i data-i=crescent></i>Пожелания", pron:"<i data-i=user></i>Местоимения", sounds:"<i data-i=sound></i>Для звуков"
+};
+
+const LESSONS = [
+{ id:"u1", n:"Урок 1", date:"9 мая", title:"Звуки и местоимения",
+  words:[
+  ["Мазэ","луна, месяц","nature"],["Адакъэ","петух","animals"],["Шатэ","сметана","food"],
+  ["Бажэ","лиса","animals"],["Бабыщ","утка","animals"],["Блын","стена","home"],
+  ["Мывэ","камень","nature"],["Вакъэ","обувь","clothes"],["Вынд","грач","sounds"],
+  ["Гын","порох","sounds"],["Бгы","гора; спина","nature"],["Джэдгын","чабрец","sounds"],
+  ["Гу","сердце","body"],["Гъатхэ","весна","time"],["Гъунэгъу","сосед; рядом","people"],
+  ["Сэ","я","pron"],["Дэ","мы","pron"],["Уэ","ты","pron"],["Фэ","вы","pron"],
+  ["Ар","он, она, оно","pron"],["Ахэр","они","pron"]],
+  note:"Слова «гын» (порох) и «вынд» (грач) учить не обязательно: они для тренировки звуков.",
+  hw:{due:"16.05",items:["Ознакомиться с презентацией","Потренировать звуки","Посмотреть видео, прослушать озвучку","Выучить лексику","Выучить правила с презентации"]}
+},
+{ id:"u2", n:"Урок 2", date:"16 мая", title:"Звуки Д, ДЖ, ДЗ, Ж",
+  words:[
+  ["Дэп","горящий уголь","home"],["Дэ","орех (и «мы»)","food"],["Джэш","фасоль","food"],
+  ["Джэд","курица","animals"],["ДжэдыкIэ","яйцо","food"],["Дзэ","зубы","body"],
+  ["Бадзэ","муха","animals"],["Бел","лопата","home"],["Еджэн","читать, учиться","verbs"],
+  ["Жыг","дерево","nature"],["Жызум","виноград","food"],["Жьыбгъэ","ветер (также жьы, жьапщэ)","nature"],
+  ["Жьынду","сова","animals"],["Зэрыджэ","калина","nature"],["Мэз","лес","nature"],
+  ["Дуней","мир","nature"],["Йоджэ","читает","verbs"],["Ин","большой","adj"],
+  ["Сабий","ребёнок","people"],["Мэ","на (бери)","phrases"],["Къэхь","принеси, дай","phrases"],
+  ["Къызэт","дай (мне)","phrases"]],
+  hw:{due:"23.05",items:["Ознакомиться с презентацией","Выучить новые слова","Отработать новые фразы","Выучить правила"]}
+},
+{ id:"u3", n:"Урок 3", date:"23 мая", title:"Звуки К, КЪ, КI, КХЪ",
+  words:[
+  ["Къуэ","сын","people"],["Си къуэ","мой сын","people"],["Уи къуэ","твой сын","people"],
+  ["Абы и къуэ","его сын","people"],["КIэ","юбка","clothes"],["Кыхь","длинный","adj"],
+  ["КIэ кыхь","длинная юбка","clothes"],["КIапсэ","верёвка","home"],
+  ["ЕджакIуэ","ученик, студент","people"],["ЩакIуэ","охотник","people"],["КIуэн","идти, ехать","verbs"],
+  ["Сэ сокIуэ","я иду","verbs"],["Уэ уокIуэ","ты идёшь","verbs"],["Ар макIуэ","он идёт","verbs"],
+  ["Куэбжэ","ворота","home"],["Хэку","родина","nature"],["Куэ","бедро","body"],
+  ["Джэдыкуэ","куриное бедро","food"],["Макъ","голос, звук","phrases"],["Макъ дахэ","красивый голос","phrases"],
+  ["Макъ зэхэсхащ","услышал голос","phrases"],["Къамэ","кинжал","home"],["Къуажэ","деревня, село","nature"],
+  ["Къудамэ","ветка","nature"],["КхъапIэ","перхоть","sounds"],["Кхъэ","кладбище","nature"],
+  ["ЩIакхъуэ","хлеб","food"],["Кхъуэ","свинья","animals"],["Кхъуей","сыр","food"],
+  ["Хэт?","кто?","phrases"],["Сыт?","что?","phrases"]],
+  hw:{due:"30.05",items:["Ознакомиться с презентацией","Выучить новые слова","Отработать новые фразы и звуки","Выучить правила"]}
+},
+{ id:"u4", n:"Урок 4", date:"31 мая", title:"Звуки Л, ЛЪ, ЛI и до буквы Р",
+  words:[
+  ["Пщэдджыжь","утро","time"],["Пщыхьэщхьэ","вечер","time"],["Жэщ","ночь","time"],
+  ["ФI","хороший, благой","adj"],["Лэныстэ","ножницы","home"],["Бжьэмышх","ложка (также «лошкэ»)","home"],
+  ["Лъакъуэ","нога","body"],["Лъэпэд","носки","clothes"],["Лъы","кровь","body"],
+  ["Мыл","лёд","nature"],["Мэл","овца","animals"],["МыIэрысэ","яблоко","food"],
+  ["Ныбэ","живот","body"],["Нэ","глаза","body"],["Нэгъуджэ","очки","home"],
+  ["Гъуджэ","зеркало","home"],["Нысэ","невеста","people"],["НысащIэ","молодая невестка","people"],
+  ["Жьы","старый","adj"],["ЩIэ","новый","adj"],["ЛI","мужчина, муж","people"],
+  ["ЛIыжь","старик","people"],["Фыз","женщина, жена","people"],["Фызыжь","старушка","people"],
+  ["Ботэ","резиновые сапоги","clothes"],["Бохъшэ","кошелёк","home"],["Бэлътоку","платок","clothes"],
+  ["Бэлъто","пальто","clothes"],["Бостей","платье","clothes"],["КIэртIоф","картофель","food"],
+  ["Пэгун","ведро","home"],["Пэш","комната","home"],["Пщэ","шея","body"],
+  ["Пшэ","облако, туча","nature"],["Пэ","нос","body"],["ЦIыкIу","маленький","adj"]],
+  hw:{due:"04.06",items:["Ознакомиться с презентацией до буквы Р включительно","Выучить новые слова","Отработать новые фразы","Выучить правила"]}
+},
+{ id:"u5", n:"Урок 5", date:"7 июня", title:"Знакомство, «мой / твой», буквы С–Щ",
+  words:[
+  ["Сэ сы-Аишэщ","Я Аиша (подставь своё имя)","phrases"],["Уэ ухэт?","Ты кто?","phrases"],
+  ["Сыт пщIэр?","Что делаешь?","phrases"],["Сэ соджэ, уэ сыт пщIэр?","Я читаю, а ты что делаешь?","phrases"],
+  ["Сэ сотхэ","Я пишу","phrases"],["Хэт зейр мы тхылъыр?","Чья эта книга?","phrases"],
+  ["Санэ","смородина","food"],["Сэ","нож","home"],["Сабын","мыло","home"],
+  ["Сымаджэ","больной","adj"],["Стол","стол","home"],["Тепщэч","тарелка","home"],
+  ["Тас","тазик","home"],["Тебэ","сковорода","home"],["Шэнт","стул","home"],
+  ["Тхылъ","книга","home"],["Матэ","корзина","home"],["ЯтIэ","грязь","nature"],
+  ["ТIэкIу","немного","adj"],["ПщIантIэ","двор","home"],["Уафэ","небо","nature"],
+  ["Уадэ","молоток","home"],["Удз","трава","nature"],["Унэ","дом","home"],
+  ["Уэ","град","nature"],["Уэ къехащ","выпал град","nature"],["Къехын","спускаться","verbs"],
+  ["Уафэгъуагъуэ","гром, молния","nature"],["Уэншэку","матрас","home"],["Фалъэ","глубокая тарелка, чашка","home"],
+  ["Фэ","кожа","body"],["Фо","мёд","food"],["Фошыгъу","сахар","food"],["Шыгъу","соль","food"],
+  ["Фадэ","спиртное","food"],["Фадэр хьэрэмщ","Спиртное запретно","faith"],
+  ["ФIамыщI","уголь","home"],["ФIыцIэ","чёрный","adj"],["ПщэфIэн","готовить","verbs"],
+  ["ПщафIэ","повар","people"],["ФIэдзэн","вешать","verbs"],["ФIэдзапIэ","вешалка (куда вешают)","home"],
+  ["Хадэ","огород","nature"],["Хабзэ","этикет, обычай","phrases"],["Хэку, лъахэ, щIыналъэ","родина, край","nature"],
+  ["Пхэн","завязывать","verbs"],["Уи лъэпсыр пхэ","Завяжи свой шнурок","phrases"],
+  ["Хамэ","чужой","adj"],["Хамэм уемыпсалъэ","Не разговаривай с чужими","phrases"],
+  ["Псэлъэн","разговаривать","verbs"],["Хьэ","собака; ячмень","animals"],
+  ["Хьэлэл","щедрый; дозволенный","adj"],["ЦIыху хьэлэл","щедрый человек","people"],
+  ["Лы хьэлэл","дозволенное мясо","faith"],["Хьэдзэ","семена","nature"],["Нартыху хьэдзэ","семена кукурузы","nature"],
+  ["Хьэсэ","грядка","nature"],["Хужь","белый","adj"],["Хугу","пшено","food"],
+  ["Хуабэ","тёплый","adj"],["Хуэм","медленный","adj"],["Хуэму","медленно","adj"],
+  ["Хуэму кIуэ","Иди медленно","phrases"],["Щэху","тихий","adj"],["Щэхуу","тихо","adj"],
+  ["Щэхуу фыщыс","Сидите тихо","phrases"],["Хъун","стать","verbs"],["Хъунщ","ладно, хорошо","phrases"],
+  ["ЩIалэфI ухъу","Чтобы ты стал хорошим парнем","faith"],["Хуабэ хъуарэт","Хоть бы стало тепло","phrases"],
+  ["Хущхъуэ","лекарство","home"],["Хьэуэ","нет","phrases"],["НтIэ","да","phrases"],["Нобэ","сегодня","time"]],
+  grammar:["possess"],
+  hw:{due:"07.06",items:["Ознакомиться с презентацией","Выучить новые слова","Отработать новые фразы","Выучить правила","Подготовить вопросы по теме или задать в чате"]}
+},
+{ id:"u6", n:"Урок 6", date:"14 июня", title:"Как дела? Семья и тело",
+  words:[
+  ["Сыт ухуэдэ?","Как ты?","phrases"],["Унагъуэ","семья","people"],
+  ["Фи унагъуэр сыт хуэдэ?","Как ваша семья?","phrases"],["Дыгъуасэ","вчера","time"],
+  ["Сыт нобэ фщIар?","Что вы сегодня делали?","phrases"],["Сыт дыгъуасэ фщIар?","Что вы вчера делали?","phrases"],
+  ["Сыт сабийхэм ящIэр?","Что делают дети?","phrases"],["Iейкъым","неплохо","phrases"],
+  ["Iей","плохой","adj"],["Уз","болезнь","body"],["Узыншэ","здоровый","adj"],
+  ["Цы","шерсть","animals"],["Щхьэц","волосы","body"],["Цыжьбанэ","ёжик","animals"],
+  ["Цыджанэ","свитер","clothes"],["Цылъэпэд","шерстяные носки","clothes"],["Цыбэ","волосатый","adj"],
+  ["ЦIыху","человек, люди","people"],["ЦIыхубэ","общество","people"],["Пщащхъуэ","ласточка","animals"],
+  ["ПцIы","ложь","phrases"],["ПцIы умыупс","Не лги","phrases"],["ПцIанэ","раздетый, голый","adj"],
+  ["Лъапцэ","босой","adj"],["Чырбыш","кирпич","home"],["ЧыцI","козлёнок","animals"],
+  ["Чэнджэщ","совет","phrases"],["Чэф","весёлый, пьяный","adj"],["Чэщанэ","башня","home"],
+  ["Зыри","ничего","phrases"],["Шы","лошадь","animals"],["Шыпс","подлива","food"],
+  ["Еплъын","смотреть","verbs"],["Йоплъ","смотрит","verbs"],["Пхъу","дочь","people"],
+  ["Шыпхъу","сестра","people"],["Къуэш","брат","people"],["Шэ","молоко","food"],
+  ["Шху","кефир","food"],["ПщампIэ","воротник","clothes"],["Гуащэ","свекровь; кукла","people"],
+  ["Пщыпхъу","золовка","people"],["Пщыкъуэ","деверь","people"],["Щапхъэ","пример","phrases"],
+  ["Щабэ","мягкий","adj"],["Щыб","спина; улица","body"],["Щыбагъ","сзади дома","home"],
+  ["Iэ","рука","body"],["Iэгу","ладонь","body"],["Iэпхъуамбэ","пальцы","body"],
+  ["Iэбжьанэ","ноготь","body"],["Iуданэ","нитка","home"],["Iупэ","губы","body"],
+  ["IункIыбзэ","ключ","home"],["Iупхъуэ","занавеска","home"]],
+  note:"Из лексики можно выписать для себя слова, которые считаешь нужными и частыми, и учить их.",
+  hw:{due:"21.06",items:["Ознакомиться с презентацией","Выучить новые слова","Отработать новые фразы","Составить свой диалог на тему «Знакомство»","Подготовить вопросы по теме или задать в чате"]}
+},
+{ id:"u7", n:"Урок 7", date:"21 июня", title:"Еда, учёба, числа",
+  words:[
+  ["Шхэн","кушать","verbs"],["Ушха?","Ты поела?","phrases"],["Пщэдджыжьышхэ","завтрак","food"],
+  ["Шэджагъуэ","полдень","time"],["Шэджагъуэшхэ","обед","food"],["Пщыхьэщхьэшхэ","ужин","food"],
+  ["Шей","чай","food"],["Ефэн","пить","verbs"],["Уефэну?","Будешь пить?","phrases"],
+  ["Хъыбар","новости, рассказ","phrases"],["ХъыбарыщIэ","свежие новости","phrases"],
+  ["IэщIагъэ","профессия","people"],["Закъуэ","один, одна","adj"],["Закъуэныгъэ","одиночество","phrases"],
+  ["Гъусэ","спутник, напарник","people"],["Мурад","цель, мечта, желание","phrases"],["Гугъэ","надежда","phrases"],
+  ["Егъэджэн","обучать кого-то","verbs"],["ЕгъэджакIуэ","учитель","people"],["Дапщэ?","Сколько?","phrases"]],
+  grammar:["numbers"],
+  hw:{due:"27.06",items:["Ознакомиться с презентацией","Выучить новые слова и числительные","Отработать новые фразы","Подготовить диалог","Ответить в аудио на вопросы в теме «звуки»","Пословицу прослушать и прочитать не спеша, выразительно 10 раз"]}
+},
+{ id:"u8", n:"Урок 8", date:"27 июня", title:"Есть / нет, брат, дела",
+  words:[
+  ["Iыгъын","держать","verbs"],["ПIыгъщ","ты держишь","verbs"],["СIыгъщ","я держу","verbs"],
+  ["ЩыIэкъым","нету (в наличии)","phrases"],["ЩыIэщ","есть","phrases"],["ЩIакхъуэ щыIэ?","Хлеб есть?","phrases"],
+  ["ФIыщIэ","хвала, благодарность","faith"],["Къуэш","брат (у мужчины)","people"],["Дэлъху","брат (у женщины)","people"],
+  ["Мухьэмэд и къуэш","брат Мухаммада","people"],["Мадинэ и дэлъху","брат Мадины","people"],
+  ["Iуэху","дело","phrases"],["Iуэху сиIэщ","У меня дела","phrases"],["СхущIыхьэкъым","Я занята (нет времени)","phrases"],
+  ["Нэхъыжь","старший","people"],["НэхъыщIэ","младший","people"]],
+  hw:{due:"04.07",items:["Ознакомиться с презентацией","Подготовить диалог","Ответить в аудио на вопросы в теме «звуки»","10 раз прочитать пословицу, отработать звуки","Выучить новые слова и фразы"]}
+},
+{ id:"u9", n:"Урок 9", date:"4 июля", title:"Сочинение «Моя семья»", text:"family1",
+  words:[["ЩIакIуэ","бурка","clothes"],["Щакъуэ","охотник (звук къу)","sounds"],["ЩIакхъуэ","хлеб (звук кхъу)","sounds"]],
+  note:"Отработать звуки кIу – къу – кхъу: ЩIакIуэ – щакъуэ – щIакхъуэ.",
+  hw:{due:"11.07",items:["Ознакомиться с презентацией","Составить своё мини-сочинение «Моя семья»","10 раз внимательно, не спеша прочитать четверостишие","Ещё раз прочитать текст сочинения, выделить непонятное, подготовить вопросы","Выучить новые слова и фразы"]}
+},
+{ id:"u10", n:"Урок 10", date:"12 июля", title:"Едем за покупками · падежи",
+  words:[["Ухъужа?", "Ты выздоровела?", "phrases"], ["НтIэ, сыхъужащ", "Да, выздоровела", "phrases"], ["Унэ лэжьыгъэр къывгурыIуа?", "Вы поняли домашнее задание?", "phrases"], ["Сочиненэр фхуэтха?", "Смогли написать сочинение?", "phrases"], ["НтIэ, схуэтхащ", "Да, смогла написать", "phrases"], ["УпщIэ фиIэкъэ?", "У вас нет вопросов?", "phrases"], ["Хьэуэ, диIэкъым", "Нет, нету", "phrases"], ["УпщIэ сиIэщ", "У меня есть вопрос", "phrases"], ["ФIыуэ лъагъун", "любить", "verbs"], ["Фыхуэхьэзыр пщэдейрей урокым?", "Вы готовы к завтрашнему уроку?", "phrases"], ["НтIэ, дыхуэхьэзырщ", "Да, готовы", "phrases"], ["Сыхьэзыркъым", "Я не готова", "phrases"], ["ПсынщIэ Аллыхьым пщищI!", "Да облегчит тебе Аллах!", "faith"], ["Бжэ", "дверь", "home"], ["Бжьэ", "пчела", "animals"], ["ЩэхуакIуэ докIуэ!", "Едем за покупками!", "phrases"], ["ЩэхуакIуэ", "за покупками; покупатель", "phrases"], ["Щэхуэн", "покупать", "verbs"], ["Шэн", "везти, возить", "verbs"], ["Хуеин", "хотеть", "verbs"], ["Щэн", "продавать", "verbs"], ["ЩапIэ", "место, где продают", "home"], ["Шхын", "еда", "food"], ["Хъуэжын", "менять", "verbs"], ["Хъуэжэн", "обменяться", "verbs"], ["Абы нэмыщI", "кроме этого", "phrases"], ["Сэ нэмыщI", "кроме меня", "phrases"], ["Тепхъуэн", "накрывать", "verbs"], ["СтIол тепхъуэ", "скатерть", "home"], ["Игъэхъуэн", "наливать, заправлять", "verbs"], ["Сигу къэгъэкIыж", "напомни мне", "phrases"], ["Уигу къэзгъэкIыжынщ", "напомню тебе", "phrases"], ["Дапщэра?", "Во сколько?", "phrases"], ["Къэщтэн", "брать", "verbs"], ["Къыздэщтэн", "брать с собой", "verbs"], ["Щыкъу", "родственники жены", "people"], ["Щыкъу анэ", "тёща", "people"], ["Къэгъэнэн", "оставлять", "verbs"], ["ЩIэскъым", "не дома", "phrases"], ["Хъунущ", "можно", "phrases"], ["Хъунукъым", "нельзя", "phrases"], ["ЛэжьапщIэ", "зарплата, плата за работу", "home"], ["Ахъшэ", "деньги", "home"], ["Ирикъун", "хватить", "verbs"], ["Аллыхьым и шыкурщ", "Хвала Аллаху", "faith"]], dialog:"market2", grammar:["cases"],
+  hw:{due:"18.07",items:["Подробно познакомиться с презентацией","Повторить пройденные четверостишия","10 раз прочитать новое четверостишие","Выучить окончания падежей","Ещё раз ознакомиться с диалогом","Составить свой диалог на тему «Покупки»","Выучить новые слова и фразы (лексика в конце PDF)"]}
+},
+{ id:"u11", n:"Урок 11", date:"25 июля", title:"На рынке · времена года",
+  words:[["Ди урокым щIедзэ!", "Наш урок начинается!", "phrases"], ["Урокым щIыдодзэ!", "Начинаем урок!", "phrases"], ["НэхъыфI ухъуа?", "Тебе стало лучше?", "phrases"], ["Тхьэмахуэр дауэ ефхьэкIа?", "Как провели неделю?", "phrases"], ["Гъэмахуэ хуабэм дауэ фезэгърэ?", "Как переносите летнюю жару?", "phrases"], ["Гъэмахуэ", "лето", "time"], ["ЩIымахуэ", "зима", "time"], ["Тхьэмахуэ", "неделя", "time"], ["ЩIэдзэн", "начинать что-то", "verbs"], ["ЩIидзэн", "начинаться", "verbs"], ["Езэгъын", "ладить, переносить", "verbs"], ["Хахуэ", "храбрый, смелый", "adj"], ["ЛIыгъэ", "мужество", "phrases"], ["ЛIыхъужьыгъэ", "героизм", "phrases"], ["ЛIэужь", "наследие", "phrases"], ["Лъэщ", "крепкий, сильный", "adj"], ["Бэзэртет", "продавец на рынке", "people"], ["Лы", "мясо", "food"], ["Къэшэчын", "взвесить", "verbs"], ["ЩIигъун", "перевесить, быть лишним", "verbs"], ["Ягъэ кIынкъым", "ничего страшного", "phrases"], ["Хьэжын", "измельчить", "verbs"], ["Дагъэ", "масло (растительное)", "food"], ["ГъэшхэкI", "молочные продукты", "food"], ["Нышэдибэ", "сегодня утром", "time"], ["Етын", "давать", "verbs"], ["ТхъуцIынэ", "сливочное масло", "food"], ["Гъуэжь", "жёлтый", "adj"], ["Къыпыгъэжын", "отрезать", "verbs"], ["Зэпыгъэжын", "резать", "verbs"], ["Ныкъуэ", "половина", "adj"], ["Илъхьэн", "положить куда-то", "verbs"], ["Зэрылъхьэн", "сложить", "verbs"], ["Щыгъупщэн", "забыть", "verbs"], ["Нэхъыщхьэ", "главный, важный", "adj"], ["Хэлъхьэжын", "добавить, доложить", "verbs"], ["Егъэдзын", "отправлять (перевод)", "verbs"], ["Iэрыхьэн", "получить", "verbs"], ["Гъэбэгъуэн", "приумножить", "verbs"], ["УасафIэ", "выгодная цена", "phrases"], ["Урокыр иухащ", "Урок закончился", "phrases"], ["Узыншэу фыщыт!", "Всего хорошего! Будьте здоровы!", "phrases"]], dialog:"bazaar",
+  note:"Запись диалога «Щэхуакlуэ докIуэ (ЕтIуанэ Iыхьэ)»: полезно переслушивать между делами.",
+  hw:{due:"1.08",items:["Подробно познакомиться с презентацией","Повторить пройденные четверостишия","10 раз прочитать новое четверостишие","Ещё раз ознакомиться с диалогом","Составить свой диалог на тему «Покупки»","Выучить новые слова и фразы (лексика в конце PDF)"]}
+},
+{ id:"u12", n:"Урок 12", date:"1 августа", title:"Платье на свадьбу · цвета и цветы",
+  words:[["УнэхъыфI?", "Тебе лучше?", "phrases"], ["Дауэ вгъэкIуа тхьэмахуэр?", "Как прошла неделя?", "phrases"], ["Сыт къэфщэхуар?", "Что вы купили?", "phrases"], ["Хэт уи гъусэу ущыIа щэхуакIуэ?", "С кем ты ходила за покупками?", "phrases"], ["Къащхъуэ", "голубой, синий", "adj"], ["Щхъуэ", "серый", "adj"], ["ЩхъуантIэ", "зелёный (также удзыфэ)", "adj"], ["Гуащэнабдзэ", "роза", "nature"], ["ГубгъуэIущхьэ", "мак", "nature"], ["Гуащэщхьэц", "гладиолус", "nature"], ["ГуащэIэпэ", "мята", "nature"], ["Гуэгушыпэ", "гиацинт", "nature"], ["ХьэгъуэлIыгъуэ", "свадьба", "people"], ["Къэшэн", "привести (в жёны)", "verbs"], ["Фыз къэшэн", "жениться", "verbs"], ["Сэбэп", "помощь, польза", "phrases"], ["Сэбэп хуэхъун", "быть полезным", "verbs"], ["ФIэлъын", "висеть", "verbs"], ["КIыхь", "длинный", "adj"], ["КIэщI", "короткий", "adj"], ["Къуалэн", "пёстрый", "adj"], ["ЩытIэгъэн", "одевать, надевать", "verbs"], ["Хуэхъун", "подходить (по размеру)", "verbs"], ["IэлъощI", "платок", "clothes"], ["Зэгъусэу", "вместе", "adj"], ["Зехьэн", "носить, хранить", "verbs"], ["ФIкIэ зыухьэ!", "Носи на радость!", "faith"], ["Ущыту пхуада фIэкIа пщIэкъым!", "Как будто на тебе сшили!", "phrases"]], dialog:"dress",
+  hw:{due:"8.08",items:["Подробно ознакомиться с презентацией","Прочитать четверостишие, отработать звуки","Ещё раз ознакомиться с диалогом","Составить свой диалог «Покупки (часть третья)»","Выучить новые слова и фразы (лексика в конце PDF)"]}
+},
+{ id:"u13", n:"Урок 13", date:"9 августа", title:"Где ты живёшь? Жильё",
+  words:[["Фи пщыхьэщхьэ фIыуэ!", "Добрый вечер!", "phrases"], ["Фи унагъуэр дауэ щыт?", "Как ваша семья?", "phrases"], ["ФыдежкIи хуабащэ мыпхуэдэ?", "У вас тоже так жарко?", "phrases"], ["Хуабащэ", "жара, очень жарко", "adj"], ["Пщтыр", "горячий", "adj"], ["Унэ лэжьыгъэр къыдопщытэж", "Проверяем домашнее задание", "phrases"], ["Псэуалъэ", "жильё", "home"], ["Къат", "этаж", "home"], ["ЩIым тет унэ", "частный дом", "home"], ["Къату зэтет унэ", "многоэтажный дом", "home"], ["ХадэхэкI", "овощи", "food"], ["Джэдкъаз", "домашняя птица", "animals"], ["Лъэсу", "пешком", "adj"], ["ЦIыхухъу", "мужчина", "people"], ["ЦIыхубз", "женщина", "people"], ["Къалэн", "обязанность", "phrases"], ["Мэрем", "пятница", "time"], ["Пэж", "правда", "phrases"], ["Пэжщ ар", "Это правда", "phrases"], ["Нэмэз щIын", "совершать намаз", "faith"], ["Благъэ", "родственники, гости", "people"], ["Неблагъэ, узгъэхьэщIэнщ", "Приходи в гости, будешь моим гостем", "phrases"], ["БлагъэфI тхьэм къыуит", "Хороших тебе гостей", "faith"], ["Гъуэгу махуэ", "Счастливого пути", "faith"], ["Иджыпсту сопIащIэ", "Сейчас я спешу", "phrases"]], dialog:"house",
+  hw:{due:"15.08",items:["Сдать ДЗ по прошлому диалогу","Подробно ознакомиться с презентацией","Прочитать четверостишие, отработать звуки","Ещё раз ознакомиться с диалогом","Составить свой диалог «Жильё (часть первая)»","Выучить новые слова и фразы (лексика в конце PDF)"]}
+},
+{ id:"r0919", n:"Запись", date:"19 сентября", title:"Учёба, квартира, готовка", dialog:"sept",
+  words:[
+  ["Содэ","я согласна","phrases"],["Здэнут","я бы согласилась","phrases"],
+  ["Нобэ унэм дыщIэсынщ","Сегодня посидим дома","phrases"],
+  ["Пэш дапщэ хъурэ фи квартирэр?","Сколько комнат в вашей квартире?","phrases"],
+  ["Зы пэшрэ пщэфIапIэрэ","Одна комната и кухня","phrases"],["ПщэфIапIэ","кухня","home"],
+  ["УпщэфIэну пфIэфI?","Ты любишь готовить?","phrases"],["Уигу ирихьрэ?","Тебе по душе?","phrases"],
+  ["ФIэфIын","нравиться","verbs"],["ФIыуэ солъагъу","люблю","phrases"],
+  ["Сэ сыпщэфIэну сфIэфIщ","Мне нравится готовить","phrases"],
+  ["Нобэ сыпщэфIащ лэкъум","Сегодня я готовила лакум","phrases"],
+  ["Хэт фи унагъуэм щэхуакIуэ кIуэр?","Кто в вашей семье ходит за покупками?","phrases"],
+  ["Нэхъыбэм си щхьэгъусэращ","Чаще всего мой супруг","phrases"],
+  ["УпщIэ уиIэ?","Есть вопрос?","phrases"],["Зэман уиIэ?","У тебя есть время?","phrases"]]
+},
+{ id:"r1001", n:"Запись", date:"1 октября", title:"Идём на рынок", words:[
+  ["Дызэныбжьэгъущ","Мы подруги (друзья)","people"],["Бэзэр","рынок","home"],
+  ["Сыту фIыт!","Как хорошо!","phrases"],["Сыхьэт","час, часы","time"],
+  ["Щысын","сидеть","verbs"],["Тысын","садиться","verbs"],["Хьэзыр","готовый","adj"],
+  ["Сыт къэпхьар?","Что ты принесла?","phrases"],["Щыгъын","одежда","clothes"],
+  ["Удзыфэ","зелёный","adj"],["Плъыжь","красный","adj"],["Уасэ","цена","phrases"],
+  ["Дапщэ и уасэр?","Сколько стоит?","phrases"],["Кхъа","пожалуйста","phrases"]],
+  dialog:"market"
+},
+{ id:"r1014", n:"Запись", date:"14 октября", title:"Знакомство: Мадина и Фатима",
+  words:[
+  ["Махуэ","день","time"],["ФIыуэ","хорошо","adj"],["ЦIэ","имя","people"],
+  ["Дэнэ","где, откуда, куда","phrases"],["Дэнэ ущыIэ?","Где ты (находишься)?","phrases"],
+  ["Дэнэ ущыщ?","Откуда ты?","phrases"],["Дэнэ укIуа?","Куда ты пошла?","phrases"],
+  ["Уэ-щэ?","А ты? А тебя?","phrases"],["Лэжьэн","работать","verbs"],
+  ["Къикын","приехать откуда-то","verbs"],["КъэкIуэн","приходить","verbs"],
+  ["ЗэгъэщIэн","изучать, заучивать","verbs"],["ЩIэн","знать, понимать","verbs"],
+  ["Хъейр","благо","faith"],["Лъагъун","видеть","verbs"],
+  ["Уи махуэ фIыуэ!","Добрый день!","phrases"],["НэхъыфIыжу!","Тебе ещё лучше! (ответ)","phrases"],
+  ["Уэри фIыуэ!","И тебе того же!","phrases"],["Упсэу","спасибо","phrases"]],
+  dialog:"meet", grammar:["pronouns","whowhat","verbconj"],
+  hw:{due:"17.10",items:["Ознакомиться с материалами урока","Подготовить совместный диалог по теме «Знакомство»"]}
+},
+{ id:"r1017", n:"Запись", date:"17 октября", title:"Ди унагъуэр — Наша семья",
+  words:[
+  ["Адэ","отец","people"],["Анэ","мать","people"],["Нанэ","бабушка","people"],["Дадэ","дедушка","people"],
+  ["ЦIыхуитху","5 человек","people"],["Нэхъ","более (сравнение)","adj"],["НэхъыфI","ещё лучше","adj"],
+  ["Тхылъыжь","старая книга","home"],["Дохутыр","доктор, врач","people"],["Сымаджэщ","больница","home"],
+  ["Мэлажьэ","работает (сейчас)","verbs"],["Щолажьэ","работает где-то","verbs"],
+  ["ШколакIуэ","школьник","people"],["Зыгъэпсэхун","отдыхать","verbs"],
+  ["Зыгъэпсэхугъуэ махуэ","выходные дни","time"],["Къалэ","город","nature"],
+  ["КIуэжын","идти обратно, возвращаться","verbs"],["Сэращ","это я","pron"],
+  ["Сэ унэм сокIуэж","Я возвращаюсь домой","phrases"],["ДэIэпыкъун","помогать","verbs"],
+  ["Псынщ1э тхьэм пщищI","Да облегчит тебе Бог","faith"],
+  ["Аллыхьыр уи дэIэпыкъуэгъущ","Аллах тебе в помощь","faith"],
+  ["Аллыхьыр къыбдэIэпыкъу","Да поможет тебе Аллах","faith"]],
+  text:"family2", grammar:["possess","numbers"],
+  hw:{due:"21.10",items:["Изучить новую лексику","Составить небольшой рассказ или диалог «Ди унагъуэр» (Наша семья)"]}
+},
+{ id:"r1021", n:"Запись", date:"20–21 октября", title:"Супруг, работа, 4 падежа",
+  words:[
+  ["Ухьэзыр?","Ты готова?","phrases"],["Сэ пхъу сиIэщ","У меня есть дочь","phrases"],
+  ["Илъэс плIыщI сохъу","Мне сорок лет","phrases"],["Тхьэмадэ","свёкор","people"],
+  ["Щхьэгъусэ","супруг, супруга (досл. «спутник головы»)","people"],
+  ["Фи акъыл Аллыхьым зэтригъахуэ","Дай Аллах, чтобы сошлись ваши мнения","faith"],
+  ["ПлIыщI","сорок","time"],["ТIощI","двадцать","time"],["ЩэщI","тридцать","time"],
+  ["Си дэлъху нэхъыжьыр","мой старший брат","people"],["ПщафIэу мэлажьэ","работает поваром","phrases"],
+  ["Тыкуэн","магазин","home"],["Тыкуэнтет","продавец","people"],
+  ["Си анэр тыкуэным щолажьэ","Моя мама работает в магазине","phrases"],
+  ["Си дэлъхур инженерщ","Мой брат инженер","phrases"],["Щхьэгъусэ уиIэ?","У тебя есть супруг?","phrases"],
+  ["Сыт уи щхьэгъусэм и цIэр?","Как зовут твоего супруга?","phrases"],
+  ["Мы","этот (рядом)","pron"],["Мо","тот (там)","pron"],["Къэлэм","ручка, карандаш","home"],
+  ["Хэт уэ къуэзэроджэр?","Как тебя называют (зовут дома)?","phrases"]],
+  grammar:["cases","ergative"],
+  hw:{due:"24.10",items:["Ознакомиться и разобрать новый материал","Подготовить вопросы, если появятся","Читать новое четверостишие «Бжьын-бжьыныхухэр»"]}
+},
+{ id:"r1024", n:"Запись", date:"24 октября", title:"Огород и телефонный разговор",
+  words:[
+  ["Акъыл","ум, разум","adj"],["АкъылыфIэ","умный","adj"],["Сэбыр","терпение","faith"],
+  ["Сэбырагъ зыхэгъэлъ","Имей терпение","faith"],
+  ["Бжьын","лук","food"],["Бжьыныху","чеснок","food"],["Бэдрэжан","помидор","food"],
+  ["Шыбжий","перец","food"],["Бгъуэ","широкий","adj"],["Бгъузэ","узкий","adj"],
+  ["Бэгъуэн","умножаться, увеличиваться","verbs"],["Бэрэчэт","барака, изобилие","faith"],
+  ["КъыпыкIэн","вырасти (на деревьях)","verbs"],["Гъэгъэн","расцвести","verbs"],
+  ["Бэрэтинэ","мята","nature"],["Бэлыджэхужь","редька белая","food"],["Балийжыг","вишня (дерево)","nature"],
+  ["Бжэндэхъу","скворец","animals"],["Абгъуэ","гнездо","animals"],["ФIэлъхьэн","повесить","verbs"],
+  ["Псалъэмакъ","беседа, разговор","phrases"],["Къоуэ","звонит (о телефоне)","verbs"],
+  ["Къэхьын","принести","verbs"],["Къеблагъэ","добро пожаловать","phrases"],
+  ["ЩIэсын","находиться внутри (дома)","verbs"],["Жьыуэ","рано","time"],["Гувауэ","поздно","time"],
+  ["ЛэжьапIэ","работа (место)","home"],["ЕджапIэ","учёба, школа","home"],["Шэн","отводить, отвозить","verbs"],
+  ["Зыгуэр","что-то","pron"],["Сыхуейщ","хочу","phrases"],["Сыхуейкъым","не хочу","phrases"],
+  ["ЩыIэн","находиться где-то","verbs"],["ЖыIэн","говорить","verbs"],["Пщэдей","завтра","time"],
+  ["ПIащIэн","спешить","verbs"],["Дэн","соглашаться (и «шить»)","verbs"],
+  ["Абы щыгъуэ","тогда, раз так","phrases"],["Зэхуэзэн","встретиться","verbs"],
+  ["Дауэ фыщыт?","Как у вас дела?","phrases"],["Сыт хуэдэ?","Какой? какая?","phrases"],
+  ["Сыт хуэдэ бостей къэпщэхуар?","Какое платье ты купила?","phrases"]],
+  dialog:"phone", grammar:["dynstat"],
+  hw:{due:"28.10",items:["Изучить записи","Составить небольшой диалог «Телефон псалъэмакъ» (телефонный разговор)"]}
+},
+{ id:"r1028", n:"Запись", date:"28 октября", title:"Скороговорка и упражнения",
+  words:[
+  ["НэкIу","лицо","body"],["Дахэ","красивый","adj"],["Хьэл","характер, нрав","adj"],
+  ["ГъащIэ","жизнь","phrases"],["Гухъу","ступа для зерна","home"],["Гуэн","амбар","home"],
+  ["Гъун","сушить, вялить","verbs"],["Бын","дети, потомство","people"],
+  ["Хъыджэбз","девушка","people"],["ЩIалэ","парень","people"],["Щхъухь","яд","home"],
+  ["Хэт уи цIэр? / Сыт уи цIэр?","Как тебя зовут?","phrases"],
+  ["Фи унагъуэр цIыху дапщэ хъурэ?","Сколько человек в вашей семье?","phrases"],
+  ["Дэлъху уиIэ?","У тебя есть брат?","phrases"],["Шыпхъу сиIэкъым","У меня нет сестры","phrases"],
+  ["Уеджэрэ хьэмэрэ улажьэрэ?","Ты учишься или работаешь?","phrases"],
+  ["Къалэра хьэмэрэ къуажэра ущыпсэур?","Ты живёшь в городе или в селе?","phrases"]],
+  exercises:"ex1028",
+  hw:{due:"31.10",items:["Отработать скороговорку","Сделать упражнения"]}
+},
+{ id:"r1031", n:"Запись", date:"31 октября", title:"Новая студентка",
+  words:[
+  ["Студентыщ1э","новая студентка","people"],["Общежитием ущIэсурэ?","Ты живёшь в общежитии?","phrases"],
+  ["Зэзэмызэ","иногда","time"],["ДэкIуакъэ?","Она не замужем?","phrases"],
+  ["Хъыджэбз дэс","девушка на выданье","people"],["НасыпыфIэ","счастливый","adj"],
+  ["Псалъэ","слово","phrases"],["Зэпсэлъэн","беседовать","verbs"],["Гупщысэн","думать","verbs"],
+  ["Зыплъыхьын","оглядываться","verbs"],["Дзадзу","младенец","people"],["ДзэпэфIанэ","передний зуб, резец","body"],
+  ["Хьэрыпыбзэ","арабский язык","phrases"]],
+  dialog:"student", grammar:["transitive"], exercises:"ex1031",
+  hw:{due:"04.11",items:["Отработать скороговорку","Ознакомиться с материалами по падежам и глаголу","Составить диалог","Решить упражнения"]}
+},
+{ id:"r1104", n:"Запись", date:"4 ноября", title:"Глаголы по лицам и падежам",
+  words:[
+  ["Лъэгу","пол","home"],["Бжьыхьэ","осень","time"],["ГъэщIэгъуэн","интересный","adj"],
+  ["Бжьыхьэр къэсащ","Наступила осень","phrases"],["Джэгун","играть","verbs"],
+  ["Тетын","стоять на чём-то","verbs"],["Тесын","сидеть на чём-то","verbs"],["Телъын","лежать на чём-то","verbs"],
+  ["Вазэр столым тетщ","Ваза стоит на столе","phrases"],["Тхылъыр столым телъщ","Книга лежит на столе","phrases"],
+  ["Нэмыс","уважение","faith"],["Насып","счастье","faith"]],
+  grammar:["persons"], exercises:"ex1104",
+  hw:{due:"11.11",items:["Доделать оставшиеся предложения","Определить в тексте вид глагола"]}
+},
+{ id:"r1111", n:"Запись", date:"11 ноября", title:"Псэуалъэ — Жильё, часть 1",
+  words:[
+  ["Уэрам","улица","home"],["Мэжджыт","мечеть","faith"],["Жыжьэ","далеко","adj"],
+  ["Гъунэгъу","близко, рядом","adj"],["Кхъуэщыныфэ","коричневый","adj"],["Лъагэ","высокий","adj"],
+  ["Лъахъшэ","низкий","adj"],["Жейн","спать","verbs"],["ЩIэтын","стоять внутри чего-то","verbs"],
+  ["Пэшхьэку","печка","home"],["Хьэкъущыкъу","посуда","home"],["Хуит","просторный","adj"],
+  ["Нэху","светлый","adj"],["ГъуэлъыпIэ","кровать","home"],["ЗытхьэщIын","мыться","verbs"],
+  ["ЗыгъэпскIын","купаться","verbs"],["Андез","омовение","faith"],["ХьэщIэщ","гостиная","home"],
+  ["Алэрыбгъу","ковёр","home"],["Убгъун","застелить","verbs"],["Бгъэдэтын","стоять рядом с чем-то","verbs"],
+  ["Iупхъуэн","повесить (занавеску)","verbs"],["Сабий сад","детский сад","home"]],
+  text:"alim",
+  hw:{due:"следующий урок",items:["Прочитать текст про Алима","Ответить на вопросы (Упщ1эхэр)","Выучить лексику «Псалъэщ1эхэр»"]}
+}
+];
+
+// ===== ДИАЛОГИ =====
+const DIALOGS = {
+market2:{"title": "Едем за покупками", "kb": "ЩэхуакIуэ докIуэ (япэ Iыхьэ)", "date": "Урок 10 · 12 июля", "who": {"Фызыр": "a", "ЛIыр": "b"}, "lines": [["Фызыр", "Пщэдей щэхуакIуэ сыпшэну?", "Ты отвезёшь меня завтра за покупками?"], ["ЛIыр", "Ухуеймэ усшэнщ, сыт къэпщэхунур?", "Если хочешь, отвезу. Что ты хочешь купить?"], ["Фызыр", "Шхын щапIэм сыкIуэнут, гъэшхэкI къэсщэхунут. Абы нэмыщI ди стIол тепхъуэр жьы хъуащи, схъуэжамэ здэнут.", "Хотела бы в продуктовый, купить молочное. Кроме того, наша скатерть состарилась — хорошо бы её поменять."], ["ЛIыр", "Япэ бензин изгъэхъуэну сигу къэгъэкIыж.", "Сначала напомни мне заправить машину."], ["Фызыр", "Дапщэра дыщыдэкIынур?", "Во сколько выезжаем?"], ["ЛIыр", "Пщэдджыжьым жьыуэ дыдэкIынщ.", "Утром рано выедем."], ["Фызыр", "Хъунщ, сабийхэр къыздэтщтэну?", "Хорошо. Детей возьмём с собой?"], ["ЛIыр", "Хьэуэ, щыкъу анэм къыхуэдгъэнэнщ.", "Нет, оставим их тёще."], ["Фызыр", "Си гуащэм къыхуэдгъанэ хъунукъэ?", "А свекрови нельзя оставить?"], ["ЛIыр", "Хьэуэ, ар щIэсынукъым.", "Нет, её не будет дома."], ["Фызыр", "Хъунщ-тIэ, си анэм хуэтшэнщ. Ахъшэ дызрикъун диIэ?", "Хорошо тогда, отвезём к моей маме. У нас хватит денег?"], ["ЛIыр", "НтIэ, Аллыхьым и фIыщIэкIэ лэжьапщIэр къыдатащ дыгъуасэ.", "Да, по милости Аллаха, вчера выдали зарплату."], ["Фызыр", "Аллыхьым и шыкурщ.", "Хвала Аллаху."]]},
+bazaar:{"title": "На рынке", "kb": "ЩэхуакIуэ докIуэ (етIуанэ Iыхьэ)", "date": "Урок 11 · 25 июля", "who": {"Бэзэртетыр": "b", "ЩэхуакIуэр": "a"}, "lines": [["Бэзэртетыр", "Къеблагъэ! Сыт ухуей, дахэ?", "Добро пожаловать! Что желаешь, красавица?"], ["ЩэхуакIуэр", "Лы килограмыр дапщэ и уасэр?", "Сколько стоит килограмм мяса?"], ["Бэзэртетыр", "Сом 750 и уасэщ.", "Стоит 750 рублей."], ["ЩэхуакIуэр", "Лы килограмищ къысхуэшэч, кхъа.", "Взвесьте мне, пожалуйста, три килограмма мяса."], ["Бэзэртетыр", "ТIэкIу щIигъуми хъуну? Килограмищрэ грам щэрэ.", "Можно чуть больше? Три килограмма сто граммов."], ["ЩэхуакIуэр", "Ягъэ кIынкъым тIэкIу щIигъуми!", "Ничего страшного, если немного больше!"], ["Бэзэртетыр", "2325 хуозэ.", "Выходит 2325."], ["ЩэхуакIуэр", "Тэмэм, фарш фиIэ?", "Хорошо. А фарш у вас есть?"], ["Бэзэртетыр", "Хьэзыру диIэкъым, ауэ пхуэсхьэжыфынущ.", "Готового нет, но могу перемолоть."], ["ЩэхуакIуэр", "Зы килограм схуэхьэж, кхъа.", "Перемелите мне, пожалуйста, один килограмм."], ["Бэзэртетыр", "ЩIигъу щымыIэу зы килограм хъуащ.", "Ровно один килограмм получился."], ["ЩэхуакIуэр", "Упсэу. КIэртIоф килограмитI, бжьын килограм, шыгъу пачкэ, дагъэ литрэ къызэт.", "Спасибо. Дайте 2 кг картошки, килограмм лука, пачку соли и литр масла."], ["Бэзэртетыр", "Псори диIэщ, мис. ГъэшхэкI зыри ухуейкъэ?", "Всё есть, вот. Молочного ничего не нужно?"], ["ЩэхуакIуэр", "Сыхуейщ, нобэреймэ.", "Нужно, если свежее."], ["Бэзэртетыр", "Свежабзэщ. Нышэдибэ къытхуаша къудейщ.", "Совсем свежее. Только сегодня утром привезли."], ["ЩэхуакIуэр", "Абы щыгъуэ къэхь литрэ зэрыз: шэ, шатэ, шху. Унагъуэ тхъуцIынэ фиIэ?", "Тогда дайте по литру: молоко, сметану, кефир. Домашнее сливочное масло есть?"], ["Бэзэртетыр", "Ауэ сытми тхъуцIынэфI диIэ, къеплъыт мыбы — гъуэжь хъужауэ! Узыхуейм хуэдиз къыпызгъэжынщ.", "Ещё какое хорошее! Посмотри — прямо жёлтое! Отрежу, сколько нужно."], ["ЩэхуакIуэр", "Килэ ныкъуэ къысхупыгъэж.", "Отрежьте полкило."], ["Бэзэртетыр", "Мэ, псори зэрыслъхьащ. Сом 5315 хуозэ.", "Вот, я всё сложил. Выходит 5315 рублей."], ["ЩэхуакIуэр", "Зыгуэр къысщымыгъупщэу-пIэрэ? Псом я нэхъыщхьэр къысщыгъупщэт! Зы щIакхъуэ къысхухэлъхьэж, кхъа. Ахъшэ хьэзыр фэстынур хьэмэрэ картэми хъуну?", "Ничего не забыла? Самое главное чуть не забыла! Положите, пожалуйста, один хлеб. Наличными или картой можно?"], ["Бэзэртетыр", "Е ахъшэ хьэзыр, е къебгъэдзу.", "Или наличными, или переводом."], ["ЩэхуакIуэр", "Сыт хуэдэ номер здезгъэдз хъунур?", "На какой номер можно отправить?"], ["Бэзэртетыр", "Мис, номерыр тетхащ мыбдей.", "Вот, номер здесь написан."], ["ЩэхуакIуэр", "Къеплъыт, езгъэдзащ.", "Посмотрите, отправила."], ["Бэзэртетыр", "КъысIэрыхьащ. Уи сомыр Аллыхьым игъэбагъуэ. УасафIэ тхьэм пхуищI!", "Получил. Да приумножит Аллах твои деньги. Удачных покупок!"]]},
+dress:{"title": "Платье на свадьбу", "kb": "ЩэхуакIуэ докIуэ (ещанэ Iыхьэ)", "date": "Урок 12 · 1 августа", "who": {"Маринэ": "a", "Мадинэ": "b", "Тыкуэнтетыр": "c"}, "lines": [["Маринэ", "Мадинэ, кхъа, си гъусэу щыгъын щапIэм накIуэ.", "Мадина, пожалуйста, сходи со мной в магазин одежды."], ["Мадинэ", "Хъунщ, сынэкIуэнщ. Сыт къэпщэхунур?", "Хорошо, пойду. Что будешь покупать?"], ["Маринэ", "Бостей къэсщэхунут хьэгъуэлIыгъуэм срикIуэну.", "Платье — чтобы пойти на свадьбу."], ["Мадинэ", "ХьэгъуэлIыгъуэ фиIэнурэ?", "У вас будет свадьба?"], ["Маринэ", "НтIэ, си дэлъхум къешэ.", "Да, мой брат женится."], ["Мадинэ", "Сыту фIыт! НасыпыфIэ тхьэм ищI.", "Как хорошо! Дай Бог ему счастья."], ["*", "В магазине", "Тыкуэным деж"], ["Тыкуэнтетыр", "Фи махуэ фIыуэ! Сыт фыхуей, зыгуэркIэ сэбэп сыфхуэхъуфыну?", "Добрый день! Чем могу быть полезна?"], ["Маринэ", "Фи бостейхэм сыхэгъаплъэ, кхъа!", "Покажите, пожалуйста, ваши платья!"], ["Тыкуэнтетыр", "Бостей дахэ куэд диIэщ, мисри мыбыкIэщ здыфIэлъыр. Сыт хуэдэ размер пхуэхъур?", "У нас много красивых платьев, вот здесь висят. Какой размер вам подходит?"], ["Маринэ", "48 си гугъэщ.", "Кажется, 48."], ["Тыкуэнтетыр", "КIыхьу узэрыхуейр хьэмэрэ кIэщIу?", "Хочешь длинное или короткое?"], ["Маринэ", "КIыхьщ сызыхуейр, кIэщI щыстIагъэкъым.", "Хочу длинное, короткое не ношу."], ["Тыкуэнтетыр", "Къеплъыт, мы бостей къуалэныр уигу ирихькъэ?", "Посмотри, тебе не нравится это пёстрое платье?"], ["Маринэ", "Хьэуэ, зы плъыфэу нэхъ къэсщтэнут.", "Нет, хотелось бы однотонное."], ["Тыкуэнтетыр", "Къеплъыт-тIэ мы бостей фIыцIэм, хъуну фIыцIэу? Плъыжьуи диIэщ.", "Тогда посмотри это чёрное — подойдёт чёрное? Есть и красное."], ["Маринэ", "Мыр сигу ирохь. Къеплъыт, Мадинэ, дауэ къыпщыхъурэ?", "Это мне нравится. Посмотри, Мадина, как тебе?"], ["Мадинэ", "Дахэ дыдэщ, щытIагъи дегъэплъыт!", "Очень красивое, надень, покажи!"], ["Маринэ", "Хъуну щыстIагъэу сеплъмэ?", "Можно примерить?"], ["Тыкуэнтетыр", "КIуэ мобдей щытIагъи дегъэплъ зэрыпхуэхъур!", "Иди туда, надень, посмотрим, как сидит!"], ["Маринэ", "Фыкъеплъыт!", "Посмотрите!"], ["Мадинэ", "Дахащэу уокIу!", "Тебе так идёт!"], ["Тыкуэнтетыр", "Ущыту пхуада фIэкIа пщIэкъым! Зэплъыжыт гъуджэмкIэ!", "Как будто на тебе сшили! Посмотрись в зеркало!"], ["Маринэ", "Сигу ирохь, икIи схуохъу. Дапщэ и уасэр?", "Мне нравится, и размер подходит. Сколько стоит?"], ["Тыкуэнтетыр", "4000 и уасэщ. IэлъощI ещхь диIэщ, къэпщтэнумэ, тIэкIу кIэрызгъэхунщ.", "Стоит 4000. К нему есть подходящий платок — если возьмёшь, немного уступлю."], ["Маринэ", "Къэсщтэнщ IэлъощIри. Зэгъусэу дапщэ и уасэр?", "Возьму и платок. Сколько вместе?"], ["Тыкуэнтетыр", "5000 уэстынщ.", "Отдам за 5000."], ["Маринэ", "Упсэу. УасафIэ пхухъу.", "Спасибо. Удачной торговли."], ["Тыкуэнтетыр", "ФIыкIэ зыухьэ!", "Носи на радость!"]]},
+house:{"title": "Где ты живёшь?", "kb": "Псэуалъэ (япэ Iыхьэ)", "date": "Урок 13 · 9 августа", "who": {"Залинэ": "a", "Аминэ": "b"}, "lines": [["Залинэ", "Уи махуэ фIыуэ!", "Добрый день!"], ["Аминэ", "МахуэфI тхьэм къуит! Хэт уи цIэр?", "Хорошего тебе дня! Как тебя зовут?"], ["Залинэ", "Залинэ. Уэ-щэ?", "Залина. А тебя?"], ["Аминэ", "Аминэ. Дэнэ ущыщ, Залинэ?", "Амина. Откуда ты, Залина?"], ["Залинэ", "Къэбэрдей-Балъкъэрым сыщыщщ. Уэ дэнэ ущыщ?", "Я из Кабардино-Балкарии. А ты откуда?"], ["Аминэ", "Сэ Дагъыстэным сыщыщщ.", "Я из Дагестана."], ["Залинэ", "Дагъыстэныр жыжьэкъым. Къалэра хьэмэрэ къуажэра ущыпсэур?", "Дагестан недалеко. Ты живёшь в городе или в селе?"], ["Аминэ", "Сэ къалэм сыщопсэу. Уэри къалэра ущыпсэур?", "Я живу в городе. Ты тоже в городе?"], ["Залинэ", "Хьэуэ, сэ къуажэращ сыщыпсэур. Къату зэтет унэ фыздыщIэсыр?", "Нет, я живу в селе. Вы живёте в многоэтажке?"], ["Аминэ", "НтIэ. Етхуанэ этажым дытесщ.", "Да. Живём на пятом этаже."], ["Залинэ", "Дэ щIым тет унэщ. Хадэ диIэщ, хадэхэкI хыдосэ, джэдкъази диIэщ. Фэ парк фи гъунэгъу?", "У нас частный дом. Есть огород, сажаем овощи, есть и домашняя птица. А у вас рядом парк?"], ["Аминэ", "НтIэ, парк дахэ дыдэ ди гъунэгъущ. Абы нэмыщI школри, садри, сымаджэщри, мэжджытри тпэжыжьэкъым.", "Да, рядом очень красивый парк. Кроме того, недалеко школа, садик, больница и мечеть."], ["Залинэ", "РайоныфIщ а жыхуэпIэр. Дэри ди къуажэм мэжджыт дэтщ, Аллыхьым и фIыщIэкIэ. Си дэлъхумрэ си адэмрэ абы лъэсу мэрем къэс макIуэ нэмэз щащIыну.", "Хороший у вас район. В нашем селе тоже есть мечеть, хвала Аллаху. Брат и отец каждую пятницу ходят туда пешком на намаз."], ["Залинэ", "Джумэ нэмэзыр мэжджытым щищIыну дэтхэнэ мусульмэн цIыхухъуми и къалэнщ.", "Для каждого мусульманина-мужчины обязанность — совершать пятничную молитву в мечети."], ["Аминэ", "Пэжщ ар, ауэ цIыхубзым и нэмэзыр унэм щищIыжмэ нэхъыфIщ.", "Это правда, а женщине лучше совершать намаз дома."], ["Залинэ", "Си автобусыр къэсащ. Неблагъэ, Аминэ, узгъэхьэщIэнщ.", "Мой автобус пришёл. Приходи в гости, Амина, будешь моей гостьей."], ["Аминэ", "БлагъэфI тхьэм къыуит. Иужьк1э хъумэ сынеблэгъэнщ, Аллыхьым жиIэмэ. Иджыпсту сопIащIэ. Гъуэгу махуэ!", "Хороших тебе гостей! Потом, если получится, приду, если пожелает Аллах. Сейчас спешу. Счастливого пути!"], ["Залинэ", "Узыншэу ущыт!", "Будь здорова!"]]},
+meet:{title:"Знакомство",kb:"Зэрыцыхугъэ",date:"14 октября",who:{"Мадинэ":"a","ФатIимэ":"b"},lines:[
+ ["Мадинэ","Уи махуэ фIыуэ!","Добрый день!"],
+ ["ФатIимэ","Нэхъыф1ыжу! / Уэри фIыуэ! / Махуэф1 тхьэм къыуит!","Тебе ещё лучше! / И тебе того же! / Дай Бог тебе хорошего дня!"],
+ ["Мадинэ","Сэ си цIэр Мадинэщ. Уэ сыт уи цIэр?","Меня зовут Мадина. А тебя как зовут?"],
+ ["ФатIимэ","Сэ си цIэр ФатIимэщ! (Сэ сы-ФатIимэщ.)","Меня зовут Фатима! (Я Фатима.)"],
+ ["Мадинэ","Дэнэ ущыщ, ФатIимэ?","Откуда ты, Фатима?"],
+ ["ФатIимэ","Сэ Дагъыстэным сыщыщщ, уэ-щэ?","Я из Дагестана, а ты?"],
+ ["Мадинэ","Сэ Тыркум сыкъикIащ. Уеджэну укъэкIуаурэ Къэбэрдей-Балъкъэрым, ФатIимэ?","Я приехала из Турции. Ты приехала в КБР учиться, Фатима?"],
+ ["ФатIимэ","Хьэуэ, сылэжьэну сыкъэкIуащ. Уэ уеджэурэ?","Нет, я приехала работать. А ты учишься?"],
+ ["Мадинэ","НтIэ, сэ соджэ, адыгэбзэ зызогъащIэ.","Да, я учусь, учу кабардинский."],
+ ["ФатIимэ","ФIы дыдэщ, Аллыхьым уригъэфIакIуэ!","Очень хорошо, да облегчит Аллах!"],
+ ["Мадинэ","Упсэу, ФатIимэ, уэри уи IэщIагъэм и хъейр Аллыхьым уигъэлъагъу!","Спасибо, Фатима! И пусть Аллах сделает твою работу благой!"]]},
+phone:{title:"Телефонный разговор",kb:"Телефон псалъэмакъ",date:"24 октября",who:{"Къуэр":"c","Анэр":"a","ХьэIишэт":"b"},lines:[
+ ["Къуэр","Мамэ, уи телефоныр къоуэ.","Мама, у тебя телефон звонит."],
+ ["Анэр","Хэт къэзыщыр? Къэхьыт, кхъа, си телефоныр!","Кто звонит? Принеси, пожалуйста, мой телефон!"],
+ ["*","Къуэм телефоныр къехь.","Сын приносит телефон."],
+ ["Анэр","Алло, хэт ар?","Алло, кто это?"],
+ ["ХьэIишэт","ХьэIишэтщ ар, уи махуэ фIыуэ, дауэ фыщыт?","Это Хаишат, добрый день, как у вас дела?"],
+ ["Анэр","Аа, ХьэIишэт, къеблагъэ, нэхъыфIыжу! Альхьамдулиллах, дыхъарзынэщ, фэ сыт фыхуэдэ?","А, Хаишат, добро пожаловать, и тебе того же! Хвала Аллаху, у нас хорошо, а вы как?"],
+ ["ХьэIишэт","Дэри Аллыхьым и фIыщIэкIэ, тэмэмщ. Уи закъуэ ущIэсрэ унэм?","Мы тоже, по милости Аллаха, хорошо. Ты одна дома?"],
+ ["Анэр","Хьэуэ, си къуэ нэхъыщIэр, Мухьэмэд, си гъусэщ. Нобэ садым сшакъым.","Нет, со мной мой младший сын Мухаммад. Сегодня не отвела его в садик."],
+ ["ХьэIишэт","Уи щхьэгъусэр лажьэрэ?","Твой муж на работе?"],
+ ["Анэр","НтIэ, си щхьэгъусэр пщэдджыжьым жьыуэ лэжьапIэм кIуащ. Си пхъу нэхъыжьри еджапIэм щыIэщ. Зыгуэр ухуейт, ХьэIишэт?","Да, муж рано утром ушёл на работу. Старшая дочь тоже на учёбе. Ты что-то хотела, Хаишат?"],
+ ["ХьэIишэт","Бэзэрым си гъусэу унэкIуэну жысIэнурат.","Хотела спросить, пойдёшь ли ты со мной на рынок."],
+ ["Анэр","Нобэ схущIыхьэнукъым. УмыпIащIэмэ, пщэдей дыкIуэнщ.","Сегодня я занята. Если не спешишь, пойдём завтра."],
+ ["ХьэIишэт","СыпIащIэкъым, пщэдейми содэ.","Не спешу, завтра тоже согласна."],
+ ["Анэр","Абы щыгъуэ, пщэдей дызэхуэзэнщ, Аллыхьым жиIэмэ.","Тогда встретимся завтра, если Аллах пожелает."],
+ ["ХьэIишэт","Хъунщ, упсэу, узыншэу фыщыт.","Хорошо, спасибо, будьте здоровы."],
+ ["Анэр","Узыншэу.","Будь здорова / до свидания."]]},
+student:{title:"Новая студентка",kb:"СтудентыщIэ",date:"31 октября",who:{"Залинэ":"b","Мадинэ":"a"},lines:[
+ ["Залинэ","Уи пщэдджыжь фIыуэ! УстудентыщIэурэ?","Доброе утро! Ты новая студентка?"],
+ ["Мадинэ","НэхъыфIыжу! НтIэ, сыстудентыщIэщ!","И тебе того же! Да, я новая студентка!"],
+ ["Залинэ","Сыт уи цIэр?","Как тебя зовут?"],
+ ["Мадинэ","Мадинэ, уэ-щэ?","Мадина, а тебя?"],
+ ["Залинэ","Сэ си цIэр Залинэщ. Дэнэ ущыщ, Мадинэ?","Меня зовут Залина. Откуда ты, Мадина?"],
+ ["Мадинэ","Шэшэным сыщыщщ, уэ дэнэ ущыщ?","Я из Чечни, а ты откуда?"],
+ ["Залинэ","Сэ Осетием сыщыщщ. Общежитием ущIэсурэ, Мадинэ?","Я из Осетии. Ты живёшь в общежитии, Мадина?"],
+ ["Мадинэ","Хьэуэ, квартирэ снимать сощI. Уэ-щэ?","Нет, снимаю квартиру. А ты?"],
+ ["Залинэ","Сэ къуажэм сыкъокI. Пэш дапщэ хъурэ фи квартирэр?","Я приезжаю из села. Сколько комнат в вашей квартире?"],
+ ["Мадинэ","Пэшищ мэхъу.","Три комнаты."],
+ ["Залинэ","ЕджапIэм и гъунэгъу?","Рядом с учёбой?"],
+ ["Мадинэ","НтIэ, и гъунэгъущ, Аллыхьым и фIыщIэкIэ.","Да, рядом, слава Аллаху."],
+ ["Залинэ","Хэт уи гъусэр?","Кто с тобой (живёт)?"],
+ ["Мадинэ","Си шыпхъур си гъусэщ.","Со мной моя сестра."],
+ ["Залинэ","Ари еджэурэ?","Она тоже учится?"],
+ ["Мадинэ","Хьэуэ, ар мэлажьэ.","Нет, она работает."],
+ ["Залинэ","Дэнэ щылажьэр?","Где работает?"],
+ ["Мадинэ","Сымаджэщым щолажьэ.","В больнице работает."],
+ ["Залинэ","Зыгъэпсэхугъуэ махуэхэм фыкIуэжрэ Шэшэным?","В выходные ездите домой в Чечню?"],
+ ["Мадинэ","Зэзэмызэ дыкIуэж.","Иногда ездим."],
+ ["Залинэ","Уи шыпхъур дэкIуакъэ?","Твоя сестра не замужем?"],
+ ["Мадинэ","Хьэуэ, хъыджэбз дэсщ.","Нет, девушка на выданье."],
+ ["Залинэ","НасыпыфIэ тхьэм ищI.","Дай Аллах ей счастья."],
+ ["Мадинэ","Упсэу. Уэри насыпыфIэ ухъу!","Спасибо. И ты будь счастлива!"]],
+ questions:[
+ ["Хэт зэпсалъэр?","Кто разговаривает?","Зэпсалъэр Мадинэрэ Залинэрэщ."],
+ ["Хэт студентыщIэр?","Кто новая студентка?","Мадинэщ."],
+ ["Хэт Шэшэным щыщыр?","Кто из Чечни?","Мадинэ Шэшэным щыщщ."],
+ ["Залинэ дэнэ щыщ?","Откуда Залина?","Залинэ Осетием щыщщ."],
+ ["Хэт квартирэм щыпсэур?","Кто живёт в квартире?","Квартирэм щыпсэур Мадинэщ."],
+ ["Залинэ дэнэ къикIрэ?","Откуда приезжает Залина?","Залинэ къуажэм къокI."],
+ ["Мадинэ и закъуэу псэурэ?","Мадина живёт одна?","Мадинэ и шыпхъур и гъусэу мэпсэу."]]},
+market:{title:"Идём на рынок",kb:"Бэзэрым дыкIуэнщ",date:"1 октября",who:{"Ныбжьэгъур":"b","Аишэ":"a","Щэзыщэр":"c"},lines:[
+ ["Ныбжьэгъур","Аишэ, пщэдей си гъусэу унэкIуэну бэзэрым?","Аиша, пойдёшь завтра со мной на рынок?"],
+ ["Аишэ","НтIэ, сынэкIуэнущ.","Да, пойду."],
+ ["Ныбжьэгъур","Сыту фIыт!","Как хорошо!"],
+ ["Аишэ","Сыхьэт дапщэрэ дыщыкIуэнур?","Во сколько мы пойдём?"],
+ ["Ныбжьэгъур","Пщэдджыжьым сыхьэтипщIым дыкIуэнщ! СыхьэтипщIым и ныкъуэм фи деж сыкъыIухьэнщ.","Утром в 10 пойдём! В половине десятого я зайду к вам."],
+ ["Аишэ","Хъунщ, сыхьэзыру сыщысынущ.","Хорошо, буду сидеть готовая."],
+ ["Ныбжьэгъур","Тэмэм, узыншэу ущыт. Пщэдей дызэхуэзэнщ.","Отлично, будь здорова. Завтра встретимся."],
+ ["*","Следующее утро","Пщэдджыжь"],
+ ["Ныбжьэгъур","Аишэ, уи пщэдджыжь фIыуэ. Дауэ нэху укъекIа? Ухьэзыр?","Аиша, доброе утро. Как спалось? Ты готова?"],
+ ["Аишэ","НтIэ, сыхьэзырщ, дыкIуэнщ.","Да, готова, пойдём."],
+ ["Ныбжьэгъур","НакIуэ-тIэ!","Пошли тогда!"],
+ ["*","На рынке","Бэзэрым"],
+ ["Ныбжьэгъур","Щыгъын щащэм накIуэ!","Пошли туда, где продают одежду!"],
+ ["Аишэ","Хъунщ, накIуэ. Мы бостейм къеплъыт!","Хорошо, пошли. Посмотри на это платье!"],
+ ["Ныбжьэгъур","Дэгъуэщ, ауэ иныIуэу къысщохъу. Еплъыт-тIэ мыбы, мыр нэхъ цIыкIущ.","Хорошее, но, по-моему, великовато. Посмотри-ка на это, оно поменьше."],
+ ["Аишэ","ЩыстIагъэу сеплъмэ нэхъыфIкъэ?","Может, лучше примерить?"],
+ ["Ныбжьэгъур","ЩытIагъи еплъ.","Надень и посмотри."],
+ ["Аишэ","Дэнэ щыщыстIагъэ хъунур?","Где можно примерить?"],
+ ["Щэзыщэр","КIуэ щытIагъэ мобыкIэ!","Иди вон туда, примерь!"],
+ ["*","Примерила, вышла","Щитlагъэщ"],
+ ["Аишэ","Сигу ирохь. Сэ тIэкIу схуэину къысщохъу. Зы размеркIэ нэхъ цIыкIу фиIэ?","Мне нравится. Но кажется немного великовато. Есть на размер меньше?"],
+ ["Щэзыщэр","НтIэ, иджыпсту къэсхьынщ.","Да, сейчас принесу."],
+ ["Аишэ","Кхъа, къысхуэхь.","Принесите, пожалуйста."],
+ ["Аишэ","Еплъыт, мыр нэхъ схуэхъуу къысщохъу.","Посмотри, это, кажется, подходит больше."],
+ ["Ныбжьэгъур","Дэгъуэу пхуохъу. Дахэ дыдэу уокIу.","Отлично подходит. Тебе очень идёт."],
+ ["Аишэ","Удзыфэ бостейр нэхъ сэкIунутэкъэ?","А зелёное платье мне не лучше?"],
+ ["Ныбжьэгъур","Плъыжьри удзыфэри тIури уокIу.","И красное, и зелёное — оба тебе идут."],
+ ["Аишэ","Абы щыгъуэ, плъыжьыр къызощтэ. Дапщэ и уасэр?","Тогда беру красное. Сколько стоит?"],
+ ["Щэзыщэр","3000 и уасэщ.","Стоит 3000."],
+ ["Аишэ","Тэмэм, мэ 3000.","Хорошо, вот 3000."],
+ ["Аишэ","Уэ зыри ухуейкъэ?","А ты ничего не хочешь?"],
+ ["Ныбжьэгъур","Хьэуэ, сэ си щыгъынхэр интернеткIэ заказывать сощI.","Нет, я свою одежду заказываю через интернет."],
+ ["Аишэ","ШхыныщапIэми укIуэнукъэ?","И в продуктовый не пойдёшь?"],
+ ["Ныбжьэгъур","Шхынри заказывать сощI.","Продукты тоже заказываю."],
+ ["Аишэ","Хъунщ абы щыгъуэ. Такси къедджэн хьэмэрэ автобусымкIэ дыкIуэжын?","Хорошо тогда. Вызовем такси или поедем на автобусе?"],
+ ["Ныбжьэгъур","Такси къедджэнщ.","Вызовем такси."],
+ ["Аишэ","Хъунщ, сэ звонить сщIынщ.","Хорошо, я позвоню."]]},
+sept:{title:"Учёба и дом",kb:"Еджэныр, унэр",date:"19 сентября",who:{"Егъэджак1уэр":"b","Аишэ":"a"},lines:[
+ ["Егъэджак1уэр","Мединэ ущеджэну ухуейт?","Ты бы хотела учиться в Медине?"],
+ ["Аишэ","НтIэ, сыщеджэми сыдэнут.","Да, согласилась бы там учиться."],
+ ["Егъэджак1уэр","Нобэ унэм дыщIэсынщ.","Сегодня посидим дома."],
+ ["Аишэ","Содэ, дыщIэсынщ унэм.","Согласна, посидим дома."],
+ ["Егъэджак1уэр","Пэш дапщэ хъурэ фи квартирэр?","Сколько комнат в вашей квартире?"],
+ ["Аишэ","Зы пэшрэ пщэфIапIэрэ.","Одна комната и кухня."],
+ ["Егъэджак1уэр","УпщэфIэну пфIэфI?","Ты любишь готовить?"],
+ ["Аишэ","Сэ сыпщэфIэну сфIэфIщ. Нобэ сыпщэфIащ лэкъум.","Я люблю готовить. Сегодня готовила лакум."],
+ ["Егъэджак1уэр","Хэт фи унагъуэм щэхуакIуэ кIуэр?","Кто в вашей семье ходит за покупками?"],
+ ["Аишэ","Нэхъыбэм си щхьэгъусэращ.","Чаще всего мой супруг."],
+ ["Егъэджак1уэр","УпщIэ уиIэ? Зэман уиIэ?","Есть вопрос? Есть время?"]]}
+};
+
+// ===== ТЕКСТЫ =====
+const TEXTS = {
+family1:{title:"Си унагъуэр",ru:"Моя семья (пример сочинения)",date:"4 июля",paras:[
+ ["Сэ си цIэр Муаедщ, сышколакIуэщ, етхуанэ классым сыщIэсщ.","Меня зовут Муаед, я школьник, учусь в пятом классе."],
+ ["Сэ си унагъуэр инщ, псори цIыхуибл дохъу.","Моя семья большая, нас всего семь человек."],
+ ["Си адэм и цIэр Хьэсэнщ. Ар дохутыру мэлажьэ, цIыхухэр егъэхъуж.","Моего отца зовут Хасан. Он работает врачом, лечит людей."],
+ ["Си анэм и цIэр ХьэIишэтщ. Ар лажьэкъым, унэм щIэсщ.","Маму зовут Хаишат. Она не работает, сидит дома."],
+ ["Си анэр IэфIу мэпщафIэ, нобэ абы лыбжьэрэ пIастэрэ тхуещI.","Мама вкусно готовит, сегодня она делает нам лыбжьэ с пастой."],
+ ["Сэ шыпхъу нэхъыжьрэ къуэш нэхъыщIэрэ сиIэщ. Си шыпхъум и цIэр Асиятщ.","У меня есть старшая сестра и младший брат. Сестру зовут Асият."],
+ ["Ар еджапIэ нэхъыщхьэм щоджэ, Асият егъэджакIуэ Iэзэ хъунущ, Аллыхьым жиIэмэ.","Она учится в вузе, Асият станет хорошим учителем, если Аллах пожелает."],
+ ["Си дэлъху нэхъыщIэр цIыкIунитIэщ, ар илъэсищ хъу къудейщ. Абы и цIэр Муратщ. Сэ ар согъэджэгу.","Мой младший брат совсем маленький, ему всего три года. Его зовут Мурат. Я играю с ним."],
+ ["Сэ нани дади сиIэщ. Ди дадэ и цIэр Хъусейнщ. Дадэ нэмэз ещI, КъурIэни йоджэ. Абы мэжджытым сыздешэ.","У меня есть бабушка и дедушка. Дедушку зовут Хусейн. Дедушка совершает намаз, читает Коран. Он берёт меня с собой в мечеть."],
+ ["Ди нанэ и цIэр Сафятщ. Нанэ цылъэпэд хуабэ тхуещI, таурыхъ къыджеIэж.","Бабушку зовут Сафят. Бабушка вяжет нам тёплые шерстяные носки, рассказывает сказки."],
+ ["Сэ си унагъуэр фIыуэ солъагъу.","Я люблю свою семью."]]},
+family2:{title:"Ди унагъуэр",ru:"Наша семья",date:"17 октября",paras:[
+ ["Ди унагъуэр цIыхуитху дохъу.","Наша семья — 5 человек."],
+ ["Си анэр, си адэр, си къуэшыр, си шыпхъур, сэ.","Мама, папа, брат, сестра и я."],
+ ["Си анэм и цIэр ХьэIишэтщ. Си адэм и цIэр Ахьмэдщ.","Маму зовут Хаишат. Папу зовут Ахмад."],
+ ["Си къуэш нэхъыжьым и цIэр Ислъамщ, си шыпхъу нэхъыщIэм и цIэр Мадинэщ.","Старшего брата зовут Ислам, младшую сестру — Мадина."],
+ ["Сэ си цIэр Мухьэмэдщ.","Меня зовут Мухаммад."],
+ ["Си адэр дохутыру щолажьэ сымаджэщым.","Папа работает врачом в больнице."],
+ ["Си анэр егъэджакIуэщ.","Мама — учительница."],
+ ["Си къуэшымрэ си шыпхъумрэ университетым щоджэ, сэ сышколакIуэщ.","Брат и сестра учатся в университете, а я школьник."],
+ ["Сэ зыгъэпсэхугъуэ махуэхэм дадэрэ нанэрэ слъагъуну къуажэм сокIуэж.","В выходные я езжу в село повидать бабушку и дедушку."]]},
+alim:{title:"Псэуалъэ (япэ Iыхьэ)",ru:"Жильё, часть 1",date:"11 ноября",paras:[
+ ["Алим къуажэм щопсэу, Надречнэ уэрамым тесщ.","Алим живёт в селе, на улице Надречная."],
+ ["Къуажэ тыкуэныр абы я гъунэгъубзэщ.","Сельский магазин прямо рядом с ними."],
+ ["Школри, сабий садри, мэжджытри япэжыжьэкъым.","Школа, детский сад и мечеть тоже недалеко от них."],
+ ["Я пщIантIэм куэбжэшхуэ хэлъщ кхъуэщыныфэу.","У их двора большие коричневые ворота."],
+ ["Абы я унэр инщ, лъагэщ.","Их дом большой, высокий."],
+ ["Ар пэшитху мэхъу.","В нём пять комнат."],
+ ["Пэшхэр хуитщ, нэхущ.","Комнаты просторные и светлые."],
+ ["Зы пэшым адэ-анэр щожей, абы гъуэлъыпIэ щIэтщ. Адрейм сабийхэр щожей, щоджэгу.","В одной комнате спят родители, там стоит кровать. В другой спят и играют дети."]],
+ questions:[
+ ["Дэнэ щыпсэурэ Алим?","Где живёт Алим?","Алим къуажэм щопсэу."],
+ ["Сыт хуэдэ уэрам щыпсэур?","На какой улице он живёт?","Надречнэ уэрамым тесщ."],
+ ["Сыт абы я гъунэгъур?","Что рядом с ними?","Къуажэ тыкуэныр абы я гъунэгъубзэщ."],
+ ["Сыт хуэдэ абы я унэр?","Какой у них дом?","Абы я унэр инщ, лъагэщ."],
+ ["Пэш дапщэ хъурэ унэр?","Сколько комнат в доме?","Ар пэшитху мэхъу."],
+ ["Сыт хуэдэ пэшыра псом нэхърэ нэхъ иныр?","Какая комната больше всех?",""],
+ ["ПщэфIапIэм сыт щащIэр?","Что делают на кухне?",""]]}
+};
+
+// ===== ЧТЕНИЕ: четверостишия, скороговорки, пословицы =====
+const READING = [
+{id:"p1",type:"Четверостишие",date:"4 июля",kb:"Щыгъщ щэбабзэу жэщым щIакIуэ,\nЩыму щылъэм къыщекIухь.\nНэху щыхункIэ, щэбэрыкIуэу,\nТафэм жейхэр щырекъухь.",ru:"Читать 10 раз медленно, не спеша, отрабатывая звуки."},
+{id:"p2",type:"Четверостишие",date:"12 июля",kb:"Бжьэхэр жьыуэ мэгъуэлъыж,\nБжьэхэр жьыуэ къотэджыж.\nБжьэ Iуэхуншэу мыхьэулей,\nБжьэхэр жыжьэу долъэтей.",ru:"Пчёлы рано ложатся, рано встают, без дела не бывают, далеко улетают.",gloss:"Бжьэ — пчела (не путать: бжэ — дверь) · Жьыуэ — рано · Жыжьэу — далеко"},
+{id:"p3",type:"Четверостишие",date:"25 июля",kb:"«Хахуэм лIыгъэ хэлъщ!» — пэж дыдэщ.\nЛIыхъужьыгъэм лIыгъэ хэлъщ.\nЛIыгъэщ — лIыщхьэ лIэужь быдэр!\nНарт лIэщIыгъуэу хабзэ лъэщщ!",ru:"О мужестве: «В храбреце есть мужество» — чистая правда."},
+{id:"p4",type:"Четверостишие",date:"8 августа",kb:"Гуащэнабдзэ и мэр дахэщ,\nГуащэIэпэ — удз бэгъуащ.\nГубгъуэIущхьэ — Iущхьэ хахуэщ,\nГуащэщхьэцыр удз гъэгъащ.\nГуэгушыпэр къащхъуэ-щхъуантIэщ,\nГубгъуи хади ар къыщокI.",ru:"О цветах в поле и огороде.",gloss:"Гуащэнабдзэ — роза · ГуащэIэпэ — мята · ГубгъуэIущхьэ — мак · Гуащэщхьэц — гладиолус · Гуэгушыпэ — гиацинт · Къащхъуэ — голубой · ЩхъуантIэ — зелёный · Бэгъуэн — разрастись · Гъэгъэн — цвести"},
+{id:"p5",type:"Четверостишие",date:"20 октября",kb:"Зым и хущхъуэр зым и щхъухьщи,\nХущхъуэр ебгъэлеймэ щхъухьщ.\nХэлъщ щIыуэпсым дэ ди хущхъуэ,\nХущхъуэудзхэм сэбэп хэлъщ.",ru:"Что одному лекарство — другому яд; лекарство сверх меры — яд. В природе есть наше лекарство, в лечебных травах — польза."},
+{id:"p6",type:"Четверостишие",date:"21 октября",kb:"Бжьын-бжьыныхухэр бжьыхьэм хасэ.\nХадэ цIыкIу къэкIыгъэ хьэсэу.\nБэдрэжан, бэлыджэхужь,\nБэрэтинэ, шыбжий плъыжь.\nХьэсэ бгъуфIэм щыбагъуэнущ,\nБэрэчэти къыпыкIынущ.\nБалийжыгхэр къэгъагъэнущ —\nБжэндэхъу абгъуэхэр фIэтлъхьэнущ!",ru:"Лук и чеснок сажают осенью. Помидор, редька, мята, красный перец… На широких грядках всё умножится, придёт изобилие. Вишни зацветут — повесим скворечники!",gloss:"Бжьын — лук · Бжьыныху — чеснок · Бэдрэжан — помидор · Шыбжий — перец · Плъыжь — красный · Хьэсэ — грядка · БгъуфIэ — широкий · Бэгъуэн — умножаться · Бэрэчэт — изобилие · КъыпыкIэн — вырасти · Гъэгъэн — расцвести · Бэрэтинэ — мята · Бэлыджэхужь — редька · Балийжыг — вишня · Бжэндэхъу — скворец · Абгъуэ — гнездо · ФIэлъхьэн — повесить"},
+{id:"s1",type:"Скороговорка",date:"28 октября",kb:"Гухъу кIэ нанэ хугу дегъэгу.\nГуащэ гуэным лы щегъэгъу.\nНанэ гухъукIэ хугу дегъэгу.\nГуэным Гуащэ лы щегъэгъу.",ru:"Бабушка ступкой шелушит просо. Гуаша в амбаре сушит мясо.",gloss:"Нанэ — бабушка · Гухъу — ступа · Хугу — просо · Гуащэ — хозяйка, свекровь · Гуэн — амбар · Лы — мясо · Гъун — сушить"},
+{id:"s2",type:"Скороговорка",date:"31 октября",kb:"Дзадзу цIыкIуу дзахъэ цIыкIу,\nДзэпэфIанэу дзащхьэ цIыкIу.\nДзахъэ цIыкIуу дзадзу цIыкIу,\nДзэпэфIанэу дзащхьэ цIыкIу.",ru:"Маленький младенец — маленький беззубик, передний зубик — главный зубик маленький.",gloss:"Дзадзу — младенец · ЦIыкIу — маленький · Дзахъэ — беззубый · ДзэпэфIанэ — передний зуб · Дзащхьэ — главный (досл. «военачальник»)"},
+{id:"s3",type:"Скороговорка",date:"4 ноября",kb:"Дэп жьэражьэр,\nПлъыжь-плъыжьыбзэу,\nМафIэ плъыжьым\nДэпу щожьэ.\nЖьындуужьыр,\nКхъужьейжьым,\nЩыпэщащэу,\nДзыгъуэ йожьэ.",ru:"Тлеющий уголёк, алый-преалый, в красном огне жаром пылает. Старый филин на старой груше тихо шуршит и на мышей охотится."},
+{id:"q1",type:"Пословица",date:"21 июня",kb:"Iуэху цIыкIури Iуэхущ, Iуэху инри Iуэхущ.",ru:"И маленькое дело — дело, и большое дело — дело."},
+{id:"q2",type:"Пословица",date:"27 июня",kb:"ПцIыр зэбгъэпщкIуми зэрыпцIыр къыщIощыж.",ru:"Как ложь ни прячь — она всё равно выйдет наружу."},
+{id:"q3",type:"Пословица",date:"24 октября",kb:"Акъыл зиIэм щIыIэ иIэщ.",ru:"У кого есть ум, у того есть терпение."},
+{id:"q4",type:"Пословица",date:"28 октября",kb:"НэкIукIэ дахэр махуэ щхьэгъусэщи, хьэл дахэ зиIэр гъащIэ щхьэгъусэщ.",ru:"Красивая лицом — супруга на день, красивая нравом — на всю жизнь.",gloss:"НэкIукIэ — внешностью · Дахэ — красивый · Махуэ — день · Щхьэгъусэ — супруг(а) · Хьэл — нрав · ЗиIэр — тот, у кого есть · ГъащIэ — жизнь"},
+{id:"q5",type:"Пословица",date:"31 октября",kb:"Гупщыси псалъэ, зыплъыхьи тIыс.",ru:"Прежде чем сказать — подумай, прежде чем сесть — оглядись."},
+{id:"q6",type:"Пословица",date:"4 ноября",kb:"Нэмысым насып къыдокIуэ.",ru:"Уважение приводит к счастью."}
+];
+
+// ===== ГРАММАТИКА =====
+const GRAMMAR = {
+pronouns:{t:"Личные местоимения",html:`<table class="tb"><tr><td><b>Сэ</b></td><td>я</td><td><b>Дэ</b></td><td>мы</td></tr><tr><td><b>Уэ</b></td><td>ты</td><td><b>Фэ</b></td><td>вы</td></tr><tr><td><b>Ар / Абы</b></td><td>он, она</td><td><b>Ахэр / Абыхэм</b></td><td>они</td></tr></table><p class="tip">В кабардинском <b>нет рода</b>: КIуащ щIалэр — парень пошёл; КIуащ хъыджэбзыр — девушка пошла.</p>`},
+whowhat:{t:"Хэт? и Сыт?",html:`<div class="qg"><div><b>Хэт?</b>кто? — только о людях<br><i>Хэт? ЩIалэр.</i></div><div><b>Сыт?</b>что? — обо всём остальном<br><i>Сыт? Тхылъыр.</i></div><div><b>Дэнэ?</b>где? откуда? куда?</div><div><b>Сыт хуэдэ?</b>какой? какая?</div><div><b>Дапщэ?</b>сколько?</div><div><b>Дауэ?</b>как?</div></div><p class="tip">Суффикс <b>-щ</b> = «есть, является»: <i>Хъыджэбзыр дахэщ</i> — девушка красивая.<br>Суффикс <b>-хэ</b> = множественное число: <i>тхылъ → тхылъхэр</i>.</p>`},
+verbconj:{t:"Глагол по лицам: еджэн (читать)",html:`<table class="tb"><tr><td>Сэ <b>со</b>джэ</td><td>я читаю</td><td>Дэ <b>до</b>джэ</td><td>мы читаем</td></tr><tr><td>Уэ <b>уо</b>джэ</td><td>ты читаешь</td><td>Фэ <b>фо</b>джэ</td><td>вы читаете</td></tr><tr><td>Ар <b>йо</b>джэ</td><td>он читает</td><td>Ахэр <b>йо</b>джэ</td><td>они читают</td></tr></table><p class="tip">КIуэн — и «идти», и «ехать»: <i>МашинэмкIэ дыкъэкIуащ</i> — приехали на машине.<br>Еджэн — «читать» и «учиться»: <i>Тхылъым соджэ</i> — читаю книгу; <i>Университетым сыщоджэ</i> — учусь в университете.</p>`},
+possess:{t:"Чей? — притяжательные",html:`<table class="tb"><tr><td><b>Си / сысей</b></td><td>мой</td><td><b>Ди / дыдей</b></td><td>наш</td></tr><tr><td><b>Уи / ууей</b></td><td>твой</td><td><b>Фи / фыфей</b></td><td>ваш</td></tr><tr><td><b>И / ей</b></td><td>его, её</td><td><b>Я / яй</b></td><td>их</td></tr></table><p class="tip"><b>Зей? / Зи?</b> — чей? <i>Хэт зейр мы тхылъыр?</i> — Чья эта книга?<br><i>Сысейщ</i> — моя. <i>Си тхылъщ</i> — моя книга. <i>Студентым ейщ</i> — студента.</p><p class="tip">Мыр сэ <b>си</b> тхылъщ · Мыр уэ <b>уи</b> тхылъщ · Мыр дэ <b>ди</b> тхылъщ · Мыр фэ <b>фи</b> тхылъщ · Мыр абы <b>и</b> тхылъщ · Мыр абыхэм <b>я</b> тхылъщ</p>`},
+numbers:{t:"Числа",html:`<div class="nums"><div><b>Зы</b>1</div><div><b>ТIу</b>2</div><div><b>Щы</b>3</div><div><b>ПлIы</b>4</div><div><b>Тху</b>5</div><div><b>Хы</b>6</div><div><b>Блы</b>7</div><div><b>И</b>8</div><div><b>Бгъу</b>9</div><div><b>Пщы</b>10</div><div><b>ТIощI</b>20</div><div><b>ЩэщI</b>30</div><div><b>ПлIыщI</b>40</div></div><p class="tip">Число прилипает к слову: <i>Зы цIыху</i> — один человек, <i>цIыхуитI</i> — два человека, <i>цIыхуитху</i> — пять, <i>цIыхуибл</i> — семь, <i>пэшищ</i> — три комнаты.</p>`},
+cases:{t:"4 падежа",html:`<table class="tb cases"><tr><th>Падеж</th><th>Конец</th><th>Вопрос</th><th>Пример</th></tr><tr><td>Именит.</td><td><b>-р</b></td><td>сытыр? хэтыр?</td><td>тхылъы<b>р</b>, къуажэ<b>р</b></td></tr><tr><td>Эргатив.</td><td><b>-м</b></td><td>сытым? хэтым?</td><td>тхылъы<b>м</b>, къуажэ<b>м</b></td></tr><tr><td>Послелож.</td><td><b>-мкIэ</b></td><td>сытымкIэ?</td><td>тхылъы<b>мкIэ</b></td></tr><tr><td>Обстоят.</td><td><b>-у / -рауэ</b></td><td>сыту? сытырауэ?</td><td>тхылъ<b>у</b>, тхылъы<b>рауэ</b></td></tr></table><p class="tip"><b>Определённое и неопределённое</b> (урок 10):<br>ЩIалэр / ЩIалэ · ЩIалэм / ЩIалэ · ЩIалэмкIэ / ЩIалэкIэ · ЩIалэрауэ / ЩIалэу<br><i>-р, -м</i> — «тот самый» парень; без окончания — «какой-то» парень.</p><p class="tip">Если слово кончается на согласный, добавляется <b>ы</b>: шэнт → шэнт<b>ы</b>р. На гласный — сразу: мажьэ → мажьэр.</p><p class="tip"><b>-мкIэ</b> — чем? или по чему?: <i>КъэлэмымкIэ тхын</i> — писать карандашом; <i>УэрамымкIэ кIуэн</i> — идти по улице.<br><b>-у</b> — в качестве кого: <i>ЛэжьакIуэу мэлажьэ</i> — работает рабочим.</p>`},
+ergative:{t:"Эргатив: -р или -м?",html:`<div class="flow"><div class="fbox"><span class="lbl">Глагол НЕпереходный</span>(действие ни на что не направлено: идти, спать, сидеть)<div class="ex">ЩIалэ<b class="r">р</b> макIуэ.<br><i>Парень идёт.</i></div>Кто делает → <b class="r">-р</b></div><div class="fbox"><span class="lbl">Глагол переходный</span>(действие на предмет: писать что-то, есть что-то)<div class="ex">ЩIалэ<b class="m">м</b> тхылъы<b class="r">р</b> етх.<br><i>Парень пишет книгу.</i></div>Кто делает → <b class="m">-м</b>, что делает → <b class="r">-р</b></div></div><p class="tip">В русском «я» всегда в именительном. В кабардинском падеж зависит от <b>глагола</b>, а не от вопроса «кому? чему?».</p>`},
+transitive:{t:"Переходный или нет?",html:`<p><b>Всегда НЕпереходные:</b></p><ul class="ul"><li>движение: макIуэ (идёт), мажэ (бежит), йожьэ (отправляется)</li><li>состояние: жеин (спит), мэпсэу (живёт), малIэ (умирает)</li><li>с приставкой <b>мэ-/ма-</b>: мэлажьэ (работает), мэджэгу (играет), матхэ (пишет), мэпсалъэ (разговаривает)</li><li>косвенные: йоджэ (читает), еплъы (смотрит на), едаIуэ (слушает)</li></ul><p><b>Всегда переходные:</b></p><ul class="ul"><li>создать / сломать: тхын (писать что-то), щIын (делать), дын (шить что-то), гъэвэн (варить), къутэн (ломать)</li><li>переместить: хьын (нести), шэн (вести), дзын (бросать), гъэувын (ставить)</li><li>восприятие: лъагъун (видеть), щIэн (знать), хэщIыкIын (понимать)</li><li>с приставкой <b>гъэ-</b> «заставить»: жеин → гъэжеин (усыплять), кIуэн → гъэкIуэн (посылать)</li></ul><div class="pairs"><div><b>Тхэн</b> писать</div><div><b>Тхын</b> писать что-то</div><div><b>Дэн</b> шить</div><div><b>Дын</b> шить что-то</div><div><b>ПщэфIэн</b> готовить</div><div><b>ПщэфIын</b> готовить что-то</div><div><b>Еджэн</b> читать, учиться</div><div><b>Джын</b> изучать что-то</div></div><p class="tip"><i data-i=sparkle></i><b>Золотое правило:</b> подставь «Сэ ар (сощIэ)» — «Я это (делаю)». Подходит «ар» — глагол переходный. Нужно «абы» — непереходный.</p>`},
+dynstat:{t:"Динамические и статические",html:`<div class="flow"><div class="fbox"><span class="lbl">Динамические</span>действие, процесс<div class="ex">Сэ <b>со</b>кIуэ — я иду<br>Уэ <b>уо</b>кIуэ — ты идёшь<br>Ар <b>ма</b>кIуэ — он идёт</div>приставки <b>о-</b>, а для 3-го лица — <b>мэ/ма</b></div><div class="fbox"><span class="lbl">Статические</span>состояние, положение<div class="ex">Сэ сыщыт<b>щ</b> — я стою<br>Уэ ущыт<b>щ</b> — ты стоишь<br>Ар щыт<b>щ</b> — он стоит</div>суффикс утверждения <b>-щ</b></div></div><p class="tip">Статические почти все непереходные. Исключения: <b>Iыгъын</b> (держать) и <b>щыгъын</b> (быть одетым): <i>ЩIалэм плIэр щыгъщ</i> — парень одет в рубашку.</p><div class="pairs"><div><b>Тетын</b> стоять на чём-то</div><div><b>Тесын</b> сидеть на чём-то</div><div><b>Телъын</b> лежать на чём-то</div><div><b>ЩIэтын</b> стоять внутри</div></div>`},
+persons:{t:"По лицам: тхэн и тхын",html:`<table class="tb"><tr><th></th><th>тхэн (непереходн.)</th><th>тхын (переходн.)</th></tr><tr><td>Сэ</td><td>сотхэ</td><td>сотх</td></tr><tr><td>Уэ</td><td>уотхэ</td><td>уотх</td></tr><tr><td>Ар</td><td>матхэ</td><td>(абы) етх</td></tr><tr><td>Дэ</td><td>дотхэ</td><td>дотх</td></tr><tr><td>Фэ</td><td>фотхэ</td><td>фотх</td></tr><tr><td>Ахэр</td><td>матхэ</td><td>(абыхэм) ятх</td></tr></table><p class="tip">Хъыджэбзы<b>р</b> матхэ · Хъыджэбзы<b>м</b> тхылъыр етх · Хъыджэбзыр ручкэ<b>мкIэ</b> матхэ</p><p class="tip">Анэр мэпщафIэ — мама готовит.<br>Анэм лыр епщэфI — мама готовит мясо.<br>Лыр шэнтым тесщ — мужчина сидит на стуле.</p>`}
+};
+
+// ===== УПРАЖНЕНИЯ =====
+const EXERCISES = {
+ex1028:{t:"Упражнения 28 октября",items:[
+ {q:"Антонимы: Хъыджэбз ↔ ?",a:"ЩIалэ"},{q:"Къуэ ↔ ?",a:"Пхъу"},{q:"Анэ ↔ ?",a:"Адэ"},
+ {q:"Махуэ ↔ ?",a:"Жэщ"},{q:"Ин ↔ ?",a:"ЦIыкIу"},{q:"Нэхъыжь ↔ ?",a:"НэхъыщIэ"},
+ {q:"Бгъуэ ↔ ?",a:"Бгъузэ"},{q:"Хущхъуэ ↔ ?",a:"Щхъухь"},{q:"Жьы ↔ ?",a:"ЩIэ"},{q:"Къуажэ ↔ ?",a:"Къалэ"},
+ {q:"Составь: макIуэ, щIалэ, школ",a:"ЩIалэр школым макIуэ."},
+ {q:"Составь: къехь, егъэджакIуэ, тхылъ",a:"ЕгъэджакIуэм тхылъыр къехь."},
+ {q:"Составь: уэ, уоджэ, хъыбар",a:"Уэ хъыбарым уоджэ."},
+ {q:"Составь: мэпщафIэ, анэ",a:"Анэр мэпщафIэ."}]},
+ex1031:{t:"Упражнения 31 октября",items:[
+ {q:"(Студент)__ тхылъыр едж. — переходный",a:"Студентым тхылъыр едж."},
+ {q:"(Студент)__ матхэ. — непереходный",a:"Студентыр матхэ."},
+ {q:"(Анэ)__ сабийр фIыуэ елъагъу. — переходный",a:"Анэм сабийр фIыуэ елъагъу."},
+ {q:"Собери: едж / тхылъхэр / щIалэм",a:"ЩIалэм тхылъхэр едж."},
+ {q:"Собери: матхэ / тэмэму / студентыр",a:"Студентыр тэмэму матхэ."},
+ {q:"Найди ошибку: ЩIалэр тхылъыр едж.",a:"ЩIалэм тхылъыр едж. (переходный → -м)"}]},
+ex1104:{t:"Разбор ДЗ 11 ноября",items:[
+ {q:"Мать готовит.",a:"Анэр мэпщафIэ. (непереходный)"},
+ {q:"Мать готовит мясо.",a:"Анэм лыр епщэфI. (переходный)"},
+ {q:"Мужчина сидит.",a:"Лыр щысщ. (всегда непереходный)"},
+ {q:"Мужчина сидит на стуле.",a:"Лыр шэнтым тесщ."},
+ {q:"Ребёнок играет с куклой.",a:"Сабийр гуащэмкIэ мэджэгу."},
+ {q:"Он изучает арабский язык.",a:"Абы хьэрыпыбзэр едж. (переходный)"},
+ {q:"Си анэм лыр епщэфI — какой глагол?",a:"Переходный: «мама готовит мясо»"},
+ {q:"ЕгъэджакIуэр тхылъым йоджэ — какой глагол?",a:"Непереходный: «учитель читает книгу»"}]}
+};
+
+const LINKS = ["Кабардинский алфавит (ссылка в «Материалах урока»)","Приветствия | Анэбзэ (ссылка в «Материалах урока»)","Русско-кабардинский разговорник — Бижоев Б.Ч., Тимижев Х.Т., 2008"];
+
+</script>
+<script>
+// ===== хранилище =====
+const KEY="adyghe_aisha_v1";
+let S={mylessons:[],miss:{},wk:{},mydlg:{},st:{},hw:{},reads:{},my:[],notes:[],days:[],ex:{},hist:{},dsteps:{},dn:5,theme:"light"};
+try{const x=JSON.parse(localStorage.getItem(KEY)||"null");if(x)S=Object.assign(S,x)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function markDay(){const d=new Date().toISOString().slice(0,10);if(!S.days.includes(d)){S.days.push(d);save()}}
+function streak(){let n=0,d=new Date();for(;;){const k=d.toISOString().slice(0,10);if(S.days.includes(k)){n++;d.setDate(d.getDate()-1)}else break}return n}
+
+// ===== слова =====
+function allWords(){
+ const seen={},out=[];
+ LESSONS.forEach(l=>l.words.forEach(w=>{const id=w[0]+"|"+w[1];if(seen[id])return;seen[id]=1;out.push({id,k:w[0],r:w[1],t:w[2],l:l.id,ln:l.n+" · "+l.date})}));
+ S.my.forEach((w,i)=>out.push({id:"my|"+i+"|"+w.k,k:w.k,r:w.r,t:"my",l:"my",ln:"Мои слова",my:i}));
+ return out;
+}
+let WORDS=allWords();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// палочка: I, l, 1, Ӏ после/перед кириллицей → подсвеченная I
+function pal(s){
+ const t=String(s).replace(/([а-яёА-ЯЁ])[Il1Ӏӏ]/g,"$1\u0001").replace(/[Il1Ӏӏ](?=[а-яёА-ЯЁ])/g,"\u0001");
+ return esc(t).replace(/([а-яёА-ЯЁ]?)\u0001/g,'<span class="pal">$1I</span>');
+}
+const st=id=>S.st[id]||0; // 0 новое, 1 учу, 2 знаю
+
+function toast(t){const e=document.getElementById("toast");e.innerHTML=t;hydrate(e);e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1800)}
+function modal(html){document.getElementById("sheet").innerHTML=html;document.getElementById("modal").classList.add("on")}
+function closeModal(){document.getElementById("modal").classList.remove("on")}
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
+
+// ===== навигация =====
+let cur="home";
+function go(v,arg,b){
+ cur=v;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v||(v==="gram"&&b.dataset.v==="lessons")));
+ document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));
+ R[v](arg,b);window.scrollTo({top:0,behavior:"instant"});
+}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.v));
+const R={};
+
+
+// ===== тема =====
+function applyTheme(){document.body.classList.toggle("light",S.theme!=="dark");const b=document.getElementById("thm");if(b)b.innerHTML=ic(S.theme==="dark"?"sun":"moon")}
+function toggleTheme(){S.theme=S.theme==="dark"?"light":"dark";save();applyTheme()}
+applyTheme();
+
+// ===== 5 СЛОВ В ДЕНЬ =====
+function dkey(d){d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return dkey(d)}
+function byId(id){return WORDS.find(w=>w.id===id)}
+function dailyPool(){
+ const used=new Set(Object.values(S.hist).flat());
+ return WORDS.filter(w=>!["sounds"].includes(w.t)&&w.k.length<=22&&!/[?!]/.test(w.k)&&st(w.id)!==2&&!used.has(w.id));
+}
+function ensureDaily(){
+ const t=dkey();
+ if(!S.hist[t]||!S.hist[t].length){S.hist[t]=dailyPool().slice(0,S.dn).map(w=>w.id);save()}
+ return S.hist[t].map(byId).filter(Boolean);
+}
+function reviewDue(){const ids=[];[1,3,7,14].forEach(n=>{(S.hist[daysAgo(n)]||[]).forEach(id=>{if(!ids.includes(id))ids.push(id)})});return ids.map(byId).filter(Boolean)}
+function dStep(n){const t=dkey();S.dsteps[t]=S.dsteps[t]||{};S.dsteps[t][n]=1;markDay();save()}
+function dailyDone(t){const x=S.dsteps[t||dkey()];return x&&x[1]&&x[2]&&x[3]}
+function dailyHTML(){
+ const W=ensureDaily(),x=S.dsteps[dkey()]||{},rev=reviewDue();
+ if(!W.length)return `<div class="daily"><h3><i data-i=star></i>Слова на сегодня</h3><p>Все слова из уроков уже пройдены! Добавь новые в «Мои слова».</p></div>`;
+ return `<div class="daily"><div class="row" style="justify-content:space-between"><h3><i data-i=star></i>${W.length} слов на сегодня</h3>${dailyDone()?'<span style="color:#7FD1A8;font-weight:800">✓ выучено</span>':""}</div>
+ <div style="font-size:14px;color:#B9C3DA">Нажми на слово, чтобы скрыть или показать перевод</div>
+ <div class="dw">${W.map(w=>`<div onclick="this.classList.toggle('hide')"><b>${pal(w.k)}</b><span>${esc(w.r)}</span></div>`).join("")}</div>
+ <div class="steps"><button class="${x[1]?"done":""}" onclick="dailyLook()"><span><i data-i=intro></i></span>1. Смотреть</button><button class="${x[2]?"done":""}" onclick="dailyCards()"><span><i data-i=cards></i></span>2. Карточки</button><button class="${x[3]?"done":""}" onclick="dailyQuiz()"><span><i data-i=target></i></span>3. Тест</button><button class="${x[4]?"done":""}" onclick="dailyWrite()"><span><i data-i=pen></i></span>4. Фраза</button></div>
+ <div class="meta"><span>${rev.length?`<i data-i=repeat></i>На повторение: ${rev.length} слов`:"Повторение появится завтра"}</span><span>${rev.length?`<button class="lnk" onclick="reviewStart()">Повторить</button> · `:""}<button class="lnk" onclick="moreDaily()">＋ ещё ${S.dn}</button> · <button class="lnk" onclick="dailySettings()"><i data-i=gear></i>${S.dn} в день</button></span></div></div>`;
+}
+function dailyLook(){
+ const W=ensureDaily();let i=0;
+ const show=()=>{const w=W[i];modal(`<div class="row" style="justify-content:space-between"><b style="color:var(--gold2)"><i data-i=intro></i>Знакомство · ${i+1} из ${W.length}</b><button class="btn sm" onclick="closeModal()">✕</button></div>
+ <div class="bar" style="margin:10px 0 18px"><i style="width:${(i+1)/W.length*100}%"></i></div>
+ <div style="text-align:center;padding:16px 0"><div style="font-size:40px;font-weight:800">${pal(w.k)}</div><div style="font-size:22px;color:var(--gold2);margin-top:6px">${esc(w.r)}</div>
+ <div class="sub" style="margin-top:14px">${esc(w.ln)}</div>
+ <div class="tip" style="text-align:left;margin-top:18px"><i data-i=voice></i>Скажи слово вслух 3 раза, потом закрой глаза и представь его.</div></div>
+ <button class="btn gold" style="width:100%" id="nx">${i<W.length-1?"Дальше →":"Готово ✓"}</button>`);
+ document.getElementById("nx").onclick=()=>{i++;if(i<W.length)show();else{dStep(1);W.forEach(w=>{if(!st(w.id))setSt(w.id,1)});closeModal();R.home();toast("Шаг 1 готов! Теперь карточки <i data-i=cards></i>")}}};
+ show();
+}
+let dailyMode=null;
+function dailyCards(){dailyMode="cards";deck=ensureDaily().sort(()=>Math.random()-.5);di=0;cards("daily")}
+function dailyQuiz(){dailyMode="quiz";deck=ensureDaily().sort(()=>Math.random()-.5);di=0;qScore=0;quiz()}
+function reviewStart(){dailyMode="review";deck=reviewDue().sort(()=>Math.random()-.5);di=0;cards("daily")}
+function moreDaily(){const t=dkey();const add=dailyPool().slice(0,S.dn).map(w=>w.id);if(!add.length)return toast("Новых слов больше нет");S.hist[t]=(S.hist[t]||[]).concat(add);S.dsteps[t]={};save();R.home();toast(`Добавлено ещё ${add.length} слов`)}
+function dailySettings(){modal(`<h2 style="margin-top:0">Сколько слов в день?</h2><div class="row">${[3,5,7,10].map(n=>`<button class="btn ${S.dn===n?"gold":""}" onclick="S.dn=${n};save();closeModal();toast('Со следующего дня: ${n} слов');R.home()">${n}</button>`).join("")}</div><p class="sub" style="margin-top:12px">Слова берутся по порядку уроков — от первого к последнему. Уже выученные (✓) не повторяются.</p>`)}
+function weekHTML(){const n=["Вс","Пн","Вт","Ср","Чт","Пт","Сб"];let h="";for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=dkey(d);h+=`<div><i class="${dailyDone(k)?"f":""}">${dailyDone(k)?"✓":""}</i>${n[d.getDay()]}</div>`}return h}
+
+
+// ===== ЗАКРЕПЛЕНИЕ НЕДЕЛИ =====
+function weekKey(d){d=new Date(d||Date.now());const day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return dkey(d)}
+function weekWords(){
+ const ids=new Set();for(let i=0;i<7;i++)(S.hist[daysAgo(i)]||[]).forEach(x=>ids.add(x));
+ for(let i=7;i<35;i++)(S.hist[daysAgo(i)]||[]).forEach(x=>{if(st(x)!==2)ids.add(x)});
+ Object.entries(S.miss).sort((a,b)=>b[1]-a[1]).slice(0,10).forEach(([x])=>ids.add(x));
+ return [...ids].map(byId).filter(Boolean);
+}
+function weeklyHTML(){
+ const W=weekWords(),done=S.wk[weekKey()],sun=new Date().getDay()===0;
+ if(!W.length)return `<div class="wk"><h3><i data-i=week></i>Закрепление недели</h3><div class="sub" style="font-size:15px">Появится, когда выучишь первые слова дня. Каждое воскресенье здесь повторяем всё, что было за неделю.</div></div>`;
+ return `<div class="wk ${sun&&!done?"due":""}"><div class="row" style="justify-content:space-between"><h3><i data-i=week></i>Закрепление недели</h3>${done?`<span style="color:var(--ok);font-weight:800">✓ ${done}</span>`:sun?'<span class="tag">сегодня</span>':""}</div>
+ <div class="sub" style="font-size:15px">${W.length} слов: выученные за неделю, незакреплённые и те, в которых ты чаще ошибалась. Лучше всего — по воскресеньям.</div>
+ <div class="row" style="margin-top:10px"><button class="btn gold" onclick="weeklyStart()"><i data-i=week></i>Начать закрепление</button></div></div>`;
+}
+let wkStage=0;
+function weeklyStart(){deck=weekWords().sort(()=>Math.random()-.5);if(!deck.length)return;dailyMode="wk1";di=0;qScore=0;quiz()}
+function weeklyAfterQuiz(){const sc=qScore,n=deck.length;dailyMode="wk2";deck=deck.sort(()=>Math.random()-.5);di=0;qScore=0;modal(`<div style="text-align:center;padding:16px 0"><div class="bigic">${ic("target")}</div><h2>Часть 1: ${sc} из ${n}</h2><p class="sub">Теперь часть 2 — напиши те же слова сама. Так они закрепятся надолго.</p><button class="btn gold" style="margin-top:14px" onclick="typeQ()">Продолжить</button></div>`)}
+function weeklyFinish(){const d=new Date().toLocaleDateString("ru-RU",{day:"numeric",month:"short"});S.wk[weekKey()]=d;deck.forEach(w=>{if(!S.miss[w.id])setSt(w.id,2)});markDay();save();dailyMode=null;closeModal();R.home();toast("<i data-i=trophy></i>Неделя закреплена! МашаАллах!")}
+
+// ===== ГЛАВНАЯ =====
+R.home=()=>{
+ WORDS=allWords();
+ const day=Math.floor(Date.now()/864e5);const pool=WORDS.filter(w=>w.t!=="sounds"&&w.t!=="phrases");const wd=pool[day%pool.length];
+ const known=WORDS.filter(w=>st(w.id)===2).length,learning=WORDS.filter(w=>st(w.id)===1).length;
+ const pct=Math.round(known/WORDS.length*100);
+ const last=[...LESSONS].reverse().find(l=>l.hw);
+ const hwDone=last?last.hw.items.filter((_,i)=>S.hw[last.id+i]).length:0;
+ document.getElementById("v-home").innerHTML=`
+ <h1>Уи махуэ фIыуэ, Аишэ!</h1>${!Object.keys(S.st).length&&!S.notes.length&&!S.mylessons.length&&!S.hidemig?`<div class="migr"><b><i data-i=restore></i>Перенести прогресс?</b><div class="sub" style="font-size:15px;margin:4px 0 10px">Если ты уже занималась в старой версии — открой её, нажми «Скопировать копию» (ДЗ → Моя тетрадь) и вставь сюда.</div><div class="row"><button class="btn sm gold" onclick="restoreDlg()"><i data-i=restore></i>Вставить копию</button><button class="btn sm" onclick="S.hidemig=1;save();R.home()">Начать заново</button></div></div>`:""}<p class="sub">Добрый день! Немного каждый день — и язык сам заговорит.</p>
+ ${dailyHTML()}
+ <div class="card"><div class="row" style="justify-content:space-between"><b><i data-i=calendar></i>Моя неделя</b><span class="sub" style="font-size:14px"><i data-i=flame></i>${streak()} дн. подряд</span></div><div class="week">${weekHTML()}</div></div>
+ ${weeklyHTML()}
+ <div class="hero"><div class="lbl"><i data-i=sparkle></i>Бонус: случайное слово</div><div class="w">${pal(wd.k)}</div><div class="t">${esc(wd.r)}</div>
+  <div class="row" style="margin-top:12px"><button class="btn sm gold" onclick="setSt('${esc(wd.id)}',1);toast('Добавлено в «Учу»')">＋ Учить</button><span class="tag">${esc(wd.ln)}</span></div></div>
+ <div class="stats">
+  <div class="stat"><b>${known}</b><span>знаю</span></div>
+  <div class="stat"><b>${learning}</b><span>учу</span></div>
+  <div class="stat"><b><i data-i=flame></i>${streak()}</b><span>дней подряд</span></div></div>
+ <div class="card"><div class="row" style="justify-content:space-between"><b>Выучено слов</b><span style="color:var(--gold2);font-weight:800">${known} из ${WORDS.length}</span></div><div class="bar"><i style="width:${pct}%"></i></div></div>
+ ${last?`<div class="card" onclick="go('hw')" style="cursor:pointer"><h3 style="margin:0 0 6px"><i data-i=pin></i>Последнее ДЗ · на ${esc(last.hw.due)}</h3><b style="font-size:19px">${esc(last.title)}</b><div class="bar"><i style="width:${hwDone/last.hw.items.length*100}%"></i></div><span class="sub">${hwDone} из ${last.hw.items.length} сделано →</span></div>`:""}
+ <h3>Быстрый старт</h3>
+ <div class="tiles">
+  <button class="tile" onclick="go('words');startMode('cards')"><span class="e badge"><i data-i=cards></i></span><b>Карточки</b><span>переворачивай и запоминай</span></button>
+  <button class="tile" onclick="go('words');startMode('quiz')"><span class="e badge"><i data-i=target></i></span><b>Тест</b><span>выбери правильный ответ</span></button>
+  <button class="tile" onclick="go('talk')"><span class="e badge"><i data-i=chat></i></span><b>Диалоги</b><span>читай по ролям</span></button>
+  <button class="tile" onclick="go('talk','read')"><span class="e badge"><i data-i=scroll></i></span><b>Чтение ×10</b><span>стихи и скороговорки</span></button>
+  <button class="tile" onclick="go('gram')"><span class="e badge"><i data-i=puzzle></i></span><b>Грамматика</b><span>падежи, глаголы, числа</span></button>
+  <button class="tile" onclick="go('hw','write')"><span class="e badge"><i data-i=pen></i></span><b>Моя тетрадь</b><span>пиши своё ДЗ</span></button>
+ </div>`;
+};
+
+// ===== СЛОВА =====
+let wTopic="all",wFilter="all",wQuery="",wLimit=60,wLesson=null;
+function hardStart(){const L=Object.entries(S.miss).sort((a,b)=>b[1]-a[1]).map(([x])=>byId(x)).filter(Boolean).slice(0,15);if(!L.length)return toast('Пока нет трудных слов — ты молодец!');deck=L;di=0;dailyMode=null;cards('hard')}
+function miss(id){S.miss[id]=(S.miss[id]||0)+1}
+function setSt(id,v){S.st[id]=v;markDay();save()}
+function cycleSt(id,el){const v=(st(id)+1)%3;setSt(id,v);el.className="st s"+v;el.textContent=["","…","✓"][v]}
+function filtered(){
+ return WORDS.filter(w=>(wTopic==="all"||w.t===wTopic)&&(wLesson?w.l===wLesson:true)&&
+  (wFilter==="all"||(wFilter==="new"&&st(w.id)===0)||(wFilter==="learn"&&st(w.id)===1)||(wFilter==="known"&&st(w.id)===2))&&
+  (!wQuery||(w.k+" "+w.r).toLowerCase().replace(/[l1ӏ]/g,"i").includes(wQuery.toLowerCase().replace(/[l1ӏ]/g,"i"))));
+}
+R.words=()=>{
+ WORDS=allWords();
+ const tps=Object.entries(TOPICS).map(([k,v])=>`<button class="chip ${wTopic===k?"on":""}" data-t="${k}">${v}</button>`).join("");
+ const L=filtered();
+ document.getElementById("v-words").innerHTML=`
+ <h1>Лексика</h1><p class="sub">${WORDS.length} слов и фраз из всех уроков</p>
+ <div style="height:10px"></div>
+ <div class="modes"><button onclick="startMode('cards')"><span><i data-i=cards></i></span>Карточки</button><button onclick="startMode('quiz')"><span><i data-i=target></i></span>Тест</button><button onclick="startMode('type')"><span><i data-i=keyboard></i></span>Пишу</button><button onclick="hardStart()"><span><i data-i=flame></i></span>Трудные</button><button onclick="startMode('learn')"><span><i data-i=repeat></i></span>Повторить</button></div>
+ <input class="search" id="wq" placeholder="Поиск: по-кабардински или по-русски" value="${esc(wQuery)}">
+ ${wLesson?`<div class="note">Показаны слова урока: <b>${esc(LESSONS.find(l=>l.id===wLesson)?.n||"Мои слова")} · ${esc(LESSONS.find(l=>l.id===wLesson)?.date||"")}</b> <button class="btn sm" onclick="wLesson=null;R.words()">показать все</button></div>`:""}
+ <div class="chips"><button class="chip ${wTopic==="all"?"on":""}" data-t="all">Все темы</button>${tps}<button class="chip ${wTopic==="my"?"on":""}" data-t="my"><i data-i=star></i>Мои слова</button></div>
+ <div class="chips">${[["all","Все"],["new","Новые"],["learn","… Учу"],["known","✓ Знаю"]].map(([k,v])=>`<button class="chip ${wFilter===k?"on":""}" data-f="${k}">${v}</button>`).join("")}<button class="chip" onclick="addWordDlg()">＋ Своё слово</button></div>
+ <p class="sub" style="font-size:14px;margin-bottom:8px">Нажми на кружок: пусто → <span style="color:var(--gold)">…учу</span> → <span style="color:var(--ok)">✓знаю</span>. Найдено: ${L.length}</p>
+ <div class="wl">${L.slice(0,wLimit).map(w=>`<div class="wi"><div class="k">${pal(w.k)}<span class="r">${esc(w.r)}</span></div><button class="st s${st(w.id)}" onclick="cycleSt('${esc(w.id).replace(/'/g,"\\'")}',this)">${["","…","✓"][st(w.id)]}</button></div>`).join("")||`<div class="empty">Ничего не найдено</div>`}</div>
+ ${L.length>wLimit?`<button class="btn more" onclick="wLimit+=80;R.words()">Показать ещё (${L.length-wLimit})</button>`:""}`;
+ const q=document.getElementById("wq");q.oninput=()=>{wQuery=q.value;wLimit=60;const p=q.selectionStart;R.words();const n=document.getElementById("wq");n.focus();n.setSelectionRange(p,p)};
+ document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{wTopic=b.dataset.t;wLimit=60;R.words()});
+ document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{wFilter=b.dataset.f;wLimit=60;R.words()});
+};
+function addWordDlg(){
+ modal(`<h2 style="margin-top:0">＋ Своё слово</h2><label>По-кабардински</label><input class="in" id="nk" placeholder="Напр.: Шэнт"><label>Перевод</label><input class="in" id="nr" placeholder="стул"><div class="row" style="margin-top:12px"><button class="btn gold" onclick="addMyWord()">Сохранить</button><button class="btn" onclick="closeModal()">Отмена</button></div>`);
+}
+function addMyWord(){const k=document.getElementById("nk").value.trim(),r=document.getElementById("nr").value.trim();if(!k||!r)return toast("Заполни оба поля");S.my.push({k,r});save();WORDS=allWords();closeModal();toast("Слово добавлено <i data-i=star></i>");if(cur==="words")R.words()}
+
+// ===== режимы учёбы =====
+let deck=[],di=0,ruFirst=false,qScore=0;
+function buildDeck(mode){
+ let L=filtered().filter(w=>w.t!=="sounds");
+ if(mode==="learn"){const a=L.filter(w=>st(w.id)===1),b=L.filter(w=>st(w.id)===0);L=a.concat(b).slice(0,20)}
+ return L.sort(()=>Math.random()-.5).slice(0,mode==="quiz"?15:40);
+}
+function startMode(m){dailyMode=null;
+ deck=buildDeck(m);di=0;qScore=0;
+ if(deck.length<2&&m!=="cards"){toast("Мало слов в этом фильтре");return}
+ if(!deck.length){toast("Нет слов в этом фильтре");return}
+ if(m==="quiz")quiz();else if(m==="type")typeQ();else cards(m);
+}
+function cards(m){
+ const w=deck[di];
+ modal(`<div class="row" style="justify-content:space-between"><b style="color:var(--gold2)">${m==="hard"?"<i data-i=flame></i>Трудные слова":m==="daily"?(dailyMode==="review"?"<i data-i=repeat></i>Повторение":"<i data-i=star></i>Слова дня"):m==="learn"?"<i data-i=repeat></i>Повторение":"<i data-i=cards></i>Карточки"}</b><button class="btn sm" onclick="closeModal();R[cur]()">✕</button></div>
+ <div class="prog" style="margin-top:12px"><span>${di+1} из ${deck.length}</span><button class="btn sm" onclick="ruFirst=!ruFirst;cards('${m}')">${ruFirst?"RU → КБ":"КБ → RU"} ⇄</button></div>
+ <div class="bar" style="margin-bottom:12px"><i style="width:${(di+1)/deck.length*100}%"></i></div>
+ <div class="fc" id="fc" onclick="this.classList.toggle('flip')"><div class="fc-in">
+  <div class="side front"><div class="l">${ruFirst?"Как сказать по-кабардински?":"Что это значит?"}</div><div class="big">${ruFirst?esc(w.r):pal(w.k)}</div><div class="hint">нажми, чтобы перевернуть</div></div>
+  <div class="side back"><div class="l">Ответ</div><div class="big">${ruFirst?pal(w.k):esc(w.r)}</div><div class="hint">${esc(w.ln)}</div></div></div></div>
+ <div class="know"><button class="btn no" onclick="nextCard('${m}',1)"><i data-i=repeat></i>Ещё учу</button><button class="btn yes" onclick="nextCard('${m}',2)">✓ Знаю</button></div>`);
+}
+function nextCard(m,v){if(v===1)miss(deck[di].id);setSt(deck[di].id,v);di++;if(di>=deck.length&&m==="daily"){if(dailyMode==="cards")dStep(2);closeModal();R.home();toast(dailyMode==="cards"?"Шаг 2 готов! Теперь тест <i data-i=target></i>":"Повторение готово <i data-i=repeat></i>");return}if(di>=deck.length){const k=deck.filter(w=>st(w.id)===2).length;modal(`<div style="text-align:center;padding:20px 0"><div class="bigic"><i data-i=star></i></div><h2>Ты молодец!</h2><p class="sub">Знаешь ${k} из ${deck.length} слов этой подборки.</p><div class="row" style="justify-content:center;margin-top:16px"><button class="btn gold" onclick="startMode('${m}')">Ещё раз</button><button class="btn" onclick="closeModal();R[cur]()">Готово</button></div></div>`);return}cards(m)}
+function quiz(){
+ const w=deck[di];const others=WORDS.filter(x=>x.id!==w.id&&x.t!=="sounds"&&x.r!==w.r).sort(()=>Math.random()-.5).slice(0,3);
+ const opts=[w,...others].sort(()=>Math.random()-.5);
+ modal(`<div class="row" style="justify-content:space-between"><b style="color:var(--gold2)"><i data-i=target></i>Тест · ${di+1}/${deck.length}</b><button class="btn sm" onclick="closeModal();R[cur]()">✕</button></div>
+ <div class="bar"><i style="width:${di/deck.length*100}%"></i></div>
+ <div class="qz-q">${pal(w.k)}</div><div class="qz-s">Выбери перевод · правильно: ${qScore}</div>
+ <div class="opts">${opts.map(o=>`<button class="opt" data-ok="${o.id===w.id?1:0}">${esc(o.r)}</button>`).join("")}</div>`);
+ document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+  const ok=b.dataset.ok==="1";document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.dataset.ok==="1")x.classList.add("ok")});
+  if(ok){qScore++;setSt(w.id,Math.max(st(w.id),1))}else{b.classList.add("bad");miss(w.id);setSt(w.id,1)}
+  setTimeout(()=>{di++;if(di>=deck.length&&dailyMode==="wk1"){weeklyAfterQuiz();return}if(di>=deck.length&&dailyMode==="quiz"){dailyMode=null;dStep(3);if(qScore===deck.length)deck.forEach(w=>setSt(w.id,2));closeModal();R.home();toast(qScore===deck.length?"<i data-i=sparkle></i>Все 5 слов выучены! МашаАллах!":`${qScore} из ${deck.length} — повтори ещё раз`);return}if(di>=deck.length){modal(`<div style="text-align:center;padding:20px 0"><div class="bigic">${qScore/deck.length>.7?"<i data-i=trophy></i>":"<i data-i=repeat></i>"}</div><h2>${qScore} из ${deck.length}</h2><p class="sub">${qScore/deck.length>.7?"Отличный результат!":"Ошибки попали в «Учу» — повтори их."}</p><div class="row" style="justify-content:center;margin-top:16px"><button class="btn gold" onclick="startMode('quiz')">Новый тест</button><button class="btn" onclick="closeModal();R[cur]()">Готово</button></div></div>`)}else quiz()},ok?650:1300);
+ });
+}
+
+// ===== УРОКИ =====
+R.lessons=id=>{
+ const v=document.getElementById("v-lessons");
+ if(!id){
+  v.innerHTML=`<h1>Уроки</h1><p class="sub">Все материалы по порядку: слова, тексты, правила и ДЗ</p>
+  <button class="btn gold" style="width:100%;margin-top:14px" onclick="addAny()"><i data-i=plus></i>Добавить новый урок или материалы</button>
+  <div class="row" style="margin:10px 0 14px"><button class="btn" onclick="go('gram')"><i data-i=puzzle></i>Вся грамматика</button><button class="btn" onclick="go('talk','read')"><i data-i=scroll></i>Чтение ×10</button></div>
+  <div class="tl">${[...LESSONS].reverse().map(l=>{const done=l.hw&&l.hw.items.every((_,i)=>S.hw[l.id+i]);const tags=[l.words.length?`<i data-i=list></i>${l.words.length} слов`:"",l.dialog?"<i data-i=chat></i>диалог":"",l.text?"<i data-i=book></i>текст":"",l.grammar?"<i data-i=puzzle></i>правила":"",l.exercises?"<i data-i=pencil></i>упражнения":"",l.hw?"<i data-i=pin></i>ДЗ":""].filter(Boolean);
+   return `<button class="ls ${done?"done":""}" onclick="R.lessons('${l.id}')"><span class="d">${esc(l.n.toUpperCase())} · ${esc(l.date)}</span><b>${pal(l.title)}</b><div class="tags">${tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div></button>`}).join("")}</div>
+  <h3>Полезные материалы</h3><div class="card">${LINKS.map(t=>`<div class="phr"><span><i data-i=clip></i>${esc(t)}</span></div>`).join("")}</div>`;
+  return;
+ }
+ const l=LESSONS.find(x=>x.id===id);markDay();
+ const words=l.words.filter(w=>w[2]!=="phrases"),phr=l.words.filter(w=>w[2]==="phrases"||w[2]==="faith");
+ const rd=READING.filter(r=>r.date===l.date);
+ v.innerHTML=`<button class="back-btn" onclick="R.lessons()">← Все уроки</button>
+ <span class="tag ${l.mine?"mine-tag":""}">${esc(l.n)} · ${esc(l.date)}</span><h1 style="margin-top:8px">${pal(l.title)}</h1>
+ ${l.mine?`<div class="row" style="margin:6px 0 4px"><button class="btn sm gold" onclick="addAny('${l.id}')"><i data-i=plus></i>Добавить сюда</button><button class="btn sm" onclick="renameLesson('${l.id}')"><i data-i=pencil></i>Название</button><button class="btn sm" onclick="delLesson('${l.id}',this)"><i data-i=trash></i>Удалить</button></div>`:""}
+ ${l.note?`<div class="note"><i data-i=bulb></i>${pal(l.note)}</div>`:""}
+ ${words.length?`<h3><i data-i=list></i>Слова (${words.length})</h3><div class="card">${words.map(w=>`<div class="phr"><span class="k">${pal(w[0])}</span><span class="r">${esc(w[1])}</span></div>`).join("")}<button class="btn gold" style="margin-top:12px;width:100%" onclick="wLesson='${l.id}';wTopic='all';wFilter='all';wQuery='';go('words');startMode('cards')"><i data-i=cards></i>Учить слова этого урока</button></div>`:""}
+ ${phr.length?`<h3><i data-i=chat></i>Фразы</h3><div class="card">${phr.map(w=>`<div class="phr"><span class="k">${pal(w[0])}</span><span class="r">${esc(w[1])}</span></div>`).join("")}</div>`:""}
+ ${l.dialog?`<h3><i data-i=masks></i>Диалог</h3><button class="ls" onclick="go('talk','${l.dialog}')"><span class="d">ОТКРЫТЬ ДИАЛОГ</span><b>${esc(DIALOGS[l.dialog].title)}</b><span class="sub">${esc(DIALOGS[l.dialog].kb)}</span></button>`:""}
+ ${l.text?`<h3><i data-i=book></i>Текст</h3>${textHTML(l.text)}`:""}
+ ${rd.map(r=>`<h3><i data-i=scroll></i>${esc(r.type)}</h3>${readHTML(r)}`).join("")}
+ ${l.grammar?`<h3><i data-i=puzzle></i>Правила</h3>${l.grammar.map(g=>gramHTML(g,true)).join("")}`:""}
+ ${l.exercises?`<h3><i data-i=pencil></i>Упражнения</h3>${exHTML(l.exercises)}`:""}
+ ${l.hw?`<h3><i data-i=pin></i>ДЗ на ${esc(l.hw.due)}</h3>${hwHTML(l)}`:""}`;
+ bindDyn();
+};
+function textHTML(id){const t=TEXTS[id];return `<div class="card"><b style="font-size:22px;color:var(--gold2)">${pal(t.title)}</b><div class="sub">${esc(t.ru)}</div>
+ <div class="row" style="margin:10px 0"><button class="btn sm" onclick="this.closest('.card').classList.toggle('noru')"><i data-i=hide></i>Спрятать перевод</button></div>
+ ${t.paras.map(p=>`<div class="para"><div class="k">${pal(p[0])}</div><div class="r" onclick="this.style.filter='none'">${esc(p[1])}</div></div>`).join("")}
+ ${t.questions?`<h3>Упщ1эхэр — вопросы</h3>${t.questions.map(q=>`<div class="ex" onclick="this.classList.toggle('on')"><div class="q">${pal(q[0])}</div><div class="sub" style="font-size:15px">${esc(q[1])}</div><div class="a">${q[2]?pal(q[2]):"Ответь сама и запиши в тетрадь <i data-i=pen></i>"}</div></div>`).join("")}<p class="sub" style="font-size:14px;margin-top:6px">Нажми на вопрос, чтобы увидеть ответ</p>`:""}</div>`}
+function readHTML(r){const n=S.reads[r.id]||0;return `<div class="card"><span class="tag">${esc(r.type)} · ${esc(r.date)}</span><div class="poem">${pal(r.kb)}</div><div class="tip">${esc(r.ru)}</div>${r.gloss?`<div class="gloss">${pal(r.gloss)}</div>`:""}${audHTML(r.id)}
+ <div class="counter"><div><b style="color:var(--gold2)">Прочитано ${n} из 10</b><div class="dots">${Array.from({length:10},(_,i)=>`<i class="${i<n?"f":""}"></i>`).join("")}</div></div><div class="row"><button class="btn sm" onclick="readCnt('${r.id}',-1,this)">−</button><button class="btn gold" onclick="readCnt('${r.id}',1,this)">＋1</button></div></div></div>`}
+function readCnt(id,d,b){S.reads[id]=Math.max(0,Math.min(10,(S.reads[id]||0)+d));markDay();save();if(S.reads[id]===10&&d>0)toast("<i data-i=sparkle></i>10 из 10! МашаАллах!");b.closest('.card').outerHTML=readHTML(READING.find(r=>r.id===id))}
+function gramHTML(g,open){const x=GRAMMAR[g];return `<div class="card ${open?"open":""}"><button class="gacc" onclick="this.parentNode.classList.toggle('open')">${esc(x.t)}</button><div class="gbody">${palHTML(x.html)}</div></div>`}
+function palHTML(h){return h.replace(/>([^<]+)</g,(m,t)=>">"+t.replace(/([а-яёА-ЯЁ]?)I(?=[а-яёА-ЯЁ\s,.!?;:—–-]|$)/g,'<span class="pal">$1I</span>')+"<")}
+function exHTML(id){const e=EXERCISES[id];return `<div class="card"><b style="color:var(--gold2)">${esc(e.t)}</b><p class="sub" style="font-size:14px">Сначала ответь сама, потом нажми, чтобы проверить</p>${e.items.map(i=>`<div class="ex" onclick="this.classList.toggle('on')"><div class="q">${pal(i.q)}</div><div class="a">✓ ${pal(i.a)}</div></div>`).join("")}</div>`}
+function hwHTML(l){return `<div class="card">${l.hw.items.map((t,i)=>`<div class="chk ${S.hw[l.id+i]?"on":""}" data-h="${l.id+i}"><div class="box">${S.hw[l.id+i]?"✓":""}</div><span>${pal(t)}</span></div>`).join("")}</div>`}
+function bindDyn(){document.querySelectorAll("[data-h]").forEach(c=>c.onclick=()=>{const k=c.dataset.h;S.hw[k]=!S.hw[k];markDay();save();c.classList.toggle("on",S.hw[k]);c.querySelector(".box").textContent=S.hw[k]?"✓":"";if(S.hw[k])toast("Сделано! ✓")})}
+
+// ===== ГРАММАТИКА =====
+R.gram=()=>{document.getElementById("v-gram").innerHTML=`<button class="back-btn" onclick="go('lessons')">← Уроки</button><h1>Грамматика</h1><p class="sub">Все правила из уроков — коротко и с примерами. Нажми на тему, чтобы раскрыть.</p><div style="height:12px"></div>
+ ${Object.keys(GRAMMAR).map((g,i)=>gramHTML(g,i===0)).join("")}
+ <h3>Вопросительные слова — шпаргалка</h3><div class="card">${palHTML(GRAMMAR.whowhat.html)}</div>`};
+
+// ===== ДИАЛОГИ и ЧТЕНИЕ =====
+let lastArg=null,role=null;
+R.talk=arg=>{
+ lastArg=arg;const v=document.getElementById("v-talk");
+ const tabs=`<div class="chips"><button class="chip ${arg!=="read"?"on":""}" onclick="go('talk')"><i data-i=chat></i>Диалоги</button><button class="chip ${arg==="read"?"on":""}" onclick="go('talk','read')"><i data-i=scroll></i>Чтение ×10</button><button class="chip ${arg==="build"?"on":""}" onclick="go('talk','build')"><i data-i=blocks></i>Собери фразу</button></div>`;
+ if(arg==="build"){v.innerHTML=`<h1>Собери фразу</h1><p class="sub">Нажимай на слова по порядку и собери фразу из диалога. Помни: глагол обычно стоит в конце.</p>${tabs}<div id="bld"></div>`;buildQ();return}
+ if(arg==="read"){
+  const types=["Мой текст","Четверостишие","Скороговорка","Пословица"];
+  v.innerHTML=`<h1>Чтение</h1><p class="sub">Учитель советует: читать каждый текст 10 раз — медленно, вслух, отрабатывая звуки. Отмечай каждое прочтение.</p>${tabs}
+  ${types.filter(t=>READING.some(r=>r.type===t)).map(t=>`<h3>${t==="Мой текст"?"<i data-i=pen></i>Мои тексты":t==="Четверостишие"?"<i data-i=flower></i>Четверостишия":t==="Скороговорка"?"<i data-i=swirl></i>Скороговорки":"<i data-i=scroll></i>Пословицы"}</h3>${READING.filter(r=>r.type===t).map(readHTML).join("")}`).join("")}`;
+  return;
+ }
+ if(arg&&DIALOGS[arg]){
+  const d=DIALOGS[arg];markDay();
+  const names=Object.keys(d.who);
+  v.innerHTML=`<button class="back-btn" onclick="role=null;go('talk')">← Все диалоги</button>
+  <span class="tag">${esc(d.date)}</span><h1 style="margin-top:8px">${esc(d.title)}</h1><p class="sub">${pal(d.kb)}</p>
+  <div class="card" style="margin-top:12px"><b style="font-size:15px;color:var(--gold)"><i data-i=masks></i>ИГРАТЬ РОЛЬ</b><p class="sub" style="font-size:14px">Выбери героя — его реплики спрячутся, и ты говоришь за него вслух.</p>
+  <div class="chips" style="padding-bottom:0"><button class="chip ${!role?"on":""}" data-r="">Просто читать</button>${names.map(n=>`<button class="chip ${role===n?"on":""}" data-r="${esc(n)}">${pal(n)}</button>`).join("")}</div>
+  <div class="row" style="margin-top:8px"><button class="btn sm" id="tru"><i data-i=hide></i>Спрятать перевод</button></div></div>
+  <div class="card">${audHTML("dlg_"+arg)}</div>
+  <div class="bubbles" id="bbl">${d.lines.map(x=>{
+   if(x[0]==="*")return `<div class="narr"><i data-i=scene></i>${esc(x[1])}${x[2]&&x[2]!==x[1]?" · "+pal(x[2]):""}</div>`;
+   const side=names.indexOf(x[0])%2===0?"L":"R",col=d.who[x[0]]||"a";
+   return `<div class="bb ${side} ${col} ${role===x[0]?"hid":""}" onclick="this.classList.add('show')"><div class="who">${pal(x[0])}</div><div class="k">${pal(x[1])}</div><div class="r">${esc(x[2])}</div></div>`}).join("")}</div>
+  ${d.questions?`<h3>Упщ1эхэр — вопросы к диалогу</h3><div class="card">${d.questions.map(q=>`<div class="ex" onclick="this.classList.toggle('on')"><div class="q">${pal(q[0])}</div><div class="sub" style="font-size:15px">${esc(q[1])}</div><div class="a">✓ ${pal(q[2])}</div></div>`).join("")}</div>`:""}
+  ${S.mydlg[arg]?`<div class="row" style="margin-bottom:10px"><button class="btn sm" onclick="addDlg('${arg}')"><i data-i=pencil></i>Изменить</button><button class="btn sm" onclick="delDlg('${arg}',this)"><i data-i=trash></i>Удалить</button></div>`:""}
+  <div class="note"><i data-i=pen></i>Хочешь составить свой похожий диалог? <button class="btn sm gold" onclick="go('hw','write','Мой диалог: ${esc(d.title)}')">Открыть тетрадь</button></div>`;
+  document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{role=b.dataset.r||null;R.talk(arg)});
+  document.getElementById("tru").onclick=e=>{document.getElementById("bbl").classList.toggle("noru");e.target.classList.toggle("gold")};
+  return;
+ }
+ v.innerHTML=`<h1>Диалоги</h1><p class="sub">Читай как переписку, прячь перевод, играй роль одного из героев.</p>${tabs}
+ <button class="btn gold" style="width:100%;margin:4px 0 12px" onclick="addDlg()"><i data-i=plusdoc></i>Добавить новый диалог</button>
+ <div class="dl-list">${Object.entries(DIALOGS).map(([k,d])=>`<button class="ls" onclick="go('talk','${k}')"><span class="d">${esc(d.date.toUpperCase())} · ${d.lines.filter(l=>l[0]!=="*").length} реплик</span><b>${esc(d.title)}</b><span class="sub">${pal(d.kb)} · ${Object.keys(d.who).map(pal).join(", ")}</span></button>`).join("")}</div>
+ <h3><i data-i=book></i>Тексты</h3><div class="dl-list">${Object.entries(TEXTS).map(([k,t])=>`<button class="ls" onclick="openText('${k}')"><span class="d">${esc(t.date.toUpperCase())}</span><b>${pal(t.title)}</b><span class="sub">${esc(t.ru)}</span></button>`).join("")}</div>`;
+};
+function openText(k){const v=document.getElementById("v-talk");v.innerHTML=`<button class="back-btn" onclick="go('talk')">← Назад</button>${textHTML(k)}`;window.scrollTo(0,0)}
+
+// ===== ДЗ и ТЕТРАДЬ =====
+R.hw=(arg,title)=>{
+ const v=document.getElementById("v-hw");
+ const tab=arg==="write"?"write":"tasks";
+ const tabs=`<div class="chips"><button class="chip ${tab==="tasks"?"on":""}" onclick="go('hw')"><i data-i=pin></i>Задания учителя</button><button class="chip ${tab==="write"?"on":""}" onclick="go('hw','write')"><i data-i=pen></i>Моя тетрадь</button></div>`;
+ if(tab==="tasks"){
+  const L=[...LESSONS].reverse().filter(l=>l.hw);
+  v.innerHTML=`<h1>Домашние задания</h1><p class="sub">Отмечай галочкой, что уже сделала</p>${tabs}
+  ${L.map(l=>{const n=l.hw.items.filter((_,i)=>S.hw[l.id+i]).length;return `<h3>${esc(l.n)} · ${esc(l.date)} → на ${esc(l.hw.due)} <span style="color:var(--soft)">(${n}/${l.hw.items.length})</span></h3><div class="sub" style="margin:-6px 0 6px;font-size:15px">${pal(l.title)} · <a style="color:var(--gold)" onclick="go('lessons');R.lessons('${l.id}')">открыть урок →</a></div>${hwHTML(l)}`}).join("")}`;
+  bindDyn();return;
+ }
+ v.innerHTML=`<h1>Моя тетрадь</h1><p class="sub">Пиши сюда своё ДЗ: диалоги, сочинения, предложения</p>${tabs}
+ <div class="card"><label>Заголовок</label><input class="in" id="nt" placeholder="Напр.: Мой диалог «Покупки»" value="${esc(title||"")}">
+ <label>Текст</label><textarea id="nb" placeholder="Сэ си цIэр Аишэщ…&#10;&#10;Палочку можно печатать как I, l или 1 — тетрадь сама подсветит.&#10;&#10;Новые слова пиши так:  Шэнт - стул"></textarea>
+ <div class="row" style="margin-top:6px"><button class="btn gold" onclick="saveNote()"><i data-i=save></i>Сохранить</button><button class="btn" onclick="wordsFromNote()"><i data-i=star></i>Слова из текста → в лексику</button></div>
+ <p class="sub" style="font-size:13px;margin-top:8px">Вторая кнопка находит строки вида «слово - перевод» и добавляет их в «Мои слова» для карточек.</p></div>
+ <h3>Мои записи (${S.notes.length})</h3>
+ ${S.notes.map((n,i)=>`<div class="card entry"><div class="row" style="justify-content:space-between"><div><div class="d">${esc(n.d)}</div><div class="t">${pal(n.t)}</div></div><div class="row"><button class="btn sm" onclick="editNote(${i})"><i data-i=pencil></i></button><button class="btn sm" onclick="delNote(${i},this)"><i data-i=trash></i></button></div></div><div class="body">${pal(n.b)}</div><button class="btn sm" style="margin-top:8px" onclick="copyTxt(${i})"><i data-i=copy></i>Скопировать для учителя</button></div>`).reverse().join("")||`<div class="empty">Пока пусто. Напиши первое ДЗ <i data-i=pen></i></div>`}
+ <h3>Резервная копия</h3><div class="card"><p class="sub" style="font-size:15px">Всё хранится в этом браузере. Иногда сохраняй копию себе в заметки.</p><div class="row" style="margin-top:8px"><button class="btn sm" onclick="backup()"><i data-i=box></i>Скопировать копию</button><button class="btn sm" onclick="restoreDlg()"><i data-i=restore></i>Восстановить</button></div></div>`;
+};
+let editIdx=null;
+function norm(s){return s.replace(/([а-яёА-ЯЁ])[l1ӀӏI]/g,"$1I").replace(/(^|[\s(«"])[l1ӀӏI]([а-яё])/g,"$1I$2")}
+function saveNote(){const t=document.getElementById("nt").value.trim()||"Без названия",b=norm(document.getElementById("nb").value.trim());if(!b)return toast("Напиши текст");const d=new Date().toLocaleDateString("ru-RU",{day:"numeric",month:"long"});if(editIdx!==null){S.notes[editIdx]={t,b,d:S.notes[editIdx].d+" · изменено"};editIdx=null}else S.notes.push({t,b,d});markDay();save();toast("Сохранено <i data-i=save></i>");R.hw("write")}
+function editNote(i){R.hw("write");editIdx=i;document.getElementById("nt").value=S.notes[i].t;document.getElementById("nb").value=S.notes[i].b;window.scrollTo(0,0)}
+function delNote(i,b){if(b.dataset.c!=="1"){b.dataset.c="1";b.textContent="Удалить?";return}S.notes.splice(i,1);save();R.hw("write")}
+function wordsFromNote(){const b=norm(document.getElementById("nb").value);let c=0;b.split("\n").forEach(l=>{const m=l.match(/^\s*([^-–—]+?)\s*[-–—]\s*(.+)$/);if(m&&m[1].length<40){S.my.push({k:m[1].trim(),r:m[2].trim()});c++}});save();WORDS=allWords();toast(c?`Добавлено слов: ${c} <i data-i=star></i>`:"Не нашла строк вида «слово - перевод»")}
+async function copyTxt(i){const n=S.notes[i];try{await navigator.clipboard.writeText(n.t+"\n\n"+n.b);toast("Скопировано <i data-i=copy></i>")}catch(e){modal(`<h2 style="margin-top:0">Выдели и скопируй</h2><textarea>${esc(n.t+"\n\n"+n.b)}</textarea><button class="btn" onclick="closeModal()">Закрыть</button>`)}}
+async function backup(){const t=JSON.stringify(S);try{await navigator.clipboard.writeText(t);toast("Копия скопирована <i data-i=box></i>")}catch(e){modal(`<h2 style="margin-top:0">Копия</h2><textarea>${esc(t)}</textarea><button class="btn" onclick="closeModal()">Закрыть</button>`)}}
+function restoreDlg(){modal(`<h2 style="margin-top:0">Восстановить</h2><p class="sub">Вставь сюда сохранённую копию</p><textarea id="rs"></textarea><div class="row"><button class="btn gold" onclick="restore()">Восстановить</button><button class="btn" onclick="closeModal()">Отмена</button></div>`)}
+function restore(){try{S=Object.assign(S,JSON.parse(document.getElementById("rs").value));save();loadMyDlg();applyTheme();closeModal();toast("Восстановлено ✓");go("home")}catch(e){toast("Не получилось — проверь текст")}}
+
+
+// ===== иконки: авто-заполнение =====
+new MutationObserver(()=>hydrate()).observe(document.body,{childList:true,subtree:true});
+
+// ===== 4. Фраза со словами дня =====
+function dailyWrite(){
+ const W=ensureDaily();
+ modal(`<div class="row" style="justify-content:space-between"><b style="color:var(--gold2)"><i data-i=pen></i> Придумай фразы</b><button class="btn sm" onclick="closeModal()">✕</button></div>
+ <p class="sub" style="margin:8px 0">Составь короткое предложение с каждым словом. Можно совсем простое: «Сэ ... солъагъу» — «Я люблю ...».</p>
+ ${W.map((w,i)=>`<label>${pal(w.k)} — ${esc(w.r)}</label><input class="in" id="dw${i}" placeholder="Твоё предложение…">`).join("")}
+ <button class="btn gold" style="width:100%;margin-top:12px" onclick="saveDailyWrite()"><i data-i=save></i>Сохранить в тетрадь</button>`);
+}
+function saveDailyWrite(){
+ const W=ensureDaily();const lines=W.map((w,i)=>{const v=document.getElementById("dw"+i).value.trim();return v?`${w.k} — ${w.r}\n→ ${norm(v)}`:""}).filter(Boolean);
+ if(!lines.length)return toast("Напиши хотя бы одну фразу");
+ const d=new Date().toLocaleDateString("ru-RU",{day:"numeric",month:"long"});
+ S.notes.push({t:"Фразы со словами дня",b:lines.join("\n\n"),d});dStep(4);save();closeModal();R.home();toast("<i data-i=sparkle></i> Фразы сохранены в тетрадь");
+}
+
+// ===== Пишу сама: RU → кабардинский =====
+function canon(s){return String(s).toLowerCase().replace(/[l1ӏӀi]/g,"i").replace(/ё/g,"е").replace(/[^а-яi ]/g,"").replace(/\s+/g," ").trim()}
+function typeQ(){
+ const w=deck[di];
+ modal(`<div class="row" style="justify-content:space-between"><b style="color:var(--gold2)"><i data-i=keyboard></i> Пишу сама · ${di+1}/${deck.length}</b><button class="btn sm" onclick="closeModal();R[cur]()">✕</button></div>
+ <div class="bar" style="margin:10px 0"><i style="width:${di/deck.length*100}%"></i></div>
+ <div class="qz-q" style="font-size:26px">${esc(w.r)}</div><div class="qz-s">Напиши по-кабардински · верно: ${qScore}</div>
+ <input class="in typein" id="ti" autocomplete="off" autocapitalize="off" placeholder="…">
+ <div class="kbd">${["I","къ","кI","лъ","хъ","щI","пI","гъ","хь"].map(k=>`<button onclick="addCh('${k}')">${k}</button>`).join("")}</div>
+ <div id="tres"></div>
+ <div class="know"><button class="btn" onclick="showType(true)">Не знаю</button><button class="btn gold" onclick="showType(false)">Проверить</button></div>`);
+ const t=document.getElementById("ti");t.focus();t.onkeydown=e=>{if(e.key==="Enter")showType(false)};
+}
+function addCh(c){const t=document.getElementById("ti");t.value+=c;t.focus()}
+function showType(skip){
+ const w=deck[di],v=document.getElementById("ti").value,ok=!skip&&canon(v)===canon(w.k);
+ if(ok){qScore++;setSt(w.id,Math.max(st(w.id),1))}else{miss(w.id);setSt(w.id,1)}
+ document.getElementById("tres").innerHTML=`<div class="res ${ok?"ok":"no"}" style="text-align:center">${ok?"Верно!":"Правильно так:"}</div><div class="ans">${pal(w.k)}</div>`;
+ document.querySelector(".know").innerHTML=`${!ok&&!skip?`<button class="btn" onclick="qScore++;nextType()">Я почти права ✓</button>`:"<span></span>"}<button class="btn gold" onclick="nextType()">Дальше →</button>`;
+}
+function nextType(){di++;if(di>=deck.length&&dailyMode==="wk2"){weeklyFinish();return}if(di>=deck.length){modal(`<div style="text-align:center;padding:20px 0"><div class="bigic">${ic(qScore/deck.length>.7?"trophy":"repeat")}</div><h2>${qScore} из ${deck.length}</h2><p class="sub">Писать самой — самый сильный способ запомнить слово.</p><div class="row" style="justify-content:center;margin-top:16px"><button class="btn gold" onclick="startMode('type')">Ещё раз</button><button class="btn" onclick="closeModal();R[cur]()">Готово</button></div></div>`);return}typeQ()}
+
+// ===== Собери фразу =====
+let bAns=[],bPool=[],bLine=null,bScore=0;
+function buildLines(){const L=[];Object.values(DIALOGS).forEach(d=>d.lines.forEach(x=>{if(x[0]==="*")return;x[1].split(/(?<=[.!?])\s+/).forEach(p=>{const w=p.replace(/[«»"()]/g,"").trim().split(/\s+/);if(w.length>=3&&w.length<=7&&!/\//.test(p))L.push({k:p.trim(),r:x[2],w})})}));Object.values(TEXTS).forEach(t=>t.paras.forEach(x=>{x[0].split(/(?<=[.!?])\s+/).forEach(p=>{const w=p.trim().split(/\s+/);if(w.length>=3&&w.length<=7)L.push({k:p.trim(),r:x[1],w})})}));return L}
+function buildQ(){
+ const L=buildLines();bLine=L[Math.floor(Math.random()*L.length)];bAns=[];
+ bPool=bLine.w.map((t,i)=>({t,i})).sort(()=>Math.random()-.5);
+ if(bPool.every((x,i)=>x.i===i))bPool.reverse();
+ drawB();
+}
+function drawB(res){
+ document.getElementById("bld").innerHTML=`<div class="card"><div class="sub" style="font-size:14px">Переведи:</div><div style="font-size:20px;font-weight:800;color:var(--gold2)">${esc(bLine.r)}</div>
+ <div class="slots">${bAns.map((x,i)=>`<button class="wchip" onclick="bBack(${i})">${pal(x.t)}</button>`).join("")||'<span class="sub" style="font-size:15px">Нажимай слова ниже…</span>'}</div>
+ <div class="pool">${bPool.map((x,i)=>`<button class="wchip" onclick="bTake(${i})">${pal(x.t)}</button>`).join("")}</div>
+ ${res?`<div class="res ${res==="ok"?"ok":"no"}">${res==="ok"?"Верно! Отлично!":"Почти! Правильно так:"}</div>${res!=="ok"?`<div style="font-size:19px;font-weight:800">${pal(bLine.k)}</div>`:""}`:""}
+ <div class="row" style="margin-top:12px"><button class="btn" onclick="buildQ()"><i data-i=repeat></i>Другая фраза</button>${!res&&!bPool.length?`<button class="btn gold" onclick="bCheck()">Проверить</button>`:""}${res?`<button class="btn gold" onclick="buildQ()">Дальше →</button>`:""}</div>
+ <p class="sub" style="font-size:14px;margin-top:10px">Собрано верно: ${bScore}</p></div>`;
+}
+function bTake(i){bAns.push(bPool.splice(i,1)[0]);drawB()}
+function bBack(i){bPool.push(bAns.splice(i,1)[0]);drawB()}
+function bCheck(){const ok=bAns.map(x=>x.t).join(" ")===bLine.w.join(" ");if(ok){bScore++;markDay()}drawB(ok?"ok":"no")}
+
+// ===== Аудио (хранится в этом браузере) =====
+let DB=null;
+function idb(){return new Promise((res,rej)=>{if(DB)return res(DB);try{const r=indexedDB.open("adyghe_audio",1);r.onupgradeneeded=()=>r.result.createObjectStore("a");r.onsuccess=()=>{DB=r.result;res(DB)};r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
+async function audPut(id,blob){const db=await idb();return new Promise((res,rej)=>{const t=db.transaction("a","readwrite");t.objectStore("a").put(blob,id);t.oncomplete=res;t.onerror=rej})}
+async function audGet(id){try{const db=await idb();return await new Promise(res=>{const r=db.transaction("a").objectStore("a").get(id);r.onsuccess=()=>res(r.result);r.onerror=()=>res(null)})}catch(e){return null}}
+async function audDel(id){const db=await idb();db.transaction("a","readwrite").objectStore("a").delete(id)}
+function audHTML(id){setTimeout(()=>audFill(id),0);return `<div class="aud" id="aud_${id}"></div>`}
+async function audFill(id){
+ const el=document.getElementById("aud_"+id);if(!el)return;const b=await audGet(id);
+ if(b){el.innerHTML=`<audio controls preload="none" src="${URL.createObjectURL(b)}"></audio><button class="btn sm" onclick="audDel('${id}').then(()=>audFill('${id}'))"><i data-i=trash></i>Убрать аудио</button>`}
+ else el.innerHTML=`<label class="btn sm filebtn" style="margin:0;text-transform:none;letter-spacing:0;color:var(--white);font-size:14px"><i data-i=sound></i>Прикрепить голосовое учителя<input type="file" accept="audio/*,video/*,.ogg,.oga,.m4a,.mp3,.wav" onchange="audUp('${id}',this)"></label>`;
+}
+async function audUp(id,inp){const f=inp.files[0];if(!f)return;try{await audPut(id,f);toast("<i data-i=sound></i> Аудио сохранено");audFill(id)}catch(e){toast("Не получилось сохранить аудио")}}
+
+// ===== Свои диалоги =====
+function loadMyDlg(){Object.entries(S.mydlg||{}).forEach(([k,d])=>DIALOGS[k]=d)}
+loadMyDlg();
+function addDlg(id){
+ const d=id?S.mydlg[id]:null;
+ modal(`<h2 style="margin-top:0"><i data-i=plusdoc></i>${d?"Изменить":"Новый"} диалог</h2>
+ <label>Название</label><input class="in" id="dt" placeholder="Напр.: В гостях" value="${d?esc(d.title):""}">
+ <label>Текст диалога</label><textarea id="dx" placeholder="Мадинэ: Уи махуэ фIыуэ! (Добрый день!)&#10;ФатIимэ: Нэхъыф1ыжу! (Тебе ещё лучше!)">${d?esc(d.raw||""):""}</textarea>
+ <p class="sub" style="font-size:14px">Каждая реплика с новой строки: <b>Имя: кабардинский текст (перевод)</b>. Можно вставить прямо из Telegram — формат как у учителя. Строки без имени станут ремарками.</p>
+ <div class="row" style="margin-top:10px"><button class="btn gold" onclick="saveDlg('${id||""}')"><i data-i=save></i>Сохранить</button><button class="btn" onclick="closeModal()">Отмена</button></div>`);
+}
+function saveDlg(id){
+ const title=document.getElementById("dt").value.trim()||"Мой диалог",raw=document.getElementById("dx").value.trim();
+ const lines=[],who={};const cols=["a","b","c"];
+ raw.split("\n").map(x=>x.trim()).filter(Boolean).forEach(l=>{
+  const m=l.match(/^([^:.\-–—]{1,25})\s*[:.\-–—]\s+(.+)$/);
+  let name="*",body=l;if(m&&!/[?!]/.test(m[1])){name=norm(m[1].trim());body=m[2]}
+  const t=body.match(/^(.*?)\s*\(([^()]*)\)\s*([.!?])?\s*$/);
+  const k=norm(t?t[1]:body),r=t?t[2]:"";
+  if(name!=="*"&&!who[name])who[name]=cols[Object.keys(who).length%3];
+  lines.push([name,k,r||(name==="*"?k:"")]);
+ });
+ if(!lines.length)return toast("Вставь текст диалога");
+ id=id||"my"+Date.now();
+ S.mydlg[id]={title,kb:"Мой диалог",date:new Date().toLocaleDateString("ru-RU",{day:"numeric",month:"long"}),who,lines,raw};
+ save();loadMyDlg();closeModal();go("talk",id);toast("<i data-i=save></i>Диалог сохранён");
+}
+function delDlg(id,b){if(b.dataset.c!=="1"){b.dataset.c="1";b.textContent="Точно удалить?";return}delete S.mydlg[id];delete DIALOGS[id];save();go("talk")}
+
+// ===== УМНОЕ ДОБАВЛЕНИЕ: вставь текст — приложение разложит сам =====
+const KB_RE=/[а-яё]*(?:I|къ|хъ|гъ|лъ|кI|щI|пI|фI|цI|кхъ|уэ|ы)[а-яё]*/i;
+function guessTopic(k,r){
+ const R=r.toLowerCase();
+ if(/[?!]/.test(k)||k.trim().split(/\s+/).length>2)return "phrases";
+ const T={people:/гост|мама|мать|отец|папа|брат|сестр|сын|доч|бабуш|дедуш|муж|жена|супруг|ребён|дети|человек|друг|подруг|учител|ученик|врач|продав|невест|свекр|тёщ|сосед|девушк|парень|мужчин|женщин|родств/,
+ food:/хлеб|мясо|молок|сыр|чай|вод|соль|сахар|масл|яйц|еда|суп|кефир|сметан|картоф|лук|чеснок|помидор|яблок|фрукт|овощ|завтрак|обед|ужин|мёд|каша|рис|рыб/,
+ home:/дом|комнат|кухн|стол|стул|кроват|окн|двер|ковёр|посуд|тарелк|ложк|нож|чашк|ключ|зеркал|двор|улиц|магазин|школ|больниц|мечет|этаж|ворот|книг|ручк|деньг/,
+ nature:/лес|гор|рек|мор|небо|солнц|лун|звезд|дерев|цвет|роз|трав|снег|дожд|ветер|камен|поле|сад|огород|село|город|деревн/,
+ animals:/собак|кошк|кот|лошад|кур|петух|утк|лис|волк|медвед|птиц|коров|овц|коз|пчел|мыш|сова|ёж/,
+ body:/рук|ног|голов|глаз|нос|рот|губ|зуб|ухо|уши|сердц|волос|палец|пальц|живот|спин|ше[яи]|лиц/,
+ clothes:/плать|юбк|рубашк|обув|сапог|платок|пальто|шапк|носк|свитер|одежд|брюк|куртк/,
+ time:/утро|вечер|ночь|день|сегодня|вчера|завтра|недел|месяц|год|зим|лет[оа]|весн|осен|час|минут|рано|поздно|пятниц|суббот|воскрес|понедел|вторник|сред[аы]|четверг|один|два|три|четыр|пять|шесть|семь|восемь|девять|десять|двадцат|сорок|сто/,
+ faith:/аллах|бог|намаз|молитв|благ|баракат|харам|халял|мечт/};
+ for(const [t,re] of Object.entries(T))if(re.test(R))return t;
+ if(/(ать|ять|еть|ить|оть|уть|ыть|ться|чь|сти|зти)(\s|$|,|\()/.test(R))return "verbs";
+ if(/(ый|ий|ой|ая|яя|ое)(\s|$|,)/.test(R))return "adj";
+ return "my";
+}
+function parseAny(raw,force){
+ const L=raw.split(/\n/).map(x=>x.replace(/ /g," ").trim());
+ const out={words:[],dlg:[],hw:null,text:[],title:""};
+ let mode=null;
+ for(let line of L){
+  if(!line){continue}
+  if(/^(лексика|псалъэщ1эхэр|псалъэщIэхэр|новые слова|слова)[\s:(]/i.test(line)||/^лексика$/i.test(line)){mode="w";continue}
+  const hm=line.match(/^(?:д\/з|дз|унэ лэжьыгъэ\w*|домашнее задание)\s*(?:на\s*([\d.]+))?/i);
+  if(hm){mode="h";out.hw={due:hm[1]||"",items:[]};continue}
+  if(/^(диалог|псалъэмакъ)/i.test(line)){mode="d";out.title=out.title||line.replace(/^диалог\s*(на тему)?\s*[-–—:.]?\s*/i,"").replace(/["“”«»]/g,"").trim();continue}
+  if(mode==="h"||force==="hw"){const it=line.replace(/^\d+[.)]\s*/,"");if(!out.hw)out.hw={due:"",items:[]};out.hw.items.push(norm(it));continue}
+  const dm=line.match(/^([А-ЯЁA-Z][а-яёa-zIl1]{1,14}(?:\s[а-яёIl1]{1,10})?)\s*[:]\s*(.+)$/);
+  if((dm&&force!=="words"&&force!=="text")||force==="dialog"&&dm){const t=dm[2].match(/^(.*?)\s*\(([^()]*)\)\s*[.!?]?\s*$/);out.dlg.push([norm(dm[1]),norm(t?t[1]:dm[2]),t?t[2]:""]);continue}
+  const wm=line.replace(/^[*•·\-]\s*/,"").match(/^(.+?)\s+[-–—]\s+(.+)$/)||line.replace(/^[*•·]\s*/,"").match(/^([^\s-–—][^-–—]{0,40}?)\s*[-–—]\s*(.+)$/);
+  if(wm&&force!=="text"&&force!=="dialog"&&wm[1].length<=45){out.words.push([norm(wm[1].trim()).replace(/^./,c=>c.toUpperCase()),wm[2].trim(),""]);continue}
+  const pm=line.match(/^(.*?)\s*\(([^()]{2,})\)\s*[.!?]?$/);
+  out.text.push(pm?[norm(pm[1]),pm[2]]:[norm(line),""]);
+ }
+ out.words.forEach(w=>w[2]=guessTopic(w[0],w[1]));
+ if(out.dlg.length===1){const d=out.dlg[0];out.text.unshift([d[0]+": "+d[1],d[2]]);out.dlg=[]}
+ return out;
+}
+let addTarget=null,addForce="auto";
+function addAny(target){
+ addTarget=target||null;
+ const tl=addTarget?S.mylessons.find(x=>x.id===addTarget):null;
+ modal(`<div class="row" style="justify-content:space-between"><h2 style="margin:0"><i data-i=plus></i>${tl?"Добавить в урок":"Добавить новое"}</h2><button class="btn sm" onclick="closeModal()">✕</button></div>
+ <p class="sub" style="font-size:15px;margin:6px 0 4px">Скопируй сообщение учителя из Telegram и вставь сюда — приложение само разложит слова, диалог, ДЗ и текст.</p>
+ <div class="seg">${[["auto","sparkle","Сам решит"],["words","cards","Слова"],["dialog","chat","Диалог"],["hw","pin","ДЗ"],["text","book","Текст / стих"]].map(([k,i,t])=>`<button class="${addForce===k?"on":""}" onclick="addForce='${k}';addAny(addTarget)"><i data-i=${i}></i>${t}</button>`).join("")}</div>
+ ${tl?"":`<label>Название урока</label><input class="in" id="at" placeholder="Напр.: Урок 14 — В гостях">`}
+ <label>Вставь текст</label><textarea id="ax" style="min-height:200px" placeholder="Лексика:&#10;Хьэщ1э - гость&#10;Шей - чай&#10;&#10;Мадинэ: Къеблагъэ! (Добро пожаловать!)&#10;Залинэ: Упсэу! (Спасибо!)&#10;&#10;Д/з на 20.11&#10;1. Выучить слова&#10;2. Составить диалог"></textarea>
+ <div id="apv"></div>
+ <div class="row" style="margin-top:10px"><button class="btn" onclick="addPreview()"><i data-i=search></i>Проверить</button><button class="btn gold" onclick="addSave()"><i data-i=save></i>Сохранить</button></div>`);
+ const x=document.getElementById("ax");let t;x.oninput=()=>{clearTimeout(t);t=setTimeout(addPreview,400)};
+}
+function addPreview(){
+ const raw=document.getElementById("ax").value;if(!raw.trim()){document.getElementById("apv").innerHTML="";return null}
+ const p=parseAny(raw,addForce==="auto"?null:addForce);
+ if(addForce==="text"){p.text=p.text.concat(p.words.map(w=>[w[0]+" - "+w[1],""]));p.words=[]}
+ const ti=document.getElementById("at");if(ti&&!ti.value&&p.title)ti.value=p.title;
+ document.getElementById("apv").innerHTML=`<h3 style="margin:14px 0 4px">Что я нашла</h3>
+ ${p.words.length?`<div class="found"><h4><i data-i=cards></i>Слова · ${p.words.length}</h4>${p.words.map(w=>`<div class="li"><b>${pal(w[0])}</b> — <span>${esc(w[1])}</span> <span class="tag">${TOPICS[w[2]]?TOPICS[w[2]].replace(/<[^>]+>/g,"").trim():"Новые"}</span></div>`).join("")}</div>`:""}
+ ${p.dlg.length?`<div class="found"><h4><i data-i=chat></i>Диалог · ${p.dlg.length} реплик</h4>${p.dlg.slice(0,6).map(d=>`<div class="li"><b>${pal(d[0])}:</b> ${pal(d[1])} ${d[2]?`<span>(${esc(d[2])})</span>`:""}</div>`).join("")}${p.dlg.length>6?`<div class="li sub">…и ещё ${p.dlg.length-6}</div>`:""}</div>`:""}
+ ${p.hw&&p.hw.items.length?`<div class="found"><h4><i data-i=pin></i>ДЗ${p.hw.due?" на "+esc(p.hw.due):""} · ${p.hw.items.length} пункт.</h4>${p.hw.items.map(i=>`<div class="li">${pal(i)}</div>`).join("")}</div>`:""}
+ ${p.text.length?`<div class="found"><h4><i data-i=book></i>Текст · ${p.text.length} строк</h4>${p.text.slice(0,5).map(t=>`<div class="li">${pal(t[0])} ${t[1]?`<span>(${esc(t[1])})</span>`:""}</div>`).join("")}${p.text.length>5?`<div class="li sub">…и ещё ${p.text.length-5}</div>`:""}</div>`:""}
+ ${!p.words.length&&!p.dlg.length&&!(p.hw&&p.hw.items.length)&&!p.text.length?`<div class="note">Ничего не нашла — проверь текст.</div>`:""}
+ <p class="sub" style="font-size:13px">Если что-то попало не туда — выбери тип вверху (Слова, Диалог, ДЗ, Текст).</p>`;
+ return p;
+}
+function addSave(){
+ const p=addPreview();if(!p)return toast("Вставь текст");
+ const dname=new Date().toLocaleDateString("ru-RU",{day:"numeric",month:"long"});
+ let L=addTarget?S.mylessons.find(x=>x.id===addTarget):null;
+ if(!L){const ti=(document.getElementById("at")||{}).value;L={id:"ml"+Date.now(),n:"Мой урок",date:dname,title:(ti||p.title||"Новые материалы").trim(),words:[],mine:1};S.mylessons.push(L)}
+ L.words=L.words.concat(p.words);
+ if(p.dlg.length){const who={},cols=["a","b","c"];p.dlg.forEach(d=>{if(!who[d[0]])who[d[0]]=cols[Object.keys(who).length%3]});L.dlgData={title:p.title||L.title,kb:"Диалог урока",date:L.date,who,lines:(L.dlgData?L.dlgData.lines:[]).concat(p.dlg)};if(L.dlgData)Object.assign(L.dlgData.who,who);L.dialog="d_"+L.id}
+ if(p.hw&&p.hw.items.length){L.hw={due:p.hw.due||(L.hw&&L.hw.due)||"следующий урок",items:((L.hw&&L.hw.items)||[]).concat(p.hw.items)}}
+ if(p.text.length){const tr=p.text.filter(t=>t[1]).length;if(tr>=p.text.length/2){L.textData={title:L.title,ru:"Текст урока",date:L.date,paras:((L.textData&&L.textData.paras)||[]).concat(p.text)};L.text="t_"+L.id}else{L.readData={id:"r_"+L.id,type:"Мой текст",date:L.date,kb:((L.readData&&L.readData.kb?L.readData.kb+"\n":"")+p.text.map(t=>t[0]).join("\n")),ru:p.text.filter(t=>t[1]).map(t=>t[1]).join(" ")||"Текст для чтения вслух"}}}
+ save();mountMine();WORDS=allWords();closeModal();addForce="auto";
+ const parts=[p.words.length?p.words.length+" слов":"",p.dlg.length?"диалог":"",p.hw&&p.hw.items.length?"ДЗ":"",p.text.length?"текст":""].filter(Boolean).join(", ");
+ toast("<i data-i=save></i>Добавлено: "+parts);go("lessons");R.lessons(L.id);
+}
+function mountMine(){
+ for(let i=LESSONS.length-1;i>=0;i--)if(LESSONS[i].mine)LESSONS.splice(i,1);
+ for(let i=READING.length-1;i>=0;i--)if(READING[i].mine)READING.splice(i,1);
+ S.mylessons.forEach(L=>{LESSONS.push(L);if(L.dlgData)DIALOGS[L.dialog]=L.dlgData;if(L.textData)TEXTS[L.text]=L.textData;if(L.readData)READING.push(Object.assign({mine:1},L.readData))});
+}
+mountMine();WORDS=allWords();
+function delLesson(id,b){if(b.dataset.c!=="1"){b.dataset.c="1";b.textContent="Точно удалить урок?";return}const L=S.mylessons.find(x=>x.id===id);if(L){delete DIALOGS[L.dialog];delete TEXTS[L.text]}S.mylessons=S.mylessons.filter(x=>x.id!==id);save();mountMine();WORDS=allWords();go("lessons")}
+function renameLesson(id){const L=S.mylessons.find(x=>x.id===id);modal(`<h2 style="margin-top:0">Название урока</h2><input class="in" id="rn" value="${esc(L.title)}"><label>Дата</label><input class="in" id="rd" value="${esc(L.date)}"><div class="row" style="margin-top:10px"><button class="btn gold" onclick="(()=>{const L=S.mylessons.find(x=>x.id==='${id}');L.title=document.getElementById('rn').value||L.title;L.date=document.getElementById('rd').value||L.date;save();mountMine();closeModal();R.lessons('${id}')})()">Сохранить</button><button class="btn" onclick="closeModal()">Отмена</button></div>`)}
+
+// ===== приложение: заставка, офлайн, перенос прогресса =====
+setTimeout(()=>document.getElementById("splash").classList.add("hide"),1700);
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
+R.home();
+</script>
+</body>
+</html>
