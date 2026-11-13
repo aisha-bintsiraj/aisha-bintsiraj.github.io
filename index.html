@@ -498,6 +498,47 @@ a.work{text-decoration:none;display:block}
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.lamp-wrap,.marquee-track{animation:none}}
+
+/* ===== обновление первого экрана ===== */
+.hero-title{display:flex;flex-direction:column;align-items:center}
+.lamp-call{display:inline-block;margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,2.2vw,24px);color:var(--rosegold-soft);text-decoration:none;opacity:.95}
+.lamp-call:hover{color:#FFE1BE}
+.hero-group{display:flex;flex-direction:column;align-items:center}
+.g-name{margin-top:clamp(34px,5vh,56px)}
+.g-what{margin-top:clamp(30px,4.5vh,48px)}
+.hero-logo{position:relative;width:min(400px,84vw)!important;margin:0 auto}
+.hero-logo img{width:100%;height:auto;display:block}
+.hero .tag{margin-top:12px}
+.hero h1{font-size:clamp(24px,3.4vw,40px)!important;line-height:1.2;margin-top:0!important}
+.hero .lead{margin-top:10px!important}
+.hero .btns{margin-top:clamp(28px,4.5vh,44px)!important}
+.siraj-dot{position:absolute;left:9%;top:2%;width:13%;height:62%;border:0;background:none;cursor:pointer;padding:0;border-radius:40%}
+.siraj-glow{position:absolute;left:50%;top:22%;width:46px;height:46px;margin-left:-23px;border-radius:50%;background:radial-gradient(circle,rgba(255,213,140,.55),transparent 65%);animation:pulse 2.4s ease-in-out infinite;pointer-events:none}
+.siraj-tip{position:absolute;left:15%;bottom:100%;transform:translate(-30%,6px);white-space:nowrap;font:600 14px Jost;color:var(--rosegold-soft);background:rgba(26,16,22,.92);border:1px solid rgba(213,154,126,.55);padding:8px 14px;border-radius:999px;opacity:0;pointer-events:none;transition:all .35s ease;z-index:5}
+.siraj-tip.show{opacity:1;transform:translate(-30%,-4px)}
+.lamp-wrap{cursor:pointer}
+.flare .lamp{filter:brightness(1.35) drop-shadow(0 0 40px rgba(255,200,120,.6))!important;transition:filter .25s ease}
+.flare #glow{opacity:1;transform:scale(1.25);transform-origin:150px 240px;transition:transform .4s ease}
+@media(min-width:701px){.lamp-wrap{width:min(165px,54vw)}.mbr{display:none}}
+
+@media(max-width:700px){
+ .hero{padding:56px 0 24px;min-height:100svh}
+ .lamp-wrap{width:min(124px,31vw)}
+ .lamp-wrap::before{height:50px}
+ .lamp-call{font-size:19px;margin-top:10px}
+ .hero-logo{width:min(320px,78vw)!important}
+ .g-name{margin-top:clamp(22px,4vh,40px)}
+ .g-what{margin-top:clamp(20px,3.5vh,34px)}
+ .hero h1{font-size:22px!important;letter-spacing:.05em}
+ .hero .tag{font-size:12px;margin-top:10px}
+ .hero .lead{font-size:16px;line-height:1.45}
+ .lead .long{display:none}
+ .hero .btns{margin-top:clamp(20px,3.5vh,32px)!important;gap:10px;flex-wrap:nowrap}
+ .hero .btns .btn{padding:13px 18px;font-size:15px}
+ .replay{display:none}
+}
+@media(max-width:400px){.hero h1{font-size:20px!important;letter-spacing:.04em}}
+@media(max-width:700px) and (max-height:640px){.lamp-wrap{width:110px}.g-name{margin-top:16px}.g-what{margin-top:16px}.hero .btns{margin-top:18px!important}.hero{padding-top:50px}}
 </style>
 </head>
 <body>
@@ -517,7 +558,6 @@ a.work{text-decoration:none;display:block}
 <header id="hdr">
   <div class="container nav">
     <a href="#top" class="logo" aria-label="Айша — на главную">
-      <svg class="mini-lamp" viewBox="0 0 26 44" aria-hidden="true"><defs><radialGradient id="mlg"><stop offset="0" stop-color="#FFD58C" stop-opacity=".9"/><stop offset="1" stop-color="#FFD58C" stop-opacity="0"/></radialGradient><linearGradient id="mlb" x1="0" x2="1"><stop offset="0" stop-color="#8A6A3E"/><stop offset=".45" stop-color="#F2D79C"/><stop offset="1" stop-color="#7A5A34"/></linearGradient></defs><line x1="13" y1="0" x2="13" y2="7" stroke="#C9A266" stroke-width="1.2"/><circle class="mg" cx="13" cy="24" r="10" fill="url(#mlg)" opacity=".7"/><path d="M7 12c0-3 3-5 6-5s6 2 6 5z" fill="url(#mlb)"/><rect x="5.5" y="12" width="15" height="2.4" rx="1" fill="url(#mlb)"/><path d="M7 14.4h12l-1 17H8z" fill="rgba(255,190,110,.4)" stroke="url(#mlb)" stroke-width="1.2"/><path class="mf" d="M13 19c2 2.6 3 5 2.2 7-.4 1-1.2 1.6-2.2 1.6s-1.8-.6-2.2-1.6c-.8-2 .2-4.4 2.2-7z" fill="url(#flg)"/><rect x="5.5" y="31" width="15" height="2.6" rx="1" fill="url(#mlb)"/><path d="M8 33.6h10l-2 4h-6z" fill="url(#mlb)"/></svg>
       <svg class="nm-logo" viewBox="0 0 232 190"><path fill-rule="evenodd" d="M59.50 94.62 L58.50 93.25 L56.62 92.38 L53.75 91.62 L50.38 89.88 L47.50 87.25 L46.12 84.75 L45.50 84.12 L44.88 84.12 L44.12 84.75 L35.75 96.12 L34.62 97.00 L33.50 97.00 L31.38 96.25 L27.38 94.12 L24.25 91.25 L22.88 88.62 L22.38 88.12 L21.62 88.00 L21.00 88.50 L17.12 93.50 L14.00 98.00 L13.12 99.75 L12.75 101.62 L13.00 104.62 L13.75 106.50 L15.00 108.38 L17.25 110.50 L18.75 111.62 L20.88 112.62 L24.00 113.62 L25.88 113.62 L27.25 112.88 L28.88 111.12 L34.00 103.62 L35.25 102.62 L36.12 103.00 L37.50 104.50 L40.00 106.50 L43.00 108.25 L46.00 109.50 L48.75 109.75 L50.50 108.88 L52.50 106.50 L58.75 97.50 L59.50 95.88Z M146.50 67.00 L145.50 66.25 L144.50 66.25 L143.75 66.88 L140.50 72.00 L138.00 77.88 L137.00 81.88 L136.38 86.88 L136.75 102.00 L136.62 104.62 L136.12 106.12 L134.50 107.88 L131.00 109.88 L128.50 110.38 L125.62 110.00 L123.00 108.38 L121.12 108.62 L120.25 109.38 L118.50 113.12 L116.38 116.00 L115.25 117.12 L113.12 118.62 L111.38 119.25 L108.88 119.38 L108.00 119.12 L106.88 118.50 L105.75 117.38 L104.62 115.75 L103.38 115.25 L102.38 115.38 L101.38 116.25 L99.38 120.38 L96.75 123.50 L93.62 125.75 L91.25 126.62 L90.12 126.88 L88.12 126.88 L86.88 126.62 L84.38 125.62 L81.12 123.12 L79.25 123.12 L78.00 124.25 L74.25 128.62 L68.88 133.12 L66.25 134.75 L64.12 135.75 L60.88 136.75 L57.75 137.12 L56.25 137.00 L53.50 135.75 L49.62 133.38 L47.12 132.88 L44.38 133.12 L40.75 134.38 L37.00 136.25 L31.50 140.00 L27.50 143.50 L24.00 147.12 L21.38 150.25 L16.88 157.00 L13.12 164.12 L13.25 165.38 L14.25 166.00 L15.38 165.88 L20.12 161.00 L24.00 158.00 L29.38 154.88 L34.88 152.88 L37.00 152.50 L39.38 152.50 L40.88 152.75 L42.62 153.50 L46.88 156.00 L48.25 156.50 L50.38 156.88 L54.12 156.62 L57.38 155.62 L61.50 153.50 L64.88 151.00 L70.75 145.25 L75.50 138.75 L76.62 137.75 L78.12 138.00 L81.25 139.62 L85.00 140.25 L86.50 140.25 L90.38 139.62 L94.62 137.62 L98.25 134.75 L100.38 132.00 L101.62 130.88 L103.00 130.88 L105.00 131.75 L109.00 132.00 L110.62 131.75 L113.12 130.62 L115.62 128.38 L117.75 125.38 L118.88 123.00 L119.62 122.25 L120.50 122.25 L122.88 122.88 L126.62 122.75 L129.25 121.88 L131.88 120.38 L135.88 116.75 L138.50 113.50 L140.88 109.75 L143.50 104.25 L145.62 97.38 L146.50 91.88 L146.75 88.25 L146.75 67.62Z M121.88 71.62 L120.75 70.38 L116.25 68.88 L112.50 66.88 L109.88 64.38 L108.75 62.12 L108.00 61.38 L107.38 61.38 L106.62 62.00 L98.38 73.25 L97.12 74.25 L96.25 74.25 L94.38 73.75 L90.00 71.50 L86.75 68.50 L85.38 65.88 L84.88 65.38 L84.25 65.25 L83.50 65.75 L76.50 75.25 L75.25 78.25 L75.25 81.12 L76.25 83.88 L78.50 86.75 L81.25 88.88 L85.62 90.75 L88.38 90.88 L89.75 90.25 L90.88 89.12 L96.75 80.62 L97.50 80.00 L98.38 80.12 L101.88 83.38 L104.62 85.12 L108.25 86.75 L111.38 87.00 L112.62 86.50 L114.00 85.12 L120.12 76.50 L121.88 73.62Z M173.38 50.88 L172.88 51.25 L172.38 52.25 L171.88 54.50 L171.25 56.00 L170.88 57.88 L168.12 66.62 L166.12 76.25 L165.12 93.25 L164.50 114.88 L164.62 125.25 L165.25 134.75 L166.12 140.50 L167.25 144.88 L167.88 146.12 L168.25 147.62 L169.62 150.38 L171.38 152.88 L174.00 155.12 L175.12 155.75 L177.38 156.50 L181.25 156.88 L185.50 156.75 L189.25 155.88 L192.50 154.75 L196.38 152.75 L202.75 148.25 L208.50 142.50 L213.38 135.75 L217.50 128.12 L218.00 126.38 L219.75 122.38 L221.50 115.38 L221.50 114.50 L221.25 114.12 L220.12 113.75 L219.62 113.88 L219.12 114.38 L217.50 118.62 L214.38 124.00 L212.38 126.25 L209.62 128.00 L207.00 128.75 L204.75 128.75 L202.12 128.25 L198.62 126.75 L196.50 125.25 L195.00 123.50 L193.88 121.00 L193.62 119.12 L193.75 116.00 L194.12 114.62 L195.25 112.25 L196.12 111.00 L198.25 108.88 L201.12 107.00 L203.50 106.12 L206.00 105.75 L208.62 105.88 L211.25 106.38 L213.12 107.00 L216.00 108.62 L216.75 108.62 L217.75 107.75 L218.62 105.62 L218.75 102.62 L218.38 101.38 L216.75 98.88 L214.50 97.25 L212.75 96.50 L209.75 96.00 L206.25 96.12 L202.62 97.12 L198.88 99.25 L195.62 102.25 L193.25 105.38 L191.25 109.12 L189.50 114.12 L188.25 119.25 L186.00 132.62 L185.12 135.88 L184.38 136.50 L183.62 136.50 L181.38 135.88 L179.00 134.50 L177.38 132.75 L175.88 130.25 L175.00 128.12 L174.12 124.25 L173.75 119.88 L173.62 108.00 L174.75 71.88 L175.12 51.62 L174.25 50.88Z M93.00 38.25 L92.00 39.00 L85.75 47.50 L85.00 49.12 L84.62 52.00 L85.00 54.25 L85.50 55.50 L86.75 57.50 L88.62 59.25 L89.88 60.12 L94.12 61.75 L96.38 61.88 L97.75 61.38 L99.62 59.38 L106.50 50.00 L107.00 48.12 L106.75 47.38 L106.12 46.75 L105.12 46.25 L101.25 45.12 L98.38 43.62 L96.38 42.00 L95.12 40.75 L94.12 39.00 L93.50 38.38Z M160.62 25.75 L159.00 24.12 L157.75 23.50 L156.25 23.12 L154.00 23.25 L151.25 24.12 L148.38 26.62 L146.38 29.50 L142.00 36.88 L139.75 39.75 L137.75 41.75 L135.38 43.12 L132.50 44.00 L128.50 44.12 L126.62 43.75 L125.25 43.88 L124.50 45.00 L123.88 47.00 L123.88 47.88 L124.25 48.88 L125.62 50.88 L127.62 52.88 L130.50 54.50 L132.38 54.88 L134.50 54.88 L136.25 54.62 L138.00 53.75 L140.62 51.38 L141.62 49.88 L145.25 42.38 L147.12 39.00 L149.38 36.50 L151.12 35.75 L153.38 35.62 L154.50 36.00 L156.75 37.75 L158.25 37.75 L159.25 37.38 L159.88 36.75 L161.38 33.88 L161.88 31.38 L161.75 28.38Z"/></svg>
       <span><small>Айша</small><small style="opacity:.75;font-weight:600">креативный дизайн</small></span>
     </a>
@@ -607,10 +647,15 @@ a.work{text-decoration:none;display:block}
 <circle cx="150" cy="410" r="6" fill="url(#brass)"/>
 </svg></div>
   <div class="hero-title">
-    <svg class="hero-name" viewBox="0 0 232 190" role="img" aria-label="عائشة"><path fill-rule="evenodd" d="M59.50 94.62 L58.50 93.25 L56.62 92.38 L53.75 91.62 L50.38 89.88 L47.50 87.25 L46.12 84.75 L45.50 84.12 L44.88 84.12 L44.12 84.75 L35.75 96.12 L34.62 97.00 L33.50 97.00 L31.38 96.25 L27.38 94.12 L24.25 91.25 L22.88 88.62 L22.38 88.12 L21.62 88.00 L21.00 88.50 L17.12 93.50 L14.00 98.00 L13.12 99.75 L12.75 101.62 L13.00 104.62 L13.75 106.50 L15.00 108.38 L17.25 110.50 L18.75 111.62 L20.88 112.62 L24.00 113.62 L25.88 113.62 L27.25 112.88 L28.88 111.12 L34.00 103.62 L35.25 102.62 L36.12 103.00 L37.50 104.50 L40.00 106.50 L43.00 108.25 L46.00 109.50 L48.75 109.75 L50.50 108.88 L52.50 106.50 L58.75 97.50 L59.50 95.88Z M146.50 67.00 L145.50 66.25 L144.50 66.25 L143.75 66.88 L140.50 72.00 L138.00 77.88 L137.00 81.88 L136.38 86.88 L136.75 102.00 L136.62 104.62 L136.12 106.12 L134.50 107.88 L131.00 109.88 L128.50 110.38 L125.62 110.00 L123.00 108.38 L121.12 108.62 L120.25 109.38 L118.50 113.12 L116.38 116.00 L115.25 117.12 L113.12 118.62 L111.38 119.25 L108.88 119.38 L108.00 119.12 L106.88 118.50 L105.75 117.38 L104.62 115.75 L103.38 115.25 L102.38 115.38 L101.38 116.25 L99.38 120.38 L96.75 123.50 L93.62 125.75 L91.25 126.62 L90.12 126.88 L88.12 126.88 L86.88 126.62 L84.38 125.62 L81.12 123.12 L79.25 123.12 L78.00 124.25 L74.25 128.62 L68.88 133.12 L66.25 134.75 L64.12 135.75 L60.88 136.75 L57.75 137.12 L56.25 137.00 L53.50 135.75 L49.62 133.38 L47.12 132.88 L44.38 133.12 L40.75 134.38 L37.00 136.25 L31.50 140.00 L27.50 143.50 L24.00 147.12 L21.38 150.25 L16.88 157.00 L13.12 164.12 L13.25 165.38 L14.25 166.00 L15.38 165.88 L20.12 161.00 L24.00 158.00 L29.38 154.88 L34.88 152.88 L37.00 152.50 L39.38 152.50 L40.88 152.75 L42.62 153.50 L46.88 156.00 L48.25 156.50 L50.38 156.88 L54.12 156.62 L57.38 155.62 L61.50 153.50 L64.88 151.00 L70.75 145.25 L75.50 138.75 L76.62 137.75 L78.12 138.00 L81.25 139.62 L85.00 140.25 L86.50 140.25 L90.38 139.62 L94.62 137.62 L98.25 134.75 L100.38 132.00 L101.62 130.88 L103.00 130.88 L105.00 131.75 L109.00 132.00 L110.62 131.75 L113.12 130.62 L115.62 128.38 L117.75 125.38 L118.88 123.00 L119.62 122.25 L120.50 122.25 L122.88 122.88 L126.62 122.75 L129.25 121.88 L131.88 120.38 L135.88 116.75 L138.50 113.50 L140.88 109.75 L143.50 104.25 L145.62 97.38 L146.50 91.88 L146.75 88.25 L146.75 67.62Z M121.88 71.62 L120.75 70.38 L116.25 68.88 L112.50 66.88 L109.88 64.38 L108.75 62.12 L108.00 61.38 L107.38 61.38 L106.62 62.00 L98.38 73.25 L97.12 74.25 L96.25 74.25 L94.38 73.75 L90.00 71.50 L86.75 68.50 L85.38 65.88 L84.88 65.38 L84.25 65.25 L83.50 65.75 L76.50 75.25 L75.25 78.25 L75.25 81.12 L76.25 83.88 L78.50 86.75 L81.25 88.88 L85.62 90.75 L88.38 90.88 L89.75 90.25 L90.88 89.12 L96.75 80.62 L97.50 80.00 L98.38 80.12 L101.88 83.38 L104.62 85.12 L108.25 86.75 L111.38 87.00 L112.62 86.50 L114.00 85.12 L120.12 76.50 L121.88 73.62Z M173.38 50.88 L172.88 51.25 L172.38 52.25 L171.88 54.50 L171.25 56.00 L170.88 57.88 L168.12 66.62 L166.12 76.25 L165.12 93.25 L164.50 114.88 L164.62 125.25 L165.25 134.75 L166.12 140.50 L167.25 144.88 L167.88 146.12 L168.25 147.62 L169.62 150.38 L171.38 152.88 L174.00 155.12 L175.12 155.75 L177.38 156.50 L181.25 156.88 L185.50 156.75 L189.25 155.88 L192.50 154.75 L196.38 152.75 L202.75 148.25 L208.50 142.50 L213.38 135.75 L217.50 128.12 L218.00 126.38 L219.75 122.38 L221.50 115.38 L221.50 114.50 L221.25 114.12 L220.12 113.75 L219.62 113.88 L219.12 114.38 L217.50 118.62 L214.38 124.00 L212.38 126.25 L209.62 128.00 L207.00 128.75 L204.75 128.75 L202.12 128.25 L198.62 126.75 L196.50 125.25 L195.00 123.50 L193.88 121.00 L193.62 119.12 L193.75 116.00 L194.12 114.62 L195.25 112.25 L196.12 111.00 L198.25 108.88 L201.12 107.00 L203.50 106.12 L206.00 105.75 L208.62 105.88 L211.25 106.38 L213.12 107.00 L216.00 108.62 L216.75 108.62 L217.75 107.75 L218.62 105.62 L218.75 102.62 L218.38 101.38 L216.75 98.88 L214.50 97.25 L212.75 96.50 L209.75 96.00 L206.25 96.12 L202.62 97.12 L198.88 99.25 L195.62 102.25 L193.25 105.38 L191.25 109.12 L189.50 114.12 L188.25 119.25 L186.00 132.62 L185.12 135.88 L184.38 136.50 L183.62 136.50 L181.38 135.88 L179.00 134.50 L177.38 132.75 L175.88 130.25 L175.00 128.12 L174.12 124.25 L173.75 119.88 L173.62 108.00 L174.75 71.88 L175.12 51.62 L174.25 50.88Z M93.00 38.25 L92.00 39.00 L85.75 47.50 L85.00 49.12 L84.62 52.00 L85.00 54.25 L85.50 55.50 L86.75 57.50 L88.62 59.25 L89.88 60.12 L94.12 61.75 L96.38 61.88 L97.75 61.38 L99.62 59.38 L106.50 50.00 L107.00 48.12 L106.75 47.38 L106.12 46.75 L105.12 46.25 L101.25 45.12 L98.38 43.62 L96.38 42.00 L95.12 40.75 L94.12 39.00 L93.50 38.38Z M160.62 25.75 L159.00 24.12 L157.75 23.50 L156.25 23.12 L154.00 23.25 L151.25 24.12 L148.38 26.62 L146.38 29.50 L142.00 36.88 L139.75 39.75 L137.75 41.75 L135.38 43.12 L132.50 44.00 L128.50 44.12 L126.62 43.75 L125.25 43.88 L124.50 45.00 L123.88 47.00 L123.88 47.88 L124.25 48.88 L125.62 50.88 L127.62 52.88 L130.50 54.50 L132.38 54.88 L134.50 54.88 L136.25 54.62 L138.00 53.75 L140.62 51.38 L141.62 49.88 L145.25 42.38 L147.12 39.00 L149.38 36.50 L151.12 35.75 L153.38 35.62 L154.50 36.00 L156.75 37.75 L158.25 37.75 L159.25 37.38 L159.88 36.75 L161.38 33.88 L161.88 31.38 L161.75 28.38Z"/></svg>
-    <h1 class="fade f1">Дизайн для онлайн-школ и экспертов</h1>
-    <div class="tag fade f2">Айша · креативный дизайн</div>
-    <p class="lead fade f3">Знание — это свет. Я создаю дизайн, который помогает ему дойти до каждой ученицы: презентации, тесты, Telegram и таблицы для школ арабского языка, таджвида и исламских знаний.</p>
+    <a href="#works" class="lamp-call fade f1" id="lampCall">Зажгите лампу — и загляните внутрь</a>
+    <div class="hero-group g-name">
+      <div class="hero-name hero-logo"><img src="al-ghashiya/img/logo_cream.png" alt="عائشة بنت سراج — Айша бинт Сирадж"><button class="siraj-dot" id="sirajDot" aria-label="Что значит سِرَاج"><span class="siraj-glow"></span></button><span class="siraj-tip" id="sirajTip">سِرَاج — по-арабски «светильник»</span></div>
+      <div class="tag fade f2">Айша · креативный дизайн</div>
+    </div>
+    <div class="hero-group g-what fade f3">
+      <h1>Дизайн для онлайн‑школ <br class="mbr">и экспертов</h1>
+      <p class="lead">Презентации, тесты, Telegram и сайты<span class="long"> для школ арабского языка, таджвида и исламских знаний</span></p>
+    </div>
     <div class="btns fade f4"><a class="btn btn-gold" href="#works">Смотреть работы</a><a class="btn btn-line" href="#order">Оформить заказ</a></div>
   </div>
   <button class="replay" id="replay">Зажечь ещё раз</button>
@@ -863,6 +908,14 @@ for(let i=0;i<14;i++){const c=document.createElementNS('http://www.w3.org/2000/s
 function light(){body.classList.remove('lit','striking');void body.offsetWidth;setTimeout(()=>body.classList.add('striking'),700);setTimeout(()=>body.classList.add('lit'),1000)}
 document.getElementById('replay').onclick=light;
 light();
+
+/* ----- лампа: зажечь и заглянуть внутрь; секрет имени ----- */
+function flareGo(ev){if(ev)ev.preventDefault();body.classList.add('flare','striking');setTimeout(()=>body.classList.remove('flare'),900);setTimeout(()=>{const w=document.getElementById('works');if(w)w.scrollIntoView({behavior:'smooth'})},650)}
+document.querySelector('.lamp-wrap').addEventListener('click',flareGo);
+document.getElementById('lampCall').addEventListener('click',flareGo);
+const sTip=document.getElementById('sirajTip');
+document.getElementById('sirajDot').addEventListener('click',e=>{e.stopPropagation();sTip.classList.toggle('show');clearTimeout(sTip._t);sTip._t=setTimeout(()=>sTip.classList.remove('show'),4000)});
+
 
 
 /* ----- гирлянда загорается, когда видна ----- */
