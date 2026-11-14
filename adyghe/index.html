@@ -1020,6 +1020,8 @@ const LINKS = ["Кабардинский алфавит (ссылка в «Ма�
 const KEY="adyghe_aisha_v1";
 let S={mylessons:[],miss:{},wk:{},mydlg:{},st:{},hw:{},reads:{},my:[],notes:[],days:[],ex:{},hist:{},dsteps:{},dn:5,theme:"light"};
 try{const x=JSON.parse(localStorage.getItem(KEY)||"null");if(x)S=Object.assign(S,x)}catch(e){}
+// разовая чистка: копия записи 11 ноября, вставленная через «＋» (урок уже есть в приложении)
+try{if(!S.fix1111){const bad=/Алим къуажэм|Жьындуу|Нэмысым насып|сыщысщ|Надречнэ/;const n0=(S.mylessons||[]).length;S.mylessons=(S.mylessons||[]).filter(L=>!bad.test(JSON.stringify(L)));S.fix1111=n0-S.mylessons.length||1;localStorage.setItem(KEY,JSON.stringify(S))}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function markDay(){const d=new Date().toISOString().slice(0,10);if(!S.days.includes(d)){S.days.push(d);save()}}
 function streak(){let n=0,d=new Date();for(;;){const k=d.toISOString().slice(0,10);if(S.days.includes(k)){n++;d.setDate(d.getDate()-1)}else break}return n}
