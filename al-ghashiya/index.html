@@ -86,7 +86,7 @@ html,body{height:100%;background:#05080f;overflow:hidden;font-family:'Montserrat
 #nav{position:fixed;right:18px;bottom:16px;display:flex;gap:10px;z-index:50}
 #nav button{width:52px;height:52px;border-radius:50%;border:1px solid rgba(232,201,138,.6);background:rgba(10,16,36,.6);color:var(--goldl);font-size:24px;cursor:pointer}
 /* specific */
-.bigword{font-size:400px;font-weight:700;line-height:1.6;background:url(img/dunes.jpg) center/180% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:pan 20s ease-in-out infinite alternate;filter:drop-shadow(0 10px 40px rgba(212,168,74,.25))}
+.bigword{font-size:400px;font-weight:700;line-height:1.6;max-width:1650px;white-space:nowrap;background:url(img/dunes.jpg) center/180% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:pan 20s ease-in-out infinite alternate;filter:drop-shadow(0 10px 40px rgba(212,168,74,.25))}
 @keyframes pan{from{background-position:0% 50%}to{background-position:100% 50%}}
 .count{font-size:430px;font-weight:700;line-height:1;background:linear-gradient(180deg,#FFE3A0 0%,#E58A3A 55%,#8A3412 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .flip{perspective:1200px;cursor:pointer}
@@ -509,7 +509,23 @@ document.querySelectorAll('.glints').forEach(gl=>{for(let i=0;i<22;i++){const g=
 document.querySelectorAll('.w[data-m]').forEach(w=>{const m=document.createElement('span');m.className='mean';m.textContent=w.dataset.m;w.appendChild(m)});
 // fit Arabic lines to one row
 function fitAll(){document.body.classList.add('measuring');document.querySelectorAll('.fit').forEach(el=>{let s=+(el.dataset.max||100);const min=+(el.dataset.min||40);el.style.whiteSpace='nowrap';el.style.fontSize=s+'px';let guard=0;while(el.scrollWidth>el.clientWidth+2&&s>min&&guard++<80){s-=2;el.style.fontSize=s+'px'}if(el.scrollWidth>el.clientWidth+2){el.style.whiteSpace='normal';el.style.flexWrap='wrap'}});document.body.classList.remove('measuring')}
-(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(fitAll);fitAll();
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{fitAll();fitCoverTitle()});fitAll();
+// Safari/iPad can render the large Arabic display font much wider than desktop.
+// Fit only the cover title to the original slide's safe text area.
+function fitCoverTitle(){
+  const heading=document.querySelector('.bigword');
+  if(!heading)return;
+  const maxWidth=1650;
+  let size=400;
+  heading.style.fontSize=size+'px';
+  heading.style.maxWidth=maxWidth+'px';
+  heading.style.whiteSpace='nowrap';
+  while(heading.scrollWidth>maxWidth+2&&size>100){
+    size-=4;
+    heading.style.fontSize=size+'px';
+  }
+}
+fitCoverTitle();
 // sparks
 const cv=document.querySelector('.sparks'),cx=cv.getContext('2d');let P=[];
 function sp(){return{x:Math.random()*1920,y:1080+Math.random()*200,r:1+Math.random()*3,v:.4+Math.random()*1.1,s:Math.random()*6.28,a:.4+Math.random()*.6}}
