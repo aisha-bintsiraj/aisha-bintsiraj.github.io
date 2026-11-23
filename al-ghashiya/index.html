@@ -8,9 +8,9 @@
 <style>
 :root{--night:#0A1024;--navy:#1A2751;--mid:#344879;--pale:#B7C4D9;--ice:#EEF1F6;--cream:#F1D5B3;--rose:#EFC9A0;--warm:#F7F0E3;--gold:#D4A84A;--goldl:#E8C98A;--goldd:#A87A22}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#05080f;overflow:hidden;font-family:'Montserrat',sans-serif;font-weight:500;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
-#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
-#stage{width:1920px;height:1080px;position:relative;overflow:hidden;flex:none;background:var(--night);transform-origin:center}
+html,body{height:100%;background:#05080f;overflow:hidden;font-family:'Montserrat',sans-serif;font-weight:500;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:none;text-size-adjust:none}
+#wrap{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;display:block}
+#stage{width:1920px;height:1080px;position:absolute;left:50%;top:50%;overflow:hidden;background:var(--night);transform-origin:center center;-webkit-text-size-adjust:none;text-size-adjust:none}
 .slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.1s ease,visibility 0s linear 1.1s;color:var(--rose)}
 .slide.on{opacity:1;visibility:visible;transition:opacity 1.1s ease}
 .slide.lt{color:var(--navy)}
@@ -489,8 +489,19 @@ html,body{height:100%;background:#05080f;overflow:hidden;font-family:'Montserrat
 
 <script>
 const stage=document.getElementById('stage');
-function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);if('zoom' in stage.style){stage.style.zoom=s;stage.style.transform=''}else{stage.style.transform='scale('+s+')'}}
-addEventListener('resize',fit);fit();
+// Preserve the complete 1920x1080 slide layout and scale it as one unit.
+function fit(){
+  const viewport=window.visualViewport;
+  const width=viewport?viewport.width:document.documentElement.clientWidth;
+  const height=viewport?viewport.height:document.documentElement.clientHeight;
+  const scale=Math.min(width/1920,height/1080);
+  stage.style.zoom='1';
+  stage.style.transform='translate(-50%, -50%) scale('+scale+')';
+}
+addEventListener('resize',fit);
+addEventListener('orientationchange',fit);
+if(window.visualViewport)window.visualViewport.addEventListener('resize',fit);
+fit();
 const slides=[...document.querySelectorAll('.slide')];
 // decor
 document.querySelectorAll('.stars').forEach(st=>{const w=+(st.dataset.w||1920);for(let i=0;i<110;i++){const d=document.createElement('div');d.className='star';const z=Math.random()<.15?4:2;d.style.cssText=`left:${Math.random()*w}px;top:${Math.random()*720}px;width:${z}px;height:${z}px;animation-delay:${-Math.random()*4}s`;st.appendChild(d)}});
